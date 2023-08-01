@@ -1,0 +1,28 @@
+{
+    "targets": {
+        "bgp_deploy": {
+            "aliases": [
+                "bgp_deploy",
+                "network/",
+                "network/bgp/",
+                "network/bgp/bgp_deploy",
+                "non_destructive/",
+                "non_destructive/bgp_deploy",
+                "non_module/",
+                "non_module/bgp_deploy",
+                "role/",
+                "role/bgp_deploy"
+            ],
+            "coverage": false,
+            "coverage_label": "",
+            "modules": [],
+            "name": "bgp_deploy",
+            "python_version": "3.11",
+            "run_time_seconds": 28,
+            "setup_always": [],
+            "setup_once": [],
+            "type": "role",
+            "validation_seconds": 0
+        }
+    }
+}

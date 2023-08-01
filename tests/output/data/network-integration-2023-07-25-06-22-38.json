@@ -1,0 +1,28 @@
+{
+    "targets": {
+        "bgp_detect": {
+            "aliases": [
+                "bgp_detect",
+                "network/",
+                "network/bgp/",
+                "network/bgp/bgp_detect",
+                "non_destructive/",
+                "non_destructive/bgp_detect",
+                "non_module/",
+                "non_module/bgp_detect",
+                "role/",
+                "role/bgp_detect"
+            ],
+            "coverage": false,
+            "coverage_label": "",
+            "modules": [],
+            "name": "bgp_detect",
+            "python_version": "3.11",
+            "run_time_seconds": 28,
+            "setup_always": [],
+            "setup_once": [],
+            "type": "role",
+            "validation_seconds": 0
+        }
+    }
+}

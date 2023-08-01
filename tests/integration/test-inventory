@@ -1,0 +1,29 @@
+[bgp]
+10.0.150.143
+# 35.155.113.92
+[bgp:vars]
+ansible_network_os=junipernetworks.junos.junos
+ansible_ssh_user=ansible
+ansible_ssh_pass=Ansible
+ansible_connection=ansible.netcommon.netconf
+#ansible_connection=ansible.netcommon.network_cli
+ansible_python_interpreter="/usr/bin/python3"
+
+# ansible_network_os=cisco.ios.ios
+# ansible_ssh_user=cisco
+# ansible_ssh_pass=cisco
+# ansible_command_timeout=80
+# ansible_connection=ansible.netcommon.network_cli
+# ansible_ssh_port=2013
+# ansible_become=true
+# ansible_become_pass=cisco
+
+# ansible_python_interpreter: "/usr/bin/python3"
+# ansible_network_os=junipernetworks.junos.junos
+# ansible_ssh_user=ansible
+# ansible_ssh_pass=Ansible
+# ansible_connection=ansible.netcommon.netconf
+# ansible_python_interpreter: "/usr/bin/python3"
+#ansible_python_interpreter=/home/rothakur/venvs/ansible36/bin/python
+#ansible_ssh_private_key_file=/home/rothakur/.vagrant.d/insecure_private_key
+
