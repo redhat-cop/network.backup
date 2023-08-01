@@ -1,0 +1,13 @@
+---
+- name: Backup Junos Configuration
+  junipernetworks.junos.junos_config:
+    backup: true
+    backup_options:
+      dir_path: "{{  data_store.local | default(/tmp/) }}"
+      filename: "{{ inventory_hostname }}.txt"
+  register: network_brm_backup
+
+
+- name: Show Config 
+  ansible.builtin.debug:
+    msg: "{{ network_brm_backup }}"

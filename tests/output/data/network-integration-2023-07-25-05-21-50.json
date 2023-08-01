@@ -1,0 +1,28 @@
+{
+    "targets": {
+        "bgp_gather": {
+            "aliases": [
+                "bgp_gather",
+                "network/",
+                "network/bgp/",
+                "network/bgp/bgp_gather",
+                "non_destructive/",
+                "non_destructive/bgp_gather",
+                "non_module/",
+                "non_module/bgp_gather",
+                "role/",
+                "role/bgp_gather"
+            ],
+            "coverage": false,
+            "coverage_label": "",
+            "modules": [],
+            "name": "bgp_gather",
+            "python_version": "3.11",
+            "run_time_seconds": 9,
+            "setup_always": [],
+            "setup_once": [],
+            "type": "role",
+            "validation_seconds": 0
+        }
+    }
+}

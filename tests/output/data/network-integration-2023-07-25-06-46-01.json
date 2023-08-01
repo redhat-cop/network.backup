@@ -1,0 +1,28 @@
+{
+    "targets": {
+        "bgp_persist": {
+            "aliases": [
+                "bgp_persist",
+                "network/",
+                "network/bgp/",
+                "network/bgp/bgp_persist",
+                "non_destructive/",
+                "non_destructive/bgp_persist",
+                "non_module/",
+                "non_module/bgp_persist",
+                "role/",
+                "role/bgp_persist"
+            ],
+            "coverage": false,
+            "coverage_label": "",
+            "modules": [],
+            "name": "bgp_persist",
+            "python_version": "3.11",
+            "run_time_seconds": 29,
+            "setup_always": [],
+            "setup_once": [],
+            "type": "role",
+            "validation_seconds": 0
+        }
+    }
+}

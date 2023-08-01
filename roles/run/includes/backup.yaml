@@ -1,0 +1,15 @@
+---
+- name: Build Local Backup Dir Path
+  ansible.builtin.include_tasks: includes/path.yaml
+  when: data_store.scm.origin is not defined 
+
+- name: Include retrieve tasks
+  ansible.builtin.include_tasks: includes/retrieve.yaml
+  when: data_store['scm']['origin'] is defined
+
+- name: Include tasks
+  ansible.builtin.include_tasks: ./backups/{{ ansible_network_os.split('.')[2] }}.yaml
+
+- name: Include build tasks
+  ansible.builtin.include_tasks: includes/publish.yaml
+  when: data_store.scm.origin is defined

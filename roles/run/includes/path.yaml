@@ -1,0 +1,10 @@
+---
+- name: Set default path for backup
+  ansible.builtin.set_fact:
+    network_backup_path: "."
+  when: data_store['local'] is not defined
+
+- name: Set local backup path
+  ansible.builtin.set_fact:
+    network_backup_path: "{{ data_store['local'] }}"
+  when: data_store['local'] is defined

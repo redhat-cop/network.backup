@@ -1,0 +1,17 @@
+---
+- name: Backup ios Configuration
+  cisco.ios.ios_config:
+    backup: true
+    backup_options:
+      dir_path: "{{  network_backup_path }}"
+      filename: "{{ inventory_hostname }}.txt"
+  register: network_backup
+
+# - name: Show Config 
+#   ansible.builtin.debug:
+#     msg: "{{ network_backup_backup }}"
+
+- name: write to file
+  ansible.builtin.copy:
+    content: "{{ network_backup | to_nice_yaml }}"
+    dest: "{{ network_backup_path }}/meta.yaml"
