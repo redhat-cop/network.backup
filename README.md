@@ -92,7 +92,7 @@ run.yml
         name: network.backup.run
       vars:
         operation: backup
-        type: full
+        type: diff
         data_store:
           scm:  
             origin:
