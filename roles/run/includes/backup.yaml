@@ -8,7 +8,8 @@
   when: data_store['scm']['origin'] is defined
 
 - name: Include tasks
-  ansible.builtin.include_tasks: ./backups/{{ ansible_network_os.split('.')[2] }}.yaml
+  ansible.builtin.include_tasks: includes/network.yaml
+  # ansible.builtin.include_tasks: ./backups/{{ ansible_network_os.split('.')[2] }}.yaml
 
 - name: Include build tasks
   ansible.builtin.include_tasks: includes/publish.yaml
