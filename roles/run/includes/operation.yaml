@@ -1,0 +1,8 @@
+---
+- name: Configuration Backup
+  ansible.netcommon.cli_config:
+    backup: true
+    backup_options:
+      dir_path: "{{  network_backup_path }}"
+      filename: "{{ inventory_hostname }}.txt"
+  register: network_backup
