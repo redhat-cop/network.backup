@@ -3,7 +3,8 @@
 [![CI](https://github.com/ansible-network/network.base/actions/workflows/tests.yml/badge.svg?event=schedule)](https://github.com/ansible-network/network.base/actions/workflows/tests.yml)
 [![OpenSSF Best Practices](https://bestpractices.coreinfrastructure.org/projects/7404/badge)](https://bestpractices.coreinfrastructure.org/projects/7404)
 
-Ansible Network Backup collection platform-agnostic single entry point management for network backup.
+Ansible Network Backup Collection provides a platform-agnostic way of managing network backup on supported network devices.
+
 
 ## Using the platform-agnostic role network.backup.run as part of a network.backup collection.
 
