@@ -21,7 +21,7 @@
   ansible.builtin.include_tasks: includes/retrieve.yaml
   when: data_store['scm']['origin'] is defined
   # ignore_errors: true
-  run_once: True
+  run_once: true
 
 - name: Include retrieve tasks
   ansible.builtin.set_fact:
