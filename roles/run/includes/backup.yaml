@@ -20,8 +20,13 @@
 - name: Include retrieve tasks
   ansible.builtin.include_tasks: includes/retrieve.yaml
   when: data_store['scm']['origin'] is defined
-  ignore_errors: true
-  # run_once: True
+  # ignore_errors: true
+  run_once: True
+
+- name: Include retrieve tasks
+  ansible.builtin.set_fact:
+    network_backup_path: "{{  data_store.scm.origin.url.split('.')[-1] }}"
+  when: data_store['scm']['origin'] is defined
 
 - name: Include tasks
   ansible.builtin.include_tasks: includes/network.yaml
