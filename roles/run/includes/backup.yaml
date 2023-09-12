@@ -35,4 +35,5 @@
 - name: Include build tasks
   ansible.builtin.include_tasks: includes/publish.yaml
   when: data_store.scm.origin is defined
+  run_once: true
   # delegate_to: localhost
