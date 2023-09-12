@@ -23,6 +23,14 @@
   # ignore_errors: true
   run_once: true
 
+- name: PRINT SPLIT ^^^^^^^^------------------
+  ansible.builtin.debug:
+    msg: "{{  data_store.scm.origin.url }}"
+
+- name: PRINT SPLIT ^^^^^^^^------------------
+  ansible.builtin.debug:
+    msg: "{{  data_store.scm.origin.url.split('.')[-1] }}"
+
 - name: Include retrieve tasks
   ansible.builtin.set_fact:
     network_backup_path: "{{  data_store.scm.origin.url.split('.')[-1] }}"
