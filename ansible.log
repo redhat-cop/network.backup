@@ -1,0 +1,1690 @@
+2023-08-21 14:41:31,888 p=166887 u=rothakur n=ansible | ansible-playbook [core 2.13.11.post0] (stable-2.13 28fb37d6c2) last updated 2023/08/13 09:59:21 (GMT +550)
+  config file = /home/rothakur/ansible-collections/collections/ansible_collections/network/backup/ansible.cfg
+  configured module search path = ['/home/rothakur/.ansible/plugins/modules', '/usr/share/ansible/plugins/modules']
+  ansible python module location = /home/rothakur/ansible-collections/collections/ansible_collections/ansible/ansible/lib/ansible
+  ansible collection location = /home/rothakur/ansible_collections
+  executable location = /home/rothakur/ansible-collections/collections/ansible_collections/ansible/ansible/bin/ansible-playbook
+  python version = 3.11.4 (main, Jun  7 2023, 00:00:00) [GCC 13.1.1 20230511 (Red Hat 13.1.1-2)]
+  jinja version = 3.1.2
+  libyaml = True
+2023-08-21 14:41:31,888 p=166887 u=rothakur n=ansible | Using /home/rothakur/ansible-collections/collections/ansible_collections/network/backup/ansible.cfg as config file
+2023-08-21 14:41:31,891 p=166887 u=rothakur n=ansible | host_list declined parsing /home/rothakur/ansible-collections/collections/ansible_collections/network/backup/inventory as it did not pass its verify_file() method
+2023-08-21 14:41:31,892 p=166887 u=rothakur n=ansible | script declined parsing /home/rothakur/ansible-collections/collections/ansible_collections/network/backup/inventory as it did not pass its verify_file() method
+2023-08-21 14:41:31,892 p=166887 u=rothakur n=ansible | auto declined parsing /home/rothakur/ansible-collections/collections/ansible_collections/network/backup/inventory as it did not pass its verify_file() method
+2023-08-21 14:41:31,893 p=166887 u=rothakur n=ansible | Parsed /home/rothakur/ansible-collections/collections/ansible_collections/network/backup/inventory inventory source with ini plugin
+2023-08-21 14:41:31,946 p=166887 u=rothakur n=ansible | Skipping callback 'default', as we already have a stdout callback.
+2023-08-21 14:41:31,946 p=166887 u=rothakur n=ansible | Skipping callback 'minimal', as we already have a stdout callback.
+2023-08-21 14:41:31,946 p=166887 u=rothakur n=ansible | Skipping callback 'oneline', as we already have a stdout callback.
+2023-08-21 14:41:31,946 p=166887 u=rothakur n=ansible | PLAYBOOK: backup_remote.yaml ************************************************************************************************************************************************
+2023-08-21 14:41:31,946 p=166887 u=rothakur n=ansible | 1 plays in playbooks/backup_remote.yaml
+2023-08-21 14:41:31,947 p=166887 u=rothakur n=ansible | PLAY [rtr1] *****************************************************************************************************************************************************************
+2023-08-21 14:41:31,962 p=166887 u=rothakur n=ansible | TASK [Gathering Facts] ******************************************************************************************************************************************************
+2023-08-21 14:41:31,966 p=166891 u=rothakur n=ansible | redirecting (type: connection) ansible.builtin.network_cli to ansible.netcommon.network_cli
+2023-08-21 14:41:32,228 p=166896 u=rothakur n=ansible | redirecting (type: connection) ansible.builtin.network_cli to ansible.netcommon.network_cli
+2023-08-21 14:41:32,280 p=166891 u=rothakur n=ansible | network_os is set to cisco.ios.ios
+2023-08-21 14:41:32,282 p=166891 u=rothakur n=ansible | <35.155.113.92> ESTABLISH LOCAL CONNECTION FOR USER: rothakur
+2023-08-21 14:41:32,282 p=166891 u=rothakur n=ansible | <35.155.113.92> EXEC /bin/sh -c '( umask 77 && mkdir -p "` echo /home/rothakur/.ansible/tmp/ansible-local-166887chsgk7d0 `"&& mkdir "` echo /home/rothakur/.ansible/tmp/ansible-local-166887chsgk7d0/ansible-tmp-1692609092.2819703-166891-206755529155845 `" && echo ansible-tmp-1692609092.2819703-166891-206755529155845="` echo /home/rothakur/.ansible/tmp/ansible-local-166887chsgk7d0/ansible-tmp-1692609092.2819703-166891-206755529155845 `" ) && sleep 0'
+2023-08-21 14:41:32,483 p=166891 u=rothakur n=ansible | Using module file /home/rothakur/ansible_collections/cisco/ios/plugins/modules/ios_facts.py
+2023-08-21 14:41:32,483 p=166891 u=rothakur n=ansible | <35.155.113.92> PUT /home/rothakur/.ansible/tmp/ansible-local-166887chsgk7d0/tmp6ntvgmg2 TO /home/rothakur/.ansible/tmp/ansible-local-166887chsgk7d0/ansible-tmp-1692609092.2819703-166891-206755529155845/AnsiballZ_ios_facts.py
+2023-08-21 14:41:32,483 p=166891 u=rothakur n=ansible | <35.155.113.92> EXEC /bin/sh -c 'chmod u+x /home/rothakur/.ansible/tmp/ansible-local-166887chsgk7d0/ansible-tmp-1692609092.2819703-166891-206755529155845/ /home/rothakur/.ansible/tmp/ansible-local-166887chsgk7d0/ansible-tmp-1692609092.2819703-166891-206755529155845/AnsiballZ_ios_facts.py && sleep 0'
+2023-08-21 14:41:32,486 p=166891 u=rothakur n=ansible | <35.155.113.92> EXEC /bin/sh -c '/home/rothakur/venvs/ansible_py311/bin/python /home/rothakur/.ansible/tmp/ansible-local-166887chsgk7d0/ansible-tmp-1692609092.2819703-166891-206755529155845/AnsiballZ_ios_facts.py && sleep 0'
+2023-08-21 14:41:32,794 p=166896 u=rothakur n=ansible | <35.155.113.92> USING PYLIBSSH VERSION 1.1.0
+2023-08-21 14:41:32,794 p=166896 u=rothakur n=ansible | <35.155.113.92> ESTABLISH LIBSSH CONNECTION FOR USER: cisco on PORT 2013 TO 35.155.113.92
+2023-08-21 14:41:35,788 p=166896 u=rothakur n=ansible | ssh connection is OK: <pylibsshext.session.Session object at 0x7f5ba591aed0>
+2023-08-21 14:41:41,568 p=166891 u=rothakur n=ansible | <35.155.113.92> EXEC /bin/sh -c 'rm -f -r /home/rothakur/.ansible/tmp/ansible-local-166887chsgk7d0/ansible-tmp-1692609092.2819703-166891-206755529155845/ > /dev/null 2>&1 && sleep 0'
+2023-08-21 14:41:41,573 p=166887 u=rothakur n=ansible | ok: [rtr1]
+2023-08-21 14:41:41,575 p=166887 u=rothakur n=ansible | META: ran handlers
+2023-08-21 14:41:41,576 p=166887 u=rothakur n=ansible | TASK [Network Backup and Resource Manager] **********************************************************************************************************************************
+2023-08-21 14:41:41,585 p=166887 u=rothakur n=ansible | TASK [network.backup.run : Include tasks] ***********************************************************************************************************************************
+2023-08-21 14:41:41,593 p=166887 u=rothakur n=ansible | included: /home/rothakur/ansible_collections/network/backup/roles/run/includes/backup.yaml for rtr1
+2023-08-21 14:41:41,595 p=166887 u=rothakur n=ansible | TASK [network.backup.run : Build Local Backup Dir Path] *********************************************************************************************************************
+2023-08-21 14:41:41,604 p=166887 u=rothakur n=ansible | skipping: [rtr1] => {
+    "changed": false,
+    "skip_reason": "Conditional result was False"
+}
+2023-08-21 14:41:41,606 p=166887 u=rothakur n=ansible | TASK [network.backup.run : Include retrieve tasks] **************************************************************************************************************************
+2023-08-21 14:41:41,619 p=166887 u=rothakur n=ansible | included: /home/rothakur/ansible_collections/network/backup/roles/run/includes/retrieve.yaml for rtr1
+2023-08-21 14:41:41,625 p=166887 u=rothakur n=ansible | TASK [network.backup.run : Retrieve the host vars with provided token access] ***********************************************************************************************
+2023-08-21 14:41:41,653 p=166923 u=rothakur n=ansible | redirecting (type: connection) ansible.builtin.network_cli to ansible.netcommon.network_cli
+2023-08-21 14:41:43,850 p=166887 u=rothakur n=ansible | changed: [rtr1] => {
+    "branch_name": "ansible-rtr1-2023-08-21T144143.845810+0530",
+    "branches": [
+        "main",
+        "main",
+        "ansible--2023-08-20T190403.435609+0530",
+        "ansible-localhost-2023-05-29T171843.795583+0530",
+        "ansible-localhost-2023-05-29T172007.148952+0530",
+        "ansible-localhost-2023-05-29T172532.120086+0530",
+        "ansible-localhost-2023-05-29T172958.037928+0530",
+        "ansible-localhost-2023-05-30T180811.375619+0530",
+        "ansible-localhost-2023-05-30T181006.275730+0530",
+        "ansible-localhost-2023-05-30T190127.351183+0530",
+        "ansible-localhost-2023-06-07T111741.459344+0530",
+        "ansible-localhost-2023-08-20T174310.289048+0530",
+        "ansible-localhost-2023-08-20T183723.633279+0530",
+        "ansible-localhost-2023-08-20T184234.997525+0530",
+        "ansible-localhost-2023-08-20T184351.696520+0530",
+        "ansible-localhost-2023-08-20T184544.923866+0530",
+        "ansible-localhost-2023-08-20T185730.521427+0530",
+        "ansible-localhost-2023-08-20T190236.519510+0530",
+        "ansible-localhost-2023-08-20T192039.584962+0530",
+        "ansible-rtr1-2023-07-28T172228.456571+0530",
+        "ansible-rtr1-2023-07-28T181820.250635+0530",
+        "ansible-rtr1-2023-07-28T184930.408801+0530",
+        "ansible-rtr1-2023-07-31T154516.399447+0530",
+        "main"
+    ],
+    "changed": true,
+    "msg": "Successfully retrieved repository: https://github.com/rohitthakur2590/network_automation_backups",
+    "name": "network_automation_backups",
+    "output": [
+        {
+            "command": "git -C ./ -c 'http.extraheader=AUTHORIZATION: basic <TOKEN>' clone --depth=1 --progress --no-single-branch https://github.com/rohitthakur2590/network_automation_backups",
+            "env": "",
+            "return_code": 0,
+            "stderr_lines": [
+                "Cloning into 'network_automation_backups'...",
+                "remote: Enumerating objects: 62, done.        ",
+                "remote: Counting objects:   1% (1/62)        ",
+                "remote: Counting objects:   3% (2/62)        ",
+                "remote: Counting objects:   4% (3/62)        ",
+                "remote: Counting objects:   6% (4/62)        ",
+                "remote: Counting objects:   8% (5/62)        ",
+                "remote: Counting objects:   9% (6/62)        ",
+                "remote: Counting objects:  11% (7/62)        ",
+                "remote: Counting objects:  12% (8/62)        ",
+                "remote: Counting objects:  14% (9/62)        ",
+                "remote: Counting objects:  16% (10/62)        ",
+                "remote: Counting objects:  17% (11/62)        ",
+                "remote: Counting objects:  19% (12/62)        ",
+                "remote: Counting objects:  20% (13/62)        ",
+                "remote: Counting objects:  22% (14/62)        ",
+                "remote: Counting objects:  24% (15/62)        ",
+                "remote: Counting objects:  25% (16/62)        ",
+                "remote: Counting objects:  27% (17/62)        ",
+                "remote: Counting objects:  29% (18/62)        ",
+                "remote: Counting objects:  30% (19/62)        ",
+                "remote: Counting objects:  32% (20/62)        ",
+                "remote: Counting objects:  33% (21/62)        ",
+                "remote: Counting objects:  35% (22/62)        ",
+                "remote: Counting objects:  37% (23/62)        ",
+                "remote: Counting objects:  38% (24/62)        ",
+                "remote: Counting objects:  40% (25/62)        ",
+                "remote: Counting objects:  41% (26/62)        ",
+                "remote: Counting objects:  43% (27/62)        ",
+                "remote: Counting objects:  45% (28/62)        ",
+                "remote: Counting objects:  46% (29/62)        ",
+                "remote: Counting objects:  48% (30/62)        ",
+                "remote: Counting objects:  50% (31/62)        ",
+                "remote: Counting objects:  51% (32/62)        ",
+                "remote: Counting objects:  53% (33/62)        ",
+                "remote: Counting objects:  54% (34/62)        ",
+                "remote: Counting objects:  56% (35/62)        ",
+                "remote: Counting objects:  58% (36/62)        ",
+                "remote: Counting objects:  59% (37/62)        ",
+                "remote: Counting objects:  61% (38/62)        ",
+                "remote: Counting objects:  62% (39/62)        ",
+                "remote: Counting objects:  64% (40/62)        ",
+                "remote: Counting objects:  66% (41/62)        ",
+                "remote: Counting objects:  67% (42/62)        ",
+                "remote: Counting objects:  69% (43/62)        ",
+                "remote: Counting objects:  70% (44/62)        ",
+                "remote: Counting objects:  72% (45/62)        ",
+                "remote: Counting objects:  74% (46/62)        ",
+                "remote: Counting objects:  75% (47/62)        ",
+                "remote: Counting objects:  77% (48/62)        ",
+                "remote: Counting objects:  79% (49/62)        ",
+                "remote: Counting objects:  80% (50/62)        ",
+                "remote: Counting objects:  82% (51/62)        ",
+                "remote: Counting objects:  83% (52/62)        ",
+                "remote: Counting objects:  85% (53/62)        ",
+                "remote: Counting objects:  87% (54/62)        ",
+                "remote: Counting objects:  88% (55/62)        ",
+                "remote: Counting objects:  90% (56/62)        ",
+                "remote: Counting objects:  91% (57/62)        ",
+                "remote: Counting objects:  93% (58/62)        ",
+                "remote: Counting objects:  95% (59/62)        ",
+                "remote: Counting objects:  96% (60/62)        ",
+                "remote: Counting objects:  98% (61/62)        ",
+                "remote: Counting objects: 100% (62/62)        ",
+                "remote: Counting objects: 100% (62/62), done.        ",
+                "remote: Compressing objects:   3% (1/27)        ",
+                "remote: Compressing objects:   7% (2/27)        ",
+                "remote: Compressing objects:  11% (3/27)        ",
+                "remote: Compressing objects:  14% (4/27)        ",
+                "remote: Compressing objects:  18% (5/27)        ",
+                "remote: Compressing objects:  22% (6/27)        ",
+                "remote: Compressing objects:  25% (7/27)        ",
+                "remote: Compressing objects:  29% (8/27)        ",
+                "remote: Compressing objects:  33% (9/27)        ",
+                "remote: Compressing objects:  37% (10/27)        ",
+                "remote: Compressing objects:  40% (11/27)        ",
+                "remote: Compressing objects:  44% (12/27)        ",
+                "remote: Compressing objects:  48% (13/27)        ",
+                "remote: Compressing objects:  51% (14/27)        ",
+                "remote: Compressing objects:  55% (15/27)        ",
+                "remote: Compressing objects:  59% (16/27)        ",
+                "remote: Compressing objects:  62% (17/27)        ",
+                "remote: Compressing objects:  66% (18/27)        ",
+                "remote: Compressing objects:  70% (19/27)        ",
+                "remote: Compressing objects:  74% (20/27)        ",
+                "remote: Compressing objects:  77% (21/27)        ",
+                "remote: Compressing objects:  81% (22/27)        ",
+                "remote: Compressing objects:  85% (23/27)        ",
+                "remote: Compressing objects:  88% (24/27)        ",
+                "remote: Compressing objects:  92% (25/27)        ",
+                "remote: Compressing objects:  96% (26/27)        ",
+                "remote: Compressing objects: 100% (27/27)        ",
+                "remote: Compressing objects: 100% (27/27), done.        ",
+                "remote: Total 62 (delta 37), reused 58 (delta 33), pack-reused 0        ",
+                "Receiving objects:   1% (1/62)",
+                "Receiving objects:   3% (2/62)",
+                "Receiving objects:   4% (3/62)",
+                "Receiving objects:   6% (4/62)",
+                "Receiving objects:   8% (5/62)",
+                "Receiving objects:   9% (6/62)",
+                "Receiving objects:  11% (7/62)",
+                "Receiving objects:  12% (8/62)",
+                "Receiving objects:  14% (9/62)",
+                "Receiving objects:  16% (10/62)",
+                "Receiving objects:  17% (11/62)",
+                "Receiving objects:  19% (12/62)",
+                "Receiving objects:  20% (13/62)",
+                "Receiving objects:  22% (14/62)",
+                "Receiving objects:  24% (15/62)",
+                "Receiving objects:  25% (16/62)",
+                "Receiving objects:  27% (17/62)",
+                "Receiving objects:  29% (18/62)",
+                "Receiving objects:  30% (19/62)",
+                "Receiving objects:  32% (20/62)",
+                "Receiving objects:  33% (21/62)",
+                "Receiving objects:  35% (22/62)",
+                "Receiving objects:  37% (23/62)",
+                "Receiving objects:  38% (24/62)",
+                "Receiving objects:  40% (25/62)",
+                "Receiving objects:  41% (26/62)",
+                "Receiving objects:  43% (27/62)",
+                "Receiving objects:  45% (28/62)",
+                "Receiving objects:  46% (29/62)",
+                "Receiving objects:  48% (30/62)",
+                "Receiving objects:  50% (31/62)",
+                "Receiving objects:  51% (32/62)",
+                "Receiving objects:  53% (33/62)",
+                "Receiving objects:  54% (34/62)",
+                "Receiving objects:  56% (35/62)",
+                "Receiving objects:  58% (36/62)",
+                "Receiving objects:  59% (37/62)",
+                "Receiving objects:  61% (38/62)",
+                "Receiving objects:  62% (39/62)",
+                "Receiving objects:  64% (40/62)",
+                "Receiving objects:  66% (41/62)",
+                "Receiving objects:  67% (42/62)",
+                "Receiving objects:  69% (43/62)",
+                "Receiving objects:  70% (44/62)",
+                "Receiving objects:  72% (45/62)",
+                "Receiving objects:  74% (46/62)",
+                "Receiving objects:  75% (47/62)",
+                "Receiving objects:  77% (48/62)",
+                "Receiving objects:  79% (49/62)",
+                "Receiving objects:  80% (50/62)",
+                "Receiving objects:  82% (51/62)",
+                "Receiving objects:  83% (52/62)",
+                "Receiving objects:  85% (53/62)",
+                "Receiving objects:  87% (54/62)",
+                "Receiving objects:  88% (55/62)",
+                "Receiving objects:  90% (56/62)",
+                "Receiving objects:  91% (57/62)",
+                "Receiving objects:  93% (58/62)",
+                "Receiving objects:  95% (59/62)",
+                "Receiving objects:  96% (60/62)",
+                "Receiving objects:  98% (61/62)",
+                "Receiving objects: 100% (62/62)",
+                "Receiving objects: 100% (62/62), 6.15 KiB | 6.15 MiB/s, done.",
+                "Resolving deltas:   0% (0/37)",
+                "Resolving deltas:   2% (1/37)",
+                "Resolving deltas:   5% (2/37)",
+                "Resolving deltas:   8% (3/37)",
+                "Resolving deltas:  10% (4/37)",
+                "Resolving deltas:  13% (5/37)",
+                "Resolving deltas:  16% (6/37)",
+                "Resolving deltas:  18% (7/37)",
+                "Resolving deltas:  21% (8/37)",
+                "Resolving deltas:  24% (9/37)",
+                "Resolving deltas:  27% (10/37)",
+                "Resolving deltas:  29% (11/37)",
+                "Resolving deltas:  32% (12/37)",
+                "Resolving deltas:  35% (13/37)",
+                "Resolving deltas:  37% (14/37)",
+                "Resolving deltas:  40% (15/37)",
+                "Resolving deltas:  43% (16/37)",
+                "Resolving deltas:  45% (17/37)",
+                "Resolving deltas:  48% (18/37)",
+                "Resolving deltas:  54% (20/37)",
+                "Resolving deltas:  56% (21/37)",
+                "Resolving deltas:  62% (23/37)",
+                "Resolving deltas:  64% (24/37)",
+                "Resolving deltas:  67% (25/37)",
+                "Resolving deltas:  70% (26/37)",
+                "Resolving deltas:  72% (27/37)",
+                "Resolving deltas:  75% (28/37)",
+                "Resolving deltas:  78% (29/37)",
+                "Resolving deltas:  81% (30/37)",
+                "Resolving deltas:  83% (31/37)",
+                "Resolving deltas:  86% (32/37)",
+                "Resolving deltas:  89% (33/37)",
+                "Resolving deltas:  91% (34/37)",
+                "Resolving deltas:  94% (35/37)",
+                "Resolving deltas:  97% (36/37)",
+                "Resolving deltas: 100% (37/37)",
+                "Resolving deltas: 100% (37/37), done."
+            ],
+            "stdout_lines": []
+        },
+        {
+            "command": "git -C network_automation_backups branch -a",
+            "env": "",
+            "return_code": 0,
+            "stderr_lines": [],
+            "stdout_lines": [
+                "* main",
+                "  remotes/origin/HEAD -> origin/main",
+                "  remotes/origin/ansible--2023-08-20T190403.435609+0530",
+                "  remotes/origin/ansible-localhost-2023-05-29T171843.795583+0530",
+                "  remotes/origin/ansible-localhost-2023-05-29T172007.148952+0530",
+                "  remotes/origin/ansible-localhost-2023-05-29T172532.120086+0530",
+                "  remotes/origin/ansible-localhost-2023-05-29T172958.037928+0530",
+                "  remotes/origin/ansible-localhost-2023-05-30T180811.375619+0530",
+                "  remotes/origin/ansible-localhost-2023-05-30T181006.275730+0530",
+                "  remotes/origin/ansible-localhost-2023-05-30T190127.351183+0530",
+                "  remotes/origin/ansible-localhost-2023-06-07T111741.459344+0530",
+                "  remotes/origin/ansible-localhost-2023-08-20T174310.289048+0530",
+                "  remotes/origin/ansible-localhost-2023-08-20T183723.633279+0530",
+                "  remotes/origin/ansible-localhost-2023-08-20T184234.997525+0530",
+                "  remotes/origin/ansible-localhost-2023-08-20T184351.696520+0530",
+                "  remotes/origin/ansible-localhost-2023-08-20T184544.923866+0530",
+                "  remotes/origin/ansible-localhost-2023-08-20T185730.521427+0530",
+                "  remotes/origin/ansible-localhost-2023-08-20T190236.519510+0530",
+                "  remotes/origin/ansible-localhost-2023-08-20T192039.584962+0530",
+                "  remotes/origin/ansible-rtr1-2023-07-28T172228.456571+0530",
+                "  remotes/origin/ansible-rtr1-2023-07-28T181820.250635+0530",
+                "  remotes/origin/ansible-rtr1-2023-07-28T184930.408801+0530",
+                "  remotes/origin/ansible-rtr1-2023-07-31T154516.399447+0530",
+                "  remotes/origin/main"
+            ]
+        },
+        {
+            "command": "git -C network_automation_backups checkout -t -b ansible-rtr1-2023-08-21T144143.845810+0530",
+            "env": "",
+            "return_code": 0,
+            "stderr_lines": [
+                "Switched to a new branch 'ansible-rtr1-2023-08-21T144143.845810+0530'"
+            ],
+            "stdout_lines": [
+                "branch 'ansible-rtr1-2023-08-21T144143.845810+0530' set up to track 'main'."
+            ]
+        }
+    ],
+    "path": "network_automation_backups"
+}
+2023-08-21 14:41:43,852 p=166887 u=rothakur n=ansible | TASK [network.backup.run : Update data store path] **************************************************************************************************************************
+2023-08-21 14:41:43,861 p=166947 u=rothakur n=ansible | redirecting (type: connection) ansible.builtin.network_cli to ansible.netcommon.network_cli
+2023-08-21 14:41:44,147 p=166887 u=rothakur n=ansible | ok: [rtr1] => {
+    "ansible_facts": {
+        "network_backup_repository": {
+            "branch_name": "ansible-rtr1-2023-08-21T144143.845810+0530",
+            "branches": [
+                "main",
+                "main",
+                "ansible--2023-08-20T190403.435609+0530",
+                "ansible-localhost-2023-05-29T171843.795583+0530",
+                "ansible-localhost-2023-05-29T172007.148952+0530",
+                "ansible-localhost-2023-05-29T172532.120086+0530",
+                "ansible-localhost-2023-05-29T172958.037928+0530",
+                "ansible-localhost-2023-05-30T180811.375619+0530",
+                "ansible-localhost-2023-05-30T181006.275730+0530",
+                "ansible-localhost-2023-05-30T190127.351183+0530",
+                "ansible-localhost-2023-06-07T111741.459344+0530",
+                "ansible-localhost-2023-08-20T174310.289048+0530",
+                "ansible-localhost-2023-08-20T183723.633279+0530",
+                "ansible-localhost-2023-08-20T184234.997525+0530",
+                "ansible-localhost-2023-08-20T184351.696520+0530",
+                "ansible-localhost-2023-08-20T184544.923866+0530",
+                "ansible-localhost-2023-08-20T185730.521427+0530",
+                "ansible-localhost-2023-08-20T190236.519510+0530",
+                "ansible-localhost-2023-08-20T192039.584962+0530",
+                "ansible-rtr1-2023-07-28T172228.456571+0530",
+                "ansible-rtr1-2023-07-28T181820.250635+0530",
+                "ansible-rtr1-2023-07-28T184930.408801+0530",
+                "ansible-rtr1-2023-07-31T154516.399447+0530",
+                "main"
+            ],
+            "changed": true,
+            "failed": false,
+            "msg": "Successfully retrieved repository: https://github.com/rohitthakur2590/network_automation_backups",
+            "name": "network_automation_backups",
+            "output": [
+                {
+                    "command": "git -C ./ -c 'http.extraheader=AUTHORIZATION: basic <TOKEN>' clone --depth=1 --progress --no-single-branch https://github.com/rohitthakur2590/network_automation_backups",
+                    "env": "",
+                    "return_code": 0,
+                    "stderr_lines": [
+                        "Cloning into 'network_automation_backups'...",
+                        "remote: Enumerating objects: 62, done.        ",
+                        "remote: Counting objects:   1% (1/62)        ",
+                        "remote: Counting objects:   3% (2/62)        ",
+                        "remote: Counting objects:   4% (3/62)        ",
+                        "remote: Counting objects:   6% (4/62)        ",
+                        "remote: Counting objects:   8% (5/62)        ",
+                        "remote: Counting objects:   9% (6/62)        ",
+                        "remote: Counting objects:  11% (7/62)        ",
+                        "remote: Counting objects:  12% (8/62)        ",
+                        "remote: Counting objects:  14% (9/62)        ",
+                        "remote: Counting objects:  16% (10/62)        ",
+                        "remote: Counting objects:  17% (11/62)        ",
+                        "remote: Counting objects:  19% (12/62)        ",
+                        "remote: Counting objects:  20% (13/62)        ",
+                        "remote: Counting objects:  22% (14/62)        ",
+                        "remote: Counting objects:  24% (15/62)        ",
+                        "remote: Counting objects:  25% (16/62)        ",
+                        "remote: Counting objects:  27% (17/62)        ",
+                        "remote: Counting objects:  29% (18/62)        ",
+                        "remote: Counting objects:  30% (19/62)        ",
+                        "remote: Counting objects:  32% (20/62)        ",
+                        "remote: Counting objects:  33% (21/62)        ",
+                        "remote: Counting objects:  35% (22/62)        ",
+                        "remote: Counting objects:  37% (23/62)        ",
+                        "remote: Counting objects:  38% (24/62)        ",
+                        "remote: Counting objects:  40% (25/62)        ",
+                        "remote: Counting objects:  41% (26/62)        ",
+                        "remote: Counting objects:  43% (27/62)        ",
+                        "remote: Counting objects:  45% (28/62)        ",
+                        "remote: Counting objects:  46% (29/62)        ",
+                        "remote: Counting objects:  48% (30/62)        ",
+                        "remote: Counting objects:  50% (31/62)        ",
+                        "remote: Counting objects:  51% (32/62)        ",
+                        "remote: Counting objects:  53% (33/62)        ",
+                        "remote: Counting objects:  54% (34/62)        ",
+                        "remote: Counting objects:  56% (35/62)        ",
+                        "remote: Counting objects:  58% (36/62)        ",
+                        "remote: Counting objects:  59% (37/62)        ",
+                        "remote: Counting objects:  61% (38/62)        ",
+                        "remote: Counting objects:  62% (39/62)        ",
+                        "remote: Counting objects:  64% (40/62)        ",
+                        "remote: Counting objects:  66% (41/62)        ",
+                        "remote: Counting objects:  67% (42/62)        ",
+                        "remote: Counting objects:  69% (43/62)        ",
+                        "remote: Counting objects:  70% (44/62)        ",
+                        "remote: Counting objects:  72% (45/62)        ",
+                        "remote: Counting objects:  74% (46/62)        ",
+                        "remote: Counting objects:  75% (47/62)        ",
+                        "remote: Counting objects:  77% (48/62)        ",
+                        "remote: Counting objects:  79% (49/62)        ",
+                        "remote: Counting objects:  80% (50/62)        ",
+                        "remote: Counting objects:  82% (51/62)        ",
+                        "remote: Counting objects:  83% (52/62)        ",
+                        "remote: Counting objects:  85% (53/62)        ",
+                        "remote: Counting objects:  87% (54/62)        ",
+                        "remote: Counting objects:  88% (55/62)        ",
+                        "remote: Counting objects:  90% (56/62)        ",
+                        "remote: Counting objects:  91% (57/62)        ",
+                        "remote: Counting objects:  93% (58/62)        ",
+                        "remote: Counting objects:  95% (59/62)        ",
+                        "remote: Counting objects:  96% (60/62)        ",
+                        "remote: Counting objects:  98% (61/62)        ",
+                        "remote: Counting objects: 100% (62/62)        ",
+                        "remote: Counting objects: 100% (62/62), done.        ",
+                        "remote: Compressing objects:   3% (1/27)        ",
+                        "remote: Compressing objects:   7% (2/27)        ",
+                        "remote: Compressing objects:  11% (3/27)        ",
+                        "remote: Compressing objects:  14% (4/27)        ",
+                        "remote: Compressing objects:  18% (5/27)        ",
+                        "remote: Compressing objects:  22% (6/27)        ",
+                        "remote: Compressing objects:  25% (7/27)        ",
+                        "remote: Compressing objects:  29% (8/27)        ",
+                        "remote: Compressing objects:  33% (9/27)        ",
+                        "remote: Compressing objects:  37% (10/27)        ",
+                        "remote: Compressing objects:  40% (11/27)        ",
+                        "remote: Compressing objects:  44% (12/27)        ",
+                        "remote: Compressing objects:  48% (13/27)        ",
+                        "remote: Compressing objects:  51% (14/27)        ",
+                        "remote: Compressing objects:  55% (15/27)        ",
+                        "remote: Compressing objects:  59% (16/27)        ",
+                        "remote: Compressing objects:  62% (17/27)        ",
+                        "remote: Compressing objects:  66% (18/27)        ",
+                        "remote: Compressing objects:  70% (19/27)        ",
+                        "remote: Compressing objects:  74% (20/27)        ",
+                        "remote: Compressing objects:  77% (21/27)        ",
+                        "remote: Compressing objects:  81% (22/27)        ",
+                        "remote: Compressing objects:  85% (23/27)        ",
+                        "remote: Compressing objects:  88% (24/27)        ",
+                        "remote: Compressing objects:  92% (25/27)        ",
+                        "remote: Compressing objects:  96% (26/27)        ",
+                        "remote: Compressing objects: 100% (27/27)        ",
+                        "remote: Compressing objects: 100% (27/27), done.        ",
+                        "remote: Total 62 (delta 37), reused 58 (delta 33), pack-reused 0        ",
+                        "Receiving objects:   1% (1/62)",
+                        "Receiving objects:   3% (2/62)",
+                        "Receiving objects:   4% (3/62)",
+                        "Receiving objects:   6% (4/62)",
+                        "Receiving objects:   8% (5/62)",
+                        "Receiving objects:   9% (6/62)",
+                        "Receiving objects:  11% (7/62)",
+                        "Receiving objects:  12% (8/62)",
+                        "Receiving objects:  14% (9/62)",
+                        "Receiving objects:  16% (10/62)",
+                        "Receiving objects:  17% (11/62)",
+                        "Receiving objects:  19% (12/62)",
+                        "Receiving objects:  20% (13/62)",
+                        "Receiving objects:  22% (14/62)",
+                        "Receiving objects:  24% (15/62)",
+                        "Receiving objects:  25% (16/62)",
+                        "Receiving objects:  27% (17/62)",
+                        "Receiving objects:  29% (18/62)",
+                        "Receiving objects:  30% (19/62)",
+                        "Receiving objects:  32% (20/62)",
+                        "Receiving objects:  33% (21/62)",
+                        "Receiving objects:  35% (22/62)",
+                        "Receiving objects:  37% (23/62)",
+                        "Receiving objects:  38% (24/62)",
+                        "Receiving objects:  40% (25/62)",
+                        "Receiving objects:  41% (26/62)",
+                        "Receiving objects:  43% (27/62)",
+                        "Receiving objects:  45% (28/62)",
+                        "Receiving objects:  46% (29/62)",
+                        "Receiving objects:  48% (30/62)",
+                        "Receiving objects:  50% (31/62)",
+                        "Receiving objects:  51% (32/62)",
+                        "Receiving objects:  53% (33/62)",
+                        "Receiving objects:  54% (34/62)",
+                        "Receiving objects:  56% (35/62)",
+                        "Receiving objects:  58% (36/62)",
+                        "Receiving objects:  59% (37/62)",
+                        "Receiving objects:  61% (38/62)",
+                        "Receiving objects:  62% (39/62)",
+                        "Receiving objects:  64% (40/62)",
+                        "Receiving objects:  66% (41/62)",
+                        "Receiving objects:  67% (42/62)",
+                        "Receiving objects:  69% (43/62)",
+                        "Receiving objects:  70% (44/62)",
+                        "Receiving objects:  72% (45/62)",
+                        "Receiving objects:  74% (46/62)",
+                        "Receiving objects:  75% (47/62)",
+                        "Receiving objects:  77% (48/62)",
+                        "Receiving objects:  79% (49/62)",
+                        "Receiving objects:  80% (50/62)",
+                        "Receiving objects:  82% (51/62)",
+                        "Receiving objects:  83% (52/62)",
+                        "Receiving objects:  85% (53/62)",
+                        "Receiving objects:  87% (54/62)",
+                        "Receiving objects:  88% (55/62)",
+                        "Receiving objects:  90% (56/62)",
+                        "Receiving objects:  91% (57/62)",
+                        "Receiving objects:  93% (58/62)",
+                        "Receiving objects:  95% (59/62)",
+                        "Receiving objects:  96% (60/62)",
+                        "Receiving objects:  98% (61/62)",
+                        "Receiving objects: 100% (62/62)",
+                        "Receiving objects: 100% (62/62), 6.15 KiB | 6.15 MiB/s, done.",
+                        "Resolving deltas:   0% (0/37)",
+                        "Resolving deltas:   2% (1/37)",
+                        "Resolving deltas:   5% (2/37)",
+                        "Resolving deltas:   8% (3/37)",
+                        "Resolving deltas:  10% (4/37)",
+                        "Resolving deltas:  13% (5/37)",
+                        "Resolving deltas:  16% (6/37)",
+                        "Resolving deltas:  18% (7/37)",
+                        "Resolving deltas:  21% (8/37)",
+                        "Resolving deltas:  24% (9/37)",
+                        "Resolving deltas:  27% (10/37)",
+                        "Resolving deltas:  29% (11/37)",
+                        "Resolving deltas:  32% (12/37)",
+                        "Resolving deltas:  35% (13/37)",
+                        "Resolving deltas:  37% (14/37)",
+                        "Resolving deltas:  40% (15/37)",
+                        "Resolving deltas:  43% (16/37)",
+                        "Resolving deltas:  45% (17/37)",
+                        "Resolving deltas:  48% (18/37)",
+                        "Resolving deltas:  54% (20/37)",
+                        "Resolving deltas:  56% (21/37)",
+                        "Resolving deltas:  62% (23/37)",
+                        "Resolving deltas:  64% (24/37)",
+                        "Resolving deltas:  67% (25/37)",
+                        "Resolving deltas:  70% (26/37)",
+                        "Resolving deltas:  72% (27/37)",
+                        "Resolving deltas:  75% (28/37)",
+                        "Resolving deltas:  78% (29/37)",
+                        "Resolving deltas:  81% (30/37)",
+                        "Resolving deltas:  83% (31/37)",
+                        "Resolving deltas:  86% (32/37)",
+                        "Resolving deltas:  89% (33/37)",
+                        "Resolving deltas:  91% (34/37)",
+                        "Resolving deltas:  94% (35/37)",
+                        "Resolving deltas:  97% (36/37)",
+                        "Resolving deltas: 100% (37/37)",
+                        "Resolving deltas: 100% (37/37), done."
+                    ],
+                    "stdout_lines": []
+                },
+                {
+                    "command": "git -C network_automation_backups branch -a",
+                    "env": "",
+                    "return_code": 0,
+                    "stderr_lines": [],
+                    "stdout_lines": [
+                        "* main",
+                        "  remotes/origin/HEAD -> origin/main",
+                        "  remotes/origin/ansible--2023-08-20T190403.435609+0530",
+                        "  remotes/origin/ansible-localhost-2023-05-29T171843.795583+0530",
+                        "  remotes/origin/ansible-localhost-2023-05-29T172007.148952+0530",
+                        "  remotes/origin/ansible-localhost-2023-05-29T172532.120086+0530",
+                        "  remotes/origin/ansible-localhost-2023-05-29T172958.037928+0530",
+                        "  remotes/origin/ansible-localhost-2023-05-30T180811.375619+0530",
+                        "  remotes/origin/ansible-localhost-2023-05-30T181006.275730+0530",
+                        "  remotes/origin/ansible-localhost-2023-05-30T190127.351183+0530",
+                        "  remotes/origin/ansible-localhost-2023-06-07T111741.459344+0530",
+                        "  remotes/origin/ansible-localhost-2023-08-20T174310.289048+0530",
+                        "  remotes/origin/ansible-localhost-2023-08-20T183723.633279+0530",
+                        "  remotes/origin/ansible-localhost-2023-08-20T184234.997525+0530",
+                        "  remotes/origin/ansible-localhost-2023-08-20T184351.696520+0530",
+                        "  remotes/origin/ansible-localhost-2023-08-20T184544.923866+0530",
+                        "  remotes/origin/ansible-localhost-2023-08-20T185730.521427+0530",
+                        "  remotes/origin/ansible-localhost-2023-08-20T190236.519510+0530",
+                        "  remotes/origin/ansible-localhost-2023-08-20T192039.584962+0530",
+                        "  remotes/origin/ansible-rtr1-2023-07-28T172228.456571+0530",
+                        "  remotes/origin/ansible-rtr1-2023-07-28T181820.250635+0530",
+                        "  remotes/origin/ansible-rtr1-2023-07-28T184930.408801+0530",
+                        "  remotes/origin/ansible-rtr1-2023-07-31T154516.399447+0530",
+                        "  remotes/origin/main"
+                    ]
+                },
+                {
+                    "command": "git -C network_automation_backups checkout -t -b ansible-rtr1-2023-08-21T144143.845810+0530",
+                    "env": "",
+                    "return_code": 0,
+                    "stderr_lines": [
+                        "Switched to a new branch 'ansible-rtr1-2023-08-21T144143.845810+0530'"
+                    ],
+                    "stdout_lines": [
+                        "branch 'ansible-rtr1-2023-08-21T144143.845810+0530' set up to track 'main'."
+                    ]
+                }
+            ],
+            "path": "network_automation_backups"
+        }
+    },
+    "changed": false
+}
+2023-08-21 14:41:44,148 p=166887 u=rothakur n=ansible | TASK [network.backup.run : Retrieve host vars with default access] **********************************************************************************************************
+2023-08-21 14:41:44,157 p=166887 u=rothakur n=ansible | skipping: [rtr1] => {
+    "changed": false,
+    "skip_reason": "Conditional result was False"
+}
+2023-08-21 14:41:44,159 p=166887 u=rothakur n=ansible | TASK [network.backup.run : Update data store path] **************************************************************************************************************************
+2023-08-21 14:41:44,166 p=166887 u=rothakur n=ansible | skipping: [rtr1] => {
+    "changed": false,
+    "skip_reason": "Conditional result was False"
+}
+2023-08-21 14:41:44,168 p=166887 u=rothakur n=ansible | TASK [network.backup.run : Update Inventory Path] ***************************************************************************************************************************
+2023-08-21 14:41:44,172 p=166955 u=rothakur n=ansible | redirecting (type: connection) ansible.builtin.network_cli to ansible.netcommon.network_cli
+2023-08-21 14:41:44,450 p=166887 u=rothakur n=ansible | ok: [rtr1] => {
+    "ansible_facts": {
+        "network_backup_path": "network_automation_backups"
+    },
+    "changed": false
+}
+2023-08-21 14:41:44,451 p=166887 u=rothakur n=ansible | TASK [network.backup.run : Include tasks] ***********************************************************************************************************************************
+2023-08-21 14:41:44,458 p=166887 u=rothakur n=ansible | included: /home/rothakur/ansible_collections/network/backup/roles/run/includes/network.yaml for rtr1
+2023-08-21 14:41:44,462 p=166887 u=rothakur n=ansible | TASK [network.backup.run : Invoke backup task] ******************************************************************************************************************************
+2023-08-21 14:41:44,478 p=166887 u=rothakur n=ansible | included: /home/rothakur/ansible_collections/network/backup/roles/run/includes/operation.yaml for rtr1
+2023-08-21 14:41:44,483 p=166887 u=rothakur n=ansible | TASK [network.backup.run : Configuration Backup] ****************************************************************************************************************************
+2023-08-21 14:41:44,488 p=166965 u=rothakur n=ansible | redirecting (type: connection) ansible.builtin.network_cli to ansible.netcommon.network_cli
+2023-08-21 14:41:45,590 p=166887 u=rothakur n=ansible | changed: [rtr1] => {
+    "backup_path": "network_automation_backups/rtr1.txt",
+    "changed": true,
+    "date": "2023-08-21",
+    "invocation": {
+        "module_args": {
+            "backup": true,
+            "backup_options": {
+                "dir_path": "network_automation_backups",
+                "filename": "rtr1.txt"
+            },
+            "commit": null,
+            "commit_comment": null,
+            "config": null,
+            "defaults": false,
+            "diff_ignore_lines": null,
+            "diff_match": null,
+            "diff_replace": null,
+            "multiline_delimiter": null,
+            "replace": null,
+            "rollback": null
+        }
+    },
+    "time": "14:41:45"
+}
+2023-08-21 14:41:45,603 p=166887 u=rothakur n=ansible | TASK [network.backup.run : write to file] ***********************************************************************************************************************************
+2023-08-21 14:41:45,618 p=166969 u=rothakur n=ansible | redirecting (type: connection) ansible.builtin.network_cli to ansible.netcommon.network_cli
+2023-08-21 14:41:45,868 p=166969 u=rothakur n=ansible | <35.155.113.92> ESTABLISH LOCAL CONNECTION FOR USER: rothakur
+2023-08-21 14:41:45,868 p=166969 u=rothakur n=ansible | <35.155.113.92> EXEC /bin/sh -c '( umask 77 && mkdir -p "` echo /home/rothakur/.ansible/tmp/ansible-local-166887chsgk7d0 `"&& mkdir "` echo /home/rothakur/.ansible/tmp/ansible-local-166887chsgk7d0/ansible-tmp-1692609105.868128-166969-258608135111760 `" && echo ansible-tmp-1692609105.868128-166969-258608135111760="` echo /home/rothakur/.ansible/tmp/ansible-local-166887chsgk7d0/ansible-tmp-1692609105.868128-166969-258608135111760 `" ) && sleep 0'
+2023-08-21 14:41:45,922 p=166969 u=rothakur n=ansible | Using module file /home/rothakur/ansible-collections/collections/ansible_collections/ansible/ansible/lib/ansible/modules/stat.py
+2023-08-21 14:41:45,922 p=166969 u=rothakur n=ansible | <35.155.113.92> PUT /home/rothakur/.ansible/tmp/ansible-local-166887chsgk7d0/tmpwhi5flao TO /home/rothakur/.ansible/tmp/ansible-local-166887chsgk7d0/ansible-tmp-1692609105.868128-166969-258608135111760/AnsiballZ_stat.py
+2023-08-21 14:41:45,922 p=166969 u=rothakur n=ansible | <35.155.113.92> EXEC /bin/sh -c 'chmod u+x /home/rothakur/.ansible/tmp/ansible-local-166887chsgk7d0/ansible-tmp-1692609105.868128-166969-258608135111760/ /home/rothakur/.ansible/tmp/ansible-local-166887chsgk7d0/ansible-tmp-1692609105.868128-166969-258608135111760/AnsiballZ_stat.py && sleep 0'
+2023-08-21 14:41:45,924 p=166969 u=rothakur n=ansible | <35.155.113.92> EXEC /bin/sh -c '/home/rothakur/venvs/ansible_py311/bin/python /home/rothakur/.ansible/tmp/ansible-local-166887chsgk7d0/ansible-tmp-1692609105.868128-166969-258608135111760/AnsiballZ_stat.py && sleep 0'
+2023-08-21 14:41:46,031 p=166969 u=rothakur n=ansible | <35.155.113.92> PUT /home/rothakur/.ansible/tmp/ansible-local-166887chsgk7d0/tmpywtlofuk TO /home/rothakur/.ansible/tmp/ansible-local-166887chsgk7d0/ansible-tmp-1692609105.868128-166969-258608135111760/source
+2023-08-21 14:41:46,032 p=166969 u=rothakur n=ansible | <35.155.113.92> EXEC /bin/sh -c 'chmod u+x /home/rothakur/.ansible/tmp/ansible-local-166887chsgk7d0/ansible-tmp-1692609105.868128-166969-258608135111760/ /home/rothakur/.ansible/tmp/ansible-local-166887chsgk7d0/ansible-tmp-1692609105.868128-166969-258608135111760/source && sleep 0'
+2023-08-21 14:41:46,107 p=166969 u=rothakur n=ansible | Using module file /home/rothakur/ansible-collections/collections/ansible_collections/ansible/ansible/lib/ansible/modules/copy.py
+2023-08-21 14:41:46,107 p=166969 u=rothakur n=ansible | <35.155.113.92> PUT /home/rothakur/.ansible/tmp/ansible-local-166887chsgk7d0/tmptq49_lxo TO /home/rothakur/.ansible/tmp/ansible-local-166887chsgk7d0/ansible-tmp-1692609105.868128-166969-258608135111760/AnsiballZ_copy.py
+2023-08-21 14:41:46,108 p=166969 u=rothakur n=ansible | <35.155.113.92> EXEC /bin/sh -c 'chmod u+x /home/rothakur/.ansible/tmp/ansible-local-166887chsgk7d0/ansible-tmp-1692609105.868128-166969-258608135111760/ /home/rothakur/.ansible/tmp/ansible-local-166887chsgk7d0/ansible-tmp-1692609105.868128-166969-258608135111760/AnsiballZ_copy.py && sleep 0'
+2023-08-21 14:41:46,110 p=166969 u=rothakur n=ansible | <35.155.113.92> EXEC /bin/sh -c '/home/rothakur/venvs/ansible_py311/bin/python /home/rothakur/.ansible/tmp/ansible-local-166887chsgk7d0/ansible-tmp-1692609105.868128-166969-258608135111760/AnsiballZ_copy.py && sleep 0'
+2023-08-21 14:41:46,205 p=166969 u=rothakur n=ansible | <35.155.113.92> EXEC /bin/sh -c 'rm -f -r /home/rothakur/.ansible/tmp/ansible-local-166887chsgk7d0/ansible-tmp-1692609105.868128-166969-258608135111760/ > /dev/null 2>&1 && sleep 0'
+2023-08-21 14:41:46,210 p=166887 u=rothakur n=ansible | changed: [rtr1] => {
+    "changed": true,
+    "checksum": "589143a039dfe6b8e4d93106c734cc69cedaf3cf",
+    "dest": "network_automation_backups/meta.yaml",
+    "diff": [],
+    "gid": 1000,
+    "group": "rothakur",
+    "invocation": {
+        "module_args": {
+            "_original_basename": "tmpywtlofuk",
+            "attributes": null,
+            "backup": false,
+            "checksum": "589143a039dfe6b8e4d93106c734cc69cedaf3cf",
+            "content": null,
+            "dest": "network_automation_backups/meta.yaml",
+            "directory_mode": null,
+            "follow": false,
+            "force": true,
+            "group": null,
+            "local_follow": null,
+            "mode": null,
+            "owner": null,
+            "remote_src": null,
+            "selevel": null,
+            "serole": null,
+            "setype": null,
+            "seuser": null,
+            "src": "/home/rothakur/.ansible/tmp/ansible-local-166887chsgk7d0/ansible-tmp-1692609105.868128-166969-258608135111760/source",
+            "unsafe_writes": false,
+            "validate": null
+        }
+    },
+    "md5sum": "5f707b4e05a3d8c47cf908ec9dbf41d9",
+    "mode": "0644",
+    "owner": "rothakur",
+    "size": 113,
+    "src": "/home/rothakur/.ansible/tmp/ansible-local-166887chsgk7d0/ansible-tmp-1692609105.868128-166969-258608135111760/source",
+    "state": "file",
+    "uid": 1000
+}
+2023-08-21 14:41:46,211 p=166887 u=rothakur n=ansible | TASK [network.backup.run : Include build tasks] *****************************************************************************************************************************
+2023-08-21 14:41:46,223 p=166887 u=rothakur n=ansible | included: /home/rothakur/ansible_collections/network/backup/roles/run/includes/publish.yaml for rtr1
+2023-08-21 14:41:46,227 p=166887 u=rothakur n=ansible | TASK [network.backup.run : Set Timestamp] ***********************************************************************************************************************************
+2023-08-21 14:41:46,235 p=166996 u=rothakur n=ansible | redirecting (type: connection) ansible.builtin.network_cli to ansible.netcommon.network_cli
+2023-08-21 14:41:46,490 p=166887 u=rothakur n=ansible | ok: [rtr1] => {
+    "ansible_facts": {
+        "time": "2023-08-21-14-41"
+    },
+    "changed": false
+}
+2023-08-21 14:41:46,492 p=166887 u=rothakur n=ansible | TASK [network.backup.run : Create default tag] ******************************************************************************************************************************
+2023-08-21 14:41:46,497 p=167001 u=rothakur n=ansible | redirecting (type: connection) ansible.builtin.network_cli to ansible.netcommon.network_cli
+2023-08-21 14:41:46,752 p=166887 u=rothakur n=ansible | ok: [rtr1] => {
+    "ansible_facts": {
+        "default_tag": {
+            "annotation": "2023-08-21-14-41",
+            "message": "backup_on: 2023-08-21-14-41"
+        }
+    },
+    "changed": false
+}
+2023-08-21 14:41:46,754 p=166887 u=rothakur n=ansible | TASK [network.backup.run : Set default tag] *********************************************************************************************************************************
+2023-08-21 14:41:46,762 p=166887 u=rothakur n=ansible | skipping: [rtr1] => {
+    "changed": false,
+    "skip_reason": "Conditional result was False"
+}
+2023-08-21 14:41:46,765 p=166887 u=rothakur n=ansible | TASK [network.backup.run : Publish the changes] *****************************************************************************************************************************
+2023-08-21 14:41:46,779 p=167007 u=rothakur n=ansible | redirecting (type: connection) ansible.builtin.network_cli to ansible.netcommon.network_cli
+2023-08-21 14:41:48,963 p=166887 u=rothakur n=ansible | changed: [rtr1] => {
+    "changed": true,
+    "msg": "Successfully published local changes from: network_automation_backups",
+    "output": [
+        {
+            "command": "git -C network_automation_backups config --get user.name",
+            "env": "",
+            "return_code": 0,
+            "stderr_lines": [],
+            "stdout_lines": [
+                "rohitthakur2590"
+            ]
+        },
+        {
+            "command": "git -C network_automation_backups config --get user.email",
+            "env": "",
+            "return_code": 0,
+            "stderr_lines": [],
+            "stdout_lines": [
+                "rohitthakur2590@outlook.com"
+            ]
+        },
+        {
+            "command": "git -C network_automation_backups add --all",
+            "env": "",
+            "return_code": 0,
+            "stderr_lines": [],
+            "stdout_lines": []
+        },
+        {
+            "command": "git -C network_automation_backups commit --allow-empty -m 'Updates made by ansible with play: rtr1'",
+            "env": "",
+            "return_code": 0,
+            "stderr_lines": [],
+            "stdout_lines": [
+                "[ansible-rtr1-2023-08-21T144143.845810+0530 65df97c] Updates made by ansible with play: rtr1",
+                " 2 files changed, 195 insertions(+), 2 deletions(-)",
+                " create mode 100644 rtr1.txt"
+            ]
+        },
+        {
+            "command": "git -C network_automation_backups tag -a 2023-08-21-14-41 -m 'backup_on: 2023-08-21-14-41'",
+            "env": "",
+            "return_code": 0,
+            "stderr_lines": [],
+            "stdout_lines": []
+        },
+        {
+            "command": "git -C network_automation_backups remote -v",
+            "env": "",
+            "return_code": 0,
+            "stderr_lines": [],
+            "stdout_lines": [
+                "origin\thttps://github.com/rohitthakur2590/network_automation_backups (fetch)",
+                "origin\thttps://github.com/rohitthakur2590/network_automation_backups (push)"
+            ]
+        },
+        {
+            "command": "git -C network_automation_backups -c 'http.extraheader=AUTHORIZATION: basic <TOKEN>' push --tags origin HEAD",
+            "env": "",
+            "return_code": 0,
+            "stderr_lines": [
+                "To https://github.com/rohitthakur2590/network_automation_backups",
+                " * [new branch]      HEAD -> ansible-rtr1-2023-08-21T144143.845810+0530",
+                " * [new tag]         2023-08-21-14-41 -> 2023-08-21-14-41"
+            ],
+            "stdout_lines": []
+        }
+    ],
+    "pr_url": "To https://github.com/rohitthakur2590/network_automation_backups\n * [new branch]      HEAD -> ansible-rtr1-2023-08-21T144143.845810+0530\n * [new tag]         2023-08-21-14-41 -> 2023-08-21-14-41",
+    "user_email": "rohitthakur2590@outlook.com\n",
+    "user_name": "rohitthakur2590\n"
+}
+2023-08-21 14:41:48,964 p=166887 u=rothakur n=ansible | META: role_complete for rtr1
+2023-08-21 14:41:48,966 p=166887 u=rothakur n=ansible | META: ran handlers
+2023-08-21 14:41:48,967 p=166887 u=rothakur n=ansible | META: ran handlers
+2023-08-21 14:41:48,968 p=166887 u=rothakur n=ansible | PLAY RECAP ******************************************************************************************************************************************************************
+2023-08-21 14:41:48,968 p=166887 u=rothakur n=ansible | rtr1                       : ok=14   changed=4    unreachable=0    failed=0    skipped=4    rescued=0    ignored=0   
+2023-08-21 14:41:49,068 p=166896 u=rothakur n=ansible | shutdown complete
+2023-08-22 09:21:38,294 p=232993 u=rothakur n=ansible | ansible-playbook [core 2.13.11.post0] (stable-2.13 28fb37d6c2) last updated 2023/08/13 09:59:21 (GMT +550)
+  config file = /home/rothakur/ansible-collections/collections/ansible_collections/network/backup/ansible.cfg
+  configured module search path = ['/home/rothakur/.ansible/plugins/modules', '/usr/share/ansible/plugins/modules']
+  ansible python module location = /home/rothakur/ansible-collections/collections/ansible_collections/ansible/ansible/lib/ansible
+  ansible collection location = /home/rothakur/ansible_collections
+  executable location = /home/rothakur/.local/bin/ansible-playbook
+  python version = 3.11.4 (main, Jun  7 2023, 00:00:00) [GCC 13.1.1 20230511 (Red Hat 13.1.1-2)]
+  jinja version = 3.0.3
+  libyaml = False
+2023-08-22 09:21:38,294 p=232993 u=rothakur n=ansible | Using /home/rothakur/ansible-collections/collections/ansible_collections/network/backup/ansible.cfg as config file
+2023-08-22 09:21:38,309 p=232993 u=rothakur n=ansible | host_list declined parsing /home/rothakur/ansible-collections/collections/ansible_collections/network/backup/inventory as it did not pass its verify_file() method
+2023-08-22 09:21:38,309 p=232993 u=rothakur n=ansible | script declined parsing /home/rothakur/ansible-collections/collections/ansible_collections/network/backup/inventory as it did not pass its verify_file() method
+2023-08-22 09:21:38,309 p=232993 u=rothakur n=ansible | auto declined parsing /home/rothakur/ansible-collections/collections/ansible_collections/network/backup/inventory as it did not pass its verify_file() method
+2023-08-22 09:21:38,310 p=232993 u=rothakur n=ansible | Parsed /home/rothakur/ansible-collections/collections/ansible_collections/network/backup/inventory inventory source with ini plugin
+2023-08-22 09:21:38,494 p=232993 u=rothakur n=ansible | Skipping callback 'default', as we already have a stdout callback.
+2023-08-22 09:21:38,494 p=232993 u=rothakur n=ansible | Skipping callback 'minimal', as we already have a stdout callback.
+2023-08-22 09:21:38,494 p=232993 u=rothakur n=ansible | Skipping callback 'oneline', as we already have a stdout callback.
+2023-08-22 09:21:38,494 p=232993 u=rothakur n=ansible | PLAYBOOK: backup_remote.yaml ************************************************************************************************************************************************
+2023-08-22 09:21:38,494 p=232993 u=rothakur n=ansible | 1 plays in playbooks/backup_remote.yaml
+2023-08-22 09:21:38,494 p=232993 u=rothakur n=ansible | PLAY [rtr1] *****************************************************************************************************************************************************************
+2023-08-22 09:21:38,566 p=232993 u=rothakur n=ansible | TASK [Gathering Facts] ******************************************************************************************************************************************************
+2023-08-22 09:21:38,570 p=232997 u=rothakur n=ansible | redirecting (type: connection) ansible.builtin.network_cli to ansible.netcommon.network_cli
+2023-08-22 09:21:39,344 p=233002 u=rothakur n=ansible | redirecting (type: connection) ansible.builtin.network_cli to ansible.netcommon.network_cli
+2023-08-22 09:21:39,444 p=232997 u=rothakur n=ansible | network_os is set to cisco.ios.ios
+2023-08-22 09:21:39,445 p=232997 u=rothakur n=ansible | <35.155.113.92> ESTABLISH LOCAL CONNECTION FOR USER: rothakur
+2023-08-22 09:21:39,445 p=232997 u=rothakur n=ansible | <35.155.113.92> EXEC /bin/sh -c '( umask 77 && mkdir -p "` echo /home/rothakur/.ansible/tmp/ansible-local-232993lt9to6bw `"&& mkdir "` echo /home/rothakur/.ansible/tmp/ansible-local-232993lt9to6bw/ansible-tmp-1692676299.4455981-232997-263714603678633 `" && echo ansible-tmp-1692676299.4455981-232997-263714603678633="` echo /home/rothakur/.ansible/tmp/ansible-local-232993lt9to6bw/ansible-tmp-1692676299.4455981-232997-263714603678633 `" ) && sleep 0'
+2023-08-22 09:21:39,645 p=232997 u=rothakur n=ansible | Using module file /home/rothakur/ansible_collections/cisco/ios/plugins/modules/ios_facts.py
+2023-08-22 09:21:39,645 p=232997 u=rothakur n=ansible | <35.155.113.92> PUT /home/rothakur/.ansible/tmp/ansible-local-232993lt9to6bw/tmppi_6tmc3 TO /home/rothakur/.ansible/tmp/ansible-local-232993lt9to6bw/ansible-tmp-1692676299.4455981-232997-263714603678633/AnsiballZ_ios_facts.py
+2023-08-22 09:21:39,646 p=232997 u=rothakur n=ansible | <35.155.113.92> EXEC /bin/sh -c 'chmod u+x /home/rothakur/.ansible/tmp/ansible-local-232993lt9to6bw/ansible-tmp-1692676299.4455981-232997-263714603678633/ /home/rothakur/.ansible/tmp/ansible-local-232993lt9to6bw/ansible-tmp-1692676299.4455981-232997-263714603678633/AnsiballZ_ios_facts.py && sleep 0'
+2023-08-22 09:21:39,648 p=232997 u=rothakur n=ansible | <35.155.113.92> EXEC /bin/sh -c '/usr/bin/python3 /home/rothakur/.ansible/tmp/ansible-local-232993lt9to6bw/ansible-tmp-1692676299.4455981-232997-263714603678633/AnsiballZ_ios_facts.py && sleep 0'
+2023-08-22 09:21:39,964 p=233002 u=rothakur n=ansible | <35.155.113.92> USING PYLIBSSH VERSION 1.1.0
+2023-08-22 09:21:39,964 p=233002 u=rothakur n=ansible | <35.155.113.92> ESTABLISH LIBSSH CONNECTION FOR USER: cisco on PORT 2013 TO 35.155.113.92
+2023-08-22 09:21:42,823 p=233002 u=rothakur n=ansible | ssh connection is OK: <pylibsshext.session.Session object at 0x7fd80412ac00>
+2023-08-22 09:21:48,766 p=232997 u=rothakur n=ansible | <35.155.113.92> EXEC /bin/sh -c 'rm -f -r /home/rothakur/.ansible/tmp/ansible-local-232993lt9to6bw/ansible-tmp-1692676299.4455981-232997-263714603678633/ > /dev/null 2>&1 && sleep 0'
+2023-08-22 09:21:48,770 p=232993 u=rothakur n=ansible | ok: [rtr1]
+2023-08-22 09:21:48,772 p=232993 u=rothakur n=ansible | META: ran handlers
+2023-08-22 09:21:48,773 p=232993 u=rothakur n=ansible | TASK [Network Backup and Resource Manager] **********************************************************************************************************************************
+2023-08-22 09:21:48,782 p=232993 u=rothakur n=ansible | TASK [network.backup.run : Include tasks] ***********************************************************************************************************************************
+2023-08-22 09:21:48,792 p=232993 u=rothakur n=ansible | included: /home/rothakur/ansible_collections/network/backup/roles/run/includes/backup.yaml for rtr1
+2023-08-22 09:21:48,794 p=232993 u=rothakur n=ansible | TASK [network.backup.run : Build Local Backup Dir Path] *********************************************************************************************************************
+2023-08-22 09:21:48,805 p=232993 u=rothakur n=ansible | skipping: [rtr1] => {
+    "changed": false,
+    "skip_reason": "Conditional result was False"
+}
+2023-08-22 09:21:48,807 p=232993 u=rothakur n=ansible | TASK [network.backup.run : Include retrieve tasks] **************************************************************************************************************************
+2023-08-22 09:21:48,823 p=232993 u=rothakur n=ansible | included: /home/rothakur/ansible_collections/network/backup/roles/run/includes/retrieve.yaml for rtr1
+2023-08-22 09:21:48,830 p=232993 u=rothakur n=ansible | TASK [network.backup.run : Retrieve the host vars with provided token access] ***********************************************************************************************
+2023-08-22 09:21:48,852 p=233031 u=rothakur n=ansible | redirecting (type: connection) ansible.builtin.network_cli to ansible.netcommon.network_cli
+2023-08-22 09:21:51,261 p=232993 u=rothakur n=ansible | changed: [rtr1] => {
+    "branch_name": "ansible-rtr1-2023-08-22T092151.248556+0530",
+    "branches": [
+        "main",
+        "main",
+        "ansible--2023-08-20T190403.435609+0530",
+        "ansible-localhost-2023-05-29T171843.795583+0530",
+        "ansible-localhost-2023-05-29T172007.148952+0530",
+        "ansible-localhost-2023-05-29T172532.120086+0530",
+        "ansible-localhost-2023-05-29T172958.037928+0530",
+        "ansible-localhost-2023-05-30T180811.375619+0530",
+        "ansible-localhost-2023-05-30T181006.275730+0530",
+        "ansible-localhost-2023-05-30T190127.351183+0530",
+        "ansible-localhost-2023-06-07T111741.459344+0530",
+        "ansible-localhost-2023-08-20T174310.289048+0530",
+        "ansible-localhost-2023-08-20T183723.633279+0530",
+        "ansible-localhost-2023-08-20T184234.997525+0530",
+        "ansible-localhost-2023-08-20T184351.696520+0530",
+        "ansible-localhost-2023-08-20T184544.923866+0530",
+        "ansible-localhost-2023-08-20T185730.521427+0530",
+        "ansible-localhost-2023-08-20T190236.519510+0530",
+        "ansible-localhost-2023-08-20T192039.584962+0530",
+        "ansible-rtr1-2023-07-28T172228.456571+0530",
+        "ansible-rtr1-2023-07-28T181820.250635+0530",
+        "ansible-rtr1-2023-07-28T184930.408801+0530",
+        "ansible-rtr1-2023-07-31T154516.399447+0530",
+        "ansible-rtr1-2023-08-21T144143.845810+0530",
+        "main"
+    ],
+    "changed": true,
+    "msg": "Successfully retrieved repository: https://github.com/rohitthakur2590/network_automation_backups",
+    "name": "network_automation_backups",
+    "output": [
+        {
+            "command": "git -C ./ -c 'http.extraheader=AUTHORIZATION: basic <TOKEN>' clone --depth=1 --progress --no-single-branch https://github.com/rohitthakur2590/network_automation_backups",
+            "env": "",
+            "return_code": 0,
+            "stderr_lines": [
+                "Cloning into 'network_automation_backups'...",
+                "remote: Enumerating objects: 66, done.        ",
+                "remote: Counting objects:   1% (1/66)        ",
+                "remote: Counting objects:   3% (2/66)        ",
+                "remote: Counting objects:   4% (3/66)        ",
+                "remote: Counting objects:   6% (4/66)        ",
+                "remote: Counting objects:   7% (5/66)        ",
+                "remote: Counting objects:   9% (6/66)        ",
+                "remote: Counting objects:  10% (7/66)        ",
+                "remote: Counting objects:  12% (8/66)        ",
+                "remote: Counting objects:  13% (9/66)        ",
+                "remote: Counting objects:  15% (10/66)        ",
+                "remote: Counting objects:  16% (11/66)        ",
+                "remote: Counting objects:  18% (12/66)        ",
+                "remote: Counting objects:  19% (13/66)        ",
+                "remote: Counting objects:  21% (14/66)        ",
+                "remote: Counting objects:  22% (15/66)        ",
+                "remote: Counting objects:  24% (16/66)        ",
+                "remote: Counting objects:  25% (17/66)        ",
+                "remote: Counting objects:  27% (18/66)        ",
+                "remote: Counting objects:  28% (19/66)        ",
+                "remote: Counting objects:  30% (20/66)        ",
+                "remote: Counting objects:  31% (21/66)        ",
+                "remote: Counting objects:  33% (22/66)        ",
+                "remote: Counting objects:  34% (23/66)        ",
+                "remote: Counting objects:  36% (24/66)        ",
+                "remote: Counting objects:  37% (25/66)        ",
+                "remote: Counting objects:  39% (26/66)        ",
+                "remote: Counting objects:  40% (27/66)        ",
+                "remote: Counting objects:  42% (28/66)        ",
+                "remote: Counting objects:  43% (29/66)        ",
+                "remote: Counting objects:  45% (30/66)        ",
+                "remote: Counting objects:  46% (31/66)        ",
+                "remote: Counting objects:  48% (32/66)        ",
+                "remote: Counting objects:  50% (33/66)        ",
+                "remote: Counting objects:  51% (34/66)        ",
+                "remote: Counting objects:  53% (35/66)        ",
+                "remote: Counting objects:  54% (36/66)        ",
+                "remote: Counting objects:  56% (37/66)        ",
+                "remote: Counting objects:  57% (38/66)        ",
+                "remote: Counting objects:  59% (39/66)        ",
+                "remote: Counting objects:  60% (40/66)        ",
+                "remote: Counting objects:  62% (41/66)        ",
+                "remote: Counting objects:  63% (42/66)        ",
+                "remote: Counting objects:  65% (43/66)        ",
+                "remote: Counting objects:  66% (44/66)        ",
+                "remote: Counting objects:  68% (45/66)        ",
+                "remote: Counting objects:  69% (46/66)        ",
+                "remote: Counting objects:  71% (47/66)        ",
+                "remote: Counting objects:  72% (48/66)        ",
+                "remote: Counting objects:  74% (49/66)        ",
+                "remote: Counting objects:  75% (50/66)        ",
+                "remote: Counting objects:  77% (51/66)        ",
+                "remote: Counting objects:  78% (52/66)        ",
+                "remote: Counting objects:  80% (53/66)        ",
+                "remote: Counting objects:  81% (54/66)        ",
+                "remote: Counting objects:  83% (55/66)        ",
+                "remote: Counting objects:  84% (56/66)        ",
+                "remote: Counting objects:  86% (57/66)        ",
+                "remote: Counting objects:  87% (58/66)        ",
+                "remote: Counting objects:  89% (59/66)        ",
+                "remote: Counting objects:  90% (60/66)        ",
+                "remote: Counting objects:  92% (61/66)        ",
+                "remote: Counting objects:  93% (62/66)        ",
+                "remote: Counting objects:  95% (63/66)        ",
+                "remote: Counting objects:  96% (64/66)        ",
+                "remote: Counting objects:  98% (65/66)        ",
+                "remote: Counting objects: 100% (66/66)        ",
+                "remote: Counting objects: 100% (66/66), done.        ",
+                "remote: Compressing objects:   3% (1/30)        ",
+                "remote: Compressing objects:   6% (2/30)        ",
+                "remote: Compressing objects:  10% (3/30)        ",
+                "remote: Compressing objects:  13% (4/30)        ",
+                "remote: Compressing objects:  16% (5/30)        ",
+                "remote: Compressing objects:  20% (6/30)        ",
+                "remote: Compressing objects:  23% (7/30)        ",
+                "remote: Compressing objects:  26% (8/30)        ",
+                "remote: Compressing objects:  30% (9/30)        ",
+                "remote: Compressing objects:  33% (10/30)        ",
+                "remote: Compressing objects:  36% (11/30)        ",
+                "remote: Compressing objects:  40% (12/30)        ",
+                "remote: Compressing objects:  43% (13/30)        ",
+                "remote: Compressing objects:  46% (14/30)        ",
+                "remote: Compressing objects:  50% (15/30)        ",
+                "remote: Compressing objects:  53% (16/30)        ",
+                "remote: Compressing objects:  56% (17/30)        ",
+                "remote: Compressing objects:  60% (18/30)        ",
+                "remote: Compressing objects:  63% (19/30)        ",
+                "remote: Compressing objects:  66% (20/30)        ",
+                "remote: Compressing objects:  70% (21/30)        ",
+                "remote: Compressing objects:  73% (22/30)        ",
+                "remote: Compressing objects:  76% (23/30)        ",
+                "remote: Compressing objects:  80% (24/30)        ",
+                "remote: Compressing objects:  83% (25/30)        ",
+                "remote: Compressing objects:  86% (26/30)        ",
+                "remote: Compressing objects:  90% (27/30)        ",
+                "remote: Compressing objects:  93% (28/30)        ",
+                "remote: Compressing objects:  96% (29/30)        ",
+                "remote: Compressing objects: 100% (30/30)        ",
+                "remote: Compressing objects: 100% (30/30), done.        ",
+                "remote: Total 66 (delta 40), reused 60 (delta 34), pack-reused 0        ",
+                "Receiving objects:   1% (1/66)",
+                "Receiving objects:   3% (2/66)",
+                "Receiving objects:   4% (3/66)",
+                "Receiving objects:   6% (4/66)",
+                "Receiving objects:   7% (5/66)",
+                "Receiving objects:   9% (6/66)",
+                "Receiving objects:  10% (7/66)",
+                "Receiving objects:  12% (8/66)",
+                "Receiving objects:  13% (9/66)",
+                "Receiving objects:  15% (10/66)",
+                "Receiving objects:  16% (11/66)",
+                "Receiving objects:  18% (12/66)",
+                "Receiving objects:  19% (13/66)",
+                "Receiving objects:  21% (14/66)",
+                "Receiving objects:  22% (15/66)",
+                "Receiving objects:  24% (16/66)",
+                "Receiving objects:  25% (17/66)",
+                "Receiving objects:  27% (18/66)",
+                "Receiving objects:  28% (19/66)",
+                "Receiving objects:  30% (20/66)",
+                "Receiving objects:  31% (21/66)",
+                "Receiving objects:  33% (22/66)",
+                "Receiving objects:  34% (23/66)",
+                "Receiving objects:  36% (24/66)",
+                "Receiving objects:  37% (25/66)",
+                "Receiving objects:  39% (26/66)",
+                "Receiving objects:  40% (27/66)",
+                "Receiving objects:  42% (28/66)",
+                "Receiving objects:  43% (29/66)",
+                "Receiving objects:  45% (30/66)",
+                "Receiving objects:  46% (31/66)",
+                "Receiving objects:  48% (32/66)",
+                "Receiving objects:  50% (33/66)",
+                "Receiving objects:  51% (34/66)",
+                "Receiving objects:  53% (35/66)",
+                "Receiving objects:  54% (36/66)",
+                "Receiving objects:  56% (37/66)",
+                "Receiving objects:  57% (38/66)",
+                "Receiving objects:  59% (39/66)",
+                "Receiving objects:  60% (40/66)",
+                "Receiving objects:  62% (41/66)",
+                "Receiving objects:  63% (42/66)",
+                "Receiving objects:  65% (43/66)",
+                "Receiving objects:  66% (44/66)",
+                "Receiving objects:  68% (45/66)",
+                "Receiving objects:  69% (46/66)",
+                "Receiving objects:  71% (47/66)",
+                "Receiving objects:  72% (48/66)",
+                "Receiving objects:  74% (49/66)",
+                "Receiving objects:  75% (50/66)",
+                "Receiving objects:  77% (51/66)",
+                "Receiving objects:  78% (52/66)",
+                "Receiving objects:  80% (53/66)",
+                "Receiving objects:  81% (54/66)",
+                "Receiving objects:  83% (55/66)",
+                "Receiving objects:  84% (56/66)",
+                "Receiving objects:  86% (57/66)",
+                "Receiving objects:  87% (58/66)",
+                "Receiving objects:  89% (59/66)",
+                "Receiving objects:  90% (60/66)",
+                "Receiving objects:  92% (61/66)",
+                "Receiving objects:  93% (62/66)",
+                "Receiving objects:  95% (63/66)",
+                "Receiving objects:  96% (64/66)",
+                "Receiving objects:  98% (65/66)",
+                "Receiving objects: 100% (66/66)",
+                "Receiving objects: 100% (66/66), 6.44 KiB | 6.44 MiB/s, done.",
+                "Resolving deltas:   0% (0/40)",
+                "Resolving deltas:   2% (1/40)",
+                "Resolving deltas:   5% (2/40)",
+                "Resolving deltas:   7% (3/40)",
+                "Resolving deltas:  10% (4/40)",
+                "Resolving deltas:  12% (5/40)",
+                "Resolving deltas:  15% (6/40)",
+                "Resolving deltas:  17% (7/40)",
+                "Resolving deltas:  20% (8/40)",
+                "Resolving deltas:  22% (9/40)",
+                "Resolving deltas:  25% (10/40)",
+                "Resolving deltas:  27% (11/40)",
+                "Resolving deltas:  30% (12/40)",
+                "Resolving deltas:  32% (13/40)",
+                "Resolving deltas:  35% (14/40)",
+                "Resolving deltas:  37% (15/40)",
+                "Resolving deltas:  40% (16/40)",
+                "Resolving deltas:  42% (17/40)",
+                "Resolving deltas:  45% (18/40)",
+                "Resolving deltas:  47% (19/40)",
+                "Resolving deltas:  50% (20/40)",
+                "Resolving deltas:  52% (21/40)",
+                "Resolving deltas:  55% (22/40)",
+                "Resolving deltas:  57% (23/40)",
+                "Resolving deltas:  60% (24/40)",
+                "Resolving deltas:  62% (25/40)",
+                "Resolving deltas:  65% (26/40)",
+                "Resolving deltas:  67% (27/40)",
+                "Resolving deltas:  70% (28/40)",
+                "Resolving deltas:  72% (29/40)",
+                "Resolving deltas:  75% (30/40)",
+                "Resolving deltas:  77% (31/40)",
+                "Resolving deltas:  80% (32/40)",
+                "Resolving deltas:  82% (33/40)",
+                "Resolving deltas:  85% (34/40)",
+                "Resolving deltas:  87% (35/40)",
+                "Resolving deltas:  90% (36/40)",
+                "Resolving deltas:  92% (37/40)",
+                "Resolving deltas:  95% (38/40)",
+                "Resolving deltas:  97% (39/40)",
+                "Resolving deltas: 100% (40/40)",
+                "Resolving deltas: 100% (40/40), done."
+            ],
+            "stdout_lines": []
+        },
+        {
+            "command": "git -C network_automation_backups branch -a",
+            "env": "",
+            "return_code": 0,
+            "stderr_lines": [],
+            "stdout_lines": [
+                "* main",
+                "  remotes/origin/HEAD -> origin/main",
+                "  remotes/origin/ansible--2023-08-20T190403.435609+0530",
+                "  remotes/origin/ansible-localhost-2023-05-29T171843.795583+0530",
+                "  remotes/origin/ansible-localhost-2023-05-29T172007.148952+0530",
+                "  remotes/origin/ansible-localhost-2023-05-29T172532.120086+0530",
+                "  remotes/origin/ansible-localhost-2023-05-29T172958.037928+0530",
+                "  remotes/origin/ansible-localhost-2023-05-30T180811.375619+0530",
+                "  remotes/origin/ansible-localhost-2023-05-30T181006.275730+0530",
+                "  remotes/origin/ansible-localhost-2023-05-30T190127.351183+0530",
+                "  remotes/origin/ansible-localhost-2023-06-07T111741.459344+0530",
+                "  remotes/origin/ansible-localhost-2023-08-20T174310.289048+0530",
+                "  remotes/origin/ansible-localhost-2023-08-20T183723.633279+0530",
+                "  remotes/origin/ansible-localhost-2023-08-20T184234.997525+0530",
+                "  remotes/origin/ansible-localhost-2023-08-20T184351.696520+0530",
+                "  remotes/origin/ansible-localhost-2023-08-20T184544.923866+0530",
+                "  remotes/origin/ansible-localhost-2023-08-20T185730.521427+0530",
+                "  remotes/origin/ansible-localhost-2023-08-20T190236.519510+0530",
+                "  remotes/origin/ansible-localhost-2023-08-20T192039.584962+0530",
+                "  remotes/origin/ansible-rtr1-2023-07-28T172228.456571+0530",
+                "  remotes/origin/ansible-rtr1-2023-07-28T181820.250635+0530",
+                "  remotes/origin/ansible-rtr1-2023-07-28T184930.408801+0530",
+                "  remotes/origin/ansible-rtr1-2023-07-31T154516.399447+0530",
+                "  remotes/origin/ansible-rtr1-2023-08-21T144143.845810+0530",
+                "  remotes/origin/main"
+            ]
+        },
+        {
+            "command": "git -C network_automation_backups checkout -t -b ansible-rtr1-2023-08-22T092151.248556+0530",
+            "env": "",
+            "return_code": 0,
+            "stderr_lines": [
+                "Switched to a new branch 'ansible-rtr1-2023-08-22T092151.248556+0530'"
+            ],
+            "stdout_lines": [
+                "branch 'ansible-rtr1-2023-08-22T092151.248556+0530' set up to track 'main'."
+            ]
+        }
+    ],
+    "path": "network_automation_backups"
+}
+2023-08-22 09:21:51,269 p=232993 u=rothakur n=ansible | TASK [network.backup.run : Update data store path] **************************************************************************************************************************
+2023-08-22 09:21:51,283 p=233052 u=rothakur n=ansible | redirecting (type: connection) ansible.builtin.network_cli to ansible.netcommon.network_cli
+2023-08-22 09:21:52,062 p=232993 u=rothakur n=ansible | ok: [rtr1] => {
+    "ansible_facts": {
+        "network_backup_repository": {
+            "branch_name": "ansible-rtr1-2023-08-22T092151.248556+0530",
+            "branches": [
+                "main",
+                "main",
+                "ansible--2023-08-20T190403.435609+0530",
+                "ansible-localhost-2023-05-29T171843.795583+0530",
+                "ansible-localhost-2023-05-29T172007.148952+0530",
+                "ansible-localhost-2023-05-29T172532.120086+0530",
+                "ansible-localhost-2023-05-29T172958.037928+0530",
+                "ansible-localhost-2023-05-30T180811.375619+0530",
+                "ansible-localhost-2023-05-30T181006.275730+0530",
+                "ansible-localhost-2023-05-30T190127.351183+0530",
+                "ansible-localhost-2023-06-07T111741.459344+0530",
+                "ansible-localhost-2023-08-20T174310.289048+0530",
+                "ansible-localhost-2023-08-20T183723.633279+0530",
+                "ansible-localhost-2023-08-20T184234.997525+0530",
+                "ansible-localhost-2023-08-20T184351.696520+0530",
+                "ansible-localhost-2023-08-20T184544.923866+0530",
+                "ansible-localhost-2023-08-20T185730.521427+0530",
+                "ansible-localhost-2023-08-20T190236.519510+0530",
+                "ansible-localhost-2023-08-20T192039.584962+0530",
+                "ansible-rtr1-2023-07-28T172228.456571+0530",
+                "ansible-rtr1-2023-07-28T181820.250635+0530",
+                "ansible-rtr1-2023-07-28T184930.408801+0530",
+                "ansible-rtr1-2023-07-31T154516.399447+0530",
+                "ansible-rtr1-2023-08-21T144143.845810+0530",
+                "main"
+            ],
+            "changed": true,
+            "failed": false,
+            "msg": "Successfully retrieved repository: https://github.com/rohitthakur2590/network_automation_backups",
+            "name": "network_automation_backups",
+            "output": [
+                {
+                    "command": "git -C ./ -c 'http.extraheader=AUTHORIZATION: basic <TOKEN>' clone --depth=1 --progress --no-single-branch https://github.com/rohitthakur2590/network_automation_backups",
+                    "env": "",
+                    "return_code": 0,
+                    "stderr_lines": [
+                        "Cloning into 'network_automation_backups'...",
+                        "remote: Enumerating objects: 66, done.        ",
+                        "remote: Counting objects:   1% (1/66)        ",
+                        "remote: Counting objects:   3% (2/66)        ",
+                        "remote: Counting objects:   4% (3/66)        ",
+                        "remote: Counting objects:   6% (4/66)        ",
+                        "remote: Counting objects:   7% (5/66)        ",
+                        "remote: Counting objects:   9% (6/66)        ",
+                        "remote: Counting objects:  10% (7/66)        ",
+                        "remote: Counting objects:  12% (8/66)        ",
+                        "remote: Counting objects:  13% (9/66)        ",
+                        "remote: Counting objects:  15% (10/66)        ",
+                        "remote: Counting objects:  16% (11/66)        ",
+                        "remote: Counting objects:  18% (12/66)        ",
+                        "remote: Counting objects:  19% (13/66)        ",
+                        "remote: Counting objects:  21% (14/66)        ",
+                        "remote: Counting objects:  22% (15/66)        ",
+                        "remote: Counting objects:  24% (16/66)        ",
+                        "remote: Counting objects:  25% (17/66)        ",
+                        "remote: Counting objects:  27% (18/66)        ",
+                        "remote: Counting objects:  28% (19/66)        ",
+                        "remote: Counting objects:  30% (20/66)        ",
+                        "remote: Counting objects:  31% (21/66)        ",
+                        "remote: Counting objects:  33% (22/66)        ",
+                        "remote: Counting objects:  34% (23/66)        ",
+                        "remote: Counting objects:  36% (24/66)        ",
+                        "remote: Counting objects:  37% (25/66)        ",
+                        "remote: Counting objects:  39% (26/66)        ",
+                        "remote: Counting objects:  40% (27/66)        ",
+                        "remote: Counting objects:  42% (28/66)        ",
+                        "remote: Counting objects:  43% (29/66)        ",
+                        "remote: Counting objects:  45% (30/66)        ",
+                        "remote: Counting objects:  46% (31/66)        ",
+                        "remote: Counting objects:  48% (32/66)        ",
+                        "remote: Counting objects:  50% (33/66)        ",
+                        "remote: Counting objects:  51% (34/66)        ",
+                        "remote: Counting objects:  53% (35/66)        ",
+                        "remote: Counting objects:  54% (36/66)        ",
+                        "remote: Counting objects:  56% (37/66)        ",
+                        "remote: Counting objects:  57% (38/66)        ",
+                        "remote: Counting objects:  59% (39/66)        ",
+                        "remote: Counting objects:  60% (40/66)        ",
+                        "remote: Counting objects:  62% (41/66)        ",
+                        "remote: Counting objects:  63% (42/66)        ",
+                        "remote: Counting objects:  65% (43/66)        ",
+                        "remote: Counting objects:  66% (44/66)        ",
+                        "remote: Counting objects:  68% (45/66)        ",
+                        "remote: Counting objects:  69% (46/66)        ",
+                        "remote: Counting objects:  71% (47/66)        ",
+                        "remote: Counting objects:  72% (48/66)        ",
+                        "remote: Counting objects:  74% (49/66)        ",
+                        "remote: Counting objects:  75% (50/66)        ",
+                        "remote: Counting objects:  77% (51/66)        ",
+                        "remote: Counting objects:  78% (52/66)        ",
+                        "remote: Counting objects:  80% (53/66)        ",
+                        "remote: Counting objects:  81% (54/66)        ",
+                        "remote: Counting objects:  83% (55/66)        ",
+                        "remote: Counting objects:  84% (56/66)        ",
+                        "remote: Counting objects:  86% (57/66)        ",
+                        "remote: Counting objects:  87% (58/66)        ",
+                        "remote: Counting objects:  89% (59/66)        ",
+                        "remote: Counting objects:  90% (60/66)        ",
+                        "remote: Counting objects:  92% (61/66)        ",
+                        "remote: Counting objects:  93% (62/66)        ",
+                        "remote: Counting objects:  95% (63/66)        ",
+                        "remote: Counting objects:  96% (64/66)        ",
+                        "remote: Counting objects:  98% (65/66)        ",
+                        "remote: Counting objects: 100% (66/66)        ",
+                        "remote: Counting objects: 100% (66/66), done.        ",
+                        "remote: Compressing objects:   3% (1/30)        ",
+                        "remote: Compressing objects:   6% (2/30)        ",
+                        "remote: Compressing objects:  10% (3/30)        ",
+                        "remote: Compressing objects:  13% (4/30)        ",
+                        "remote: Compressing objects:  16% (5/30)        ",
+                        "remote: Compressing objects:  20% (6/30)        ",
+                        "remote: Compressing objects:  23% (7/30)        ",
+                        "remote: Compressing objects:  26% (8/30)        ",
+                        "remote: Compressing objects:  30% (9/30)        ",
+                        "remote: Compressing objects:  33% (10/30)        ",
+                        "remote: Compressing objects:  36% (11/30)        ",
+                        "remote: Compressing objects:  40% (12/30)        ",
+                        "remote: Compressing objects:  43% (13/30)        ",
+                        "remote: Compressing objects:  46% (14/30)        ",
+                        "remote: Compressing objects:  50% (15/30)        ",
+                        "remote: Compressing objects:  53% (16/30)        ",
+                        "remote: Compressing objects:  56% (17/30)        ",
+                        "remote: Compressing objects:  60% (18/30)        ",
+                        "remote: Compressing objects:  63% (19/30)        ",
+                        "remote: Compressing objects:  66% (20/30)        ",
+                        "remote: Compressing objects:  70% (21/30)        ",
+                        "remote: Compressing objects:  73% (22/30)        ",
+                        "remote: Compressing objects:  76% (23/30)        ",
+                        "remote: Compressing objects:  80% (24/30)        ",
+                        "remote: Compressing objects:  83% (25/30)        ",
+                        "remote: Compressing objects:  86% (26/30)        ",
+                        "remote: Compressing objects:  90% (27/30)        ",
+                        "remote: Compressing objects:  93% (28/30)        ",
+                        "remote: Compressing objects:  96% (29/30)        ",
+                        "remote: Compressing objects: 100% (30/30)        ",
+                        "remote: Compressing objects: 100% (30/30), done.        ",
+                        "remote: Total 66 (delta 40), reused 60 (delta 34), pack-reused 0        ",
+                        "Receiving objects:   1% (1/66)",
+                        "Receiving objects:   3% (2/66)",
+                        "Receiving objects:   4% (3/66)",
+                        "Receiving objects:   6% (4/66)",
+                        "Receiving objects:   7% (5/66)",
+                        "Receiving objects:   9% (6/66)",
+                        "Receiving objects:  10% (7/66)",
+                        "Receiving objects:  12% (8/66)",
+                        "Receiving objects:  13% (9/66)",
+                        "Receiving objects:  15% (10/66)",
+                        "Receiving objects:  16% (11/66)",
+                        "Receiving objects:  18% (12/66)",
+                        "Receiving objects:  19% (13/66)",
+                        "Receiving objects:  21% (14/66)",
+                        "Receiving objects:  22% (15/66)",
+                        "Receiving objects:  24% (16/66)",
+                        "Receiving objects:  25% (17/66)",
+                        "Receiving objects:  27% (18/66)",
+                        "Receiving objects:  28% (19/66)",
+                        "Receiving objects:  30% (20/66)",
+                        "Receiving objects:  31% (21/66)",
+                        "Receiving objects:  33% (22/66)",
+                        "Receiving objects:  34% (23/66)",
+                        "Receiving objects:  36% (24/66)",
+                        "Receiving objects:  37% (25/66)",
+                        "Receiving objects:  39% (26/66)",
+                        "Receiving objects:  40% (27/66)",
+                        "Receiving objects:  42% (28/66)",
+                        "Receiving objects:  43% (29/66)",
+                        "Receiving objects:  45% (30/66)",
+                        "Receiving objects:  46% (31/66)",
+                        "Receiving objects:  48% (32/66)",
+                        "Receiving objects:  50% (33/66)",
+                        "Receiving objects:  51% (34/66)",
+                        "Receiving objects:  53% (35/66)",
+                        "Receiving objects:  54% (36/66)",
+                        "Receiving objects:  56% (37/66)",
+                        "Receiving objects:  57% (38/66)",
+                        "Receiving objects:  59% (39/66)",
+                        "Receiving objects:  60% (40/66)",
+                        "Receiving objects:  62% (41/66)",
+                        "Receiving objects:  63% (42/66)",
+                        "Receiving objects:  65% (43/66)",
+                        "Receiving objects:  66% (44/66)",
+                        "Receiving objects:  68% (45/66)",
+                        "Receiving objects:  69% (46/66)",
+                        "Receiving objects:  71% (47/66)",
+                        "Receiving objects:  72% (48/66)",
+                        "Receiving objects:  74% (49/66)",
+                        "Receiving objects:  75% (50/66)",
+                        "Receiving objects:  77% (51/66)",
+                        "Receiving objects:  78% (52/66)",
+                        "Receiving objects:  80% (53/66)",
+                        "Receiving objects:  81% (54/66)",
+                        "Receiving objects:  83% (55/66)",
+                        "Receiving objects:  84% (56/66)",
+                        "Receiving objects:  86% (57/66)",
+                        "Receiving objects:  87% (58/66)",
+                        "Receiving objects:  89% (59/66)",
+                        "Receiving objects:  90% (60/66)",
+                        "Receiving objects:  92% (61/66)",
+                        "Receiving objects:  93% (62/66)",
+                        "Receiving objects:  95% (63/66)",
+                        "Receiving objects:  96% (64/66)",
+                        "Receiving objects:  98% (65/66)",
+                        "Receiving objects: 100% (66/66)",
+                        "Receiving objects: 100% (66/66), 6.44 KiB | 6.44 MiB/s, done.",
+                        "Resolving deltas:   0% (0/40)",
+                        "Resolving deltas:   2% (1/40)",
+                        "Resolving deltas:   5% (2/40)",
+                        "Resolving deltas:   7% (3/40)",
+                        "Resolving deltas:  10% (4/40)",
+                        "Resolving deltas:  12% (5/40)",
+                        "Resolving deltas:  15% (6/40)",
+                        "Resolving deltas:  17% (7/40)",
+                        "Resolving deltas:  20% (8/40)",
+                        "Resolving deltas:  22% (9/40)",
+                        "Resolving deltas:  25% (10/40)",
+                        "Resolving deltas:  27% (11/40)",
+                        "Resolving deltas:  30% (12/40)",
+                        "Resolving deltas:  32% (13/40)",
+                        "Resolving deltas:  35% (14/40)",
+                        "Resolving deltas:  37% (15/40)",
+                        "Resolving deltas:  40% (16/40)",
+                        "Resolving deltas:  42% (17/40)",
+                        "Resolving deltas:  45% (18/40)",
+                        "Resolving deltas:  47% (19/40)",
+                        "Resolving deltas:  50% (20/40)",
+                        "Resolving deltas:  52% (21/40)",
+                        "Resolving deltas:  55% (22/40)",
+                        "Resolving deltas:  57% (23/40)",
+                        "Resolving deltas:  60% (24/40)",
+                        "Resolving deltas:  62% (25/40)",
+                        "Resolving deltas:  65% (26/40)",
+                        "Resolving deltas:  67% (27/40)",
+                        "Resolving deltas:  70% (28/40)",
+                        "Resolving deltas:  72% (29/40)",
+                        "Resolving deltas:  75% (30/40)",
+                        "Resolving deltas:  77% (31/40)",
+                        "Resolving deltas:  80% (32/40)",
+                        "Resolving deltas:  82% (33/40)",
+                        "Resolving deltas:  85% (34/40)",
+                        "Resolving deltas:  87% (35/40)",
+                        "Resolving deltas:  90% (36/40)",
+                        "Resolving deltas:  92% (37/40)",
+                        "Resolving deltas:  95% (38/40)",
+                        "Resolving deltas:  97% (39/40)",
+                        "Resolving deltas: 100% (40/40)",
+                        "Resolving deltas: 100% (40/40), done."
+                    ],
+                    "stdout_lines": []
+                },
+                {
+                    "command": "git -C network_automation_backups branch -a",
+                    "env": "",
+                    "return_code": 0,
+                    "stderr_lines": [],
+                    "stdout_lines": [
+                        "* main",
+                        "  remotes/origin/HEAD -> origin/main",
+                        "  remotes/origin/ansible--2023-08-20T190403.435609+0530",
+                        "  remotes/origin/ansible-localhost-2023-05-29T171843.795583+0530",
+                        "  remotes/origin/ansible-localhost-2023-05-29T172007.148952+0530",
+                        "  remotes/origin/ansible-localhost-2023-05-29T172532.120086+0530",
+                        "  remotes/origin/ansible-localhost-2023-05-29T172958.037928+0530",
+                        "  remotes/origin/ansible-localhost-2023-05-30T180811.375619+0530",
+                        "  remotes/origin/ansible-localhost-2023-05-30T181006.275730+0530",
+                        "  remotes/origin/ansible-localhost-2023-05-30T190127.351183+0530",
+                        "  remotes/origin/ansible-localhost-2023-06-07T111741.459344+0530",
+                        "  remotes/origin/ansible-localhost-2023-08-20T174310.289048+0530",
+                        "  remotes/origin/ansible-localhost-2023-08-20T183723.633279+0530",
+                        "  remotes/origin/ansible-localhost-2023-08-20T184234.997525+0530",
+                        "  remotes/origin/ansible-localhost-2023-08-20T184351.696520+0530",
+                        "  remotes/origin/ansible-localhost-2023-08-20T184544.923866+0530",
+                        "  remotes/origin/ansible-localhost-2023-08-20T185730.521427+0530",
+                        "  remotes/origin/ansible-localhost-2023-08-20T190236.519510+0530",
+                        "  remotes/origin/ansible-localhost-2023-08-20T192039.584962+0530",
+                        "  remotes/origin/ansible-rtr1-2023-07-28T172228.456571+0530",
+                        "  remotes/origin/ansible-rtr1-2023-07-28T181820.250635+0530",
+                        "  remotes/origin/ansible-rtr1-2023-07-28T184930.408801+0530",
+                        "  remotes/origin/ansible-rtr1-2023-07-31T154516.399447+0530",
+                        "  remotes/origin/ansible-rtr1-2023-08-21T144143.845810+0530",
+                        "  remotes/origin/main"
+                    ]
+                },
+                {
+                    "command": "git -C network_automation_backups checkout -t -b ansible-rtr1-2023-08-22T092151.248556+0530",
+                    "env": "",
+                    "return_code": 0,
+                    "stderr_lines": [
+                        "Switched to a new branch 'ansible-rtr1-2023-08-22T092151.248556+0530'"
+                    ],
+                    "stdout_lines": [
+                        "branch 'ansible-rtr1-2023-08-22T092151.248556+0530' set up to track 'main'."
+                    ]
+                }
+            ],
+            "path": "network_automation_backups"
+        }
+    },
+    "changed": false
+}
+2023-08-22 09:21:52,064 p=232993 u=rothakur n=ansible | TASK [network.backup.run : Retrieve host vars with default access] **********************************************************************************************************
+2023-08-22 09:21:52,071 p=232993 u=rothakur n=ansible | skipping: [rtr1] => {
+    "changed": false,
+    "skip_reason": "Conditional result was False"
+}
+2023-08-22 09:21:52,073 p=232993 u=rothakur n=ansible | TASK [network.backup.run : Update data store path] **************************************************************************************************************************
+2023-08-22 09:21:52,080 p=232993 u=rothakur n=ansible | skipping: [rtr1] => {
+    "changed": false,
+    "skip_reason": "Conditional result was False"
+}
+2023-08-22 09:21:52,082 p=232993 u=rothakur n=ansible | TASK [network.backup.run : Update Inventory Path] ***************************************************************************************************************************
+2023-08-22 09:21:52,087 p=233060 u=rothakur n=ansible | redirecting (type: connection) ansible.builtin.network_cli to ansible.netcommon.network_cli
+2023-08-22 09:21:52,857 p=232993 u=rothakur n=ansible | ok: [rtr1] => {
+    "ansible_facts": {
+        "network_backup_path": "network_automation_backups"
+    },
+    "changed": false
+}
+2023-08-22 09:21:52,859 p=232993 u=rothakur n=ansible | TASK [network.backup.run : Include tasks] ***********************************************************************************************************************************
+2023-08-22 09:21:52,866 p=232993 u=rothakur n=ansible | included: /home/rothakur/ansible_collections/network/backup/roles/run/includes/network.yaml for rtr1
+2023-08-22 09:21:52,870 p=232993 u=rothakur n=ansible | TASK [network.backup.run : Invoke backup task] ******************************************************************************************************************************
+2023-08-22 09:21:52,882 p=232993 u=rothakur n=ansible | included: /home/rothakur/ansible_collections/network/backup/roles/run/includes/operation.yaml for rtr1
+2023-08-22 09:21:52,886 p=232993 u=rothakur n=ansible | TASK [network.backup.run : Configuration Backup] ****************************************************************************************************************************
+2023-08-22 09:21:52,891 p=233068 u=rothakur n=ansible | redirecting (type: connection) ansible.builtin.network_cli to ansible.netcommon.network_cli
+2023-08-22 09:21:54,482 p=232993 u=rothakur n=ansible | changed: [rtr1] => {
+    "backup_path": "network_automation_backups/rtr1.txt",
+    "changed": true,
+    "date": "2023-08-22",
+    "invocation": {
+        "module_args": {
+            "backup": true,
+            "backup_options": {
+                "dir_path": "network_automation_backups",
+                "filename": "rtr1.txt"
+            },
+            "commit": null,
+            "commit_comment": null,
+            "config": null,
+            "defaults": false,
+            "diff_ignore_lines": null,
+            "diff_match": null,
+            "diff_replace": null,
+            "multiline_delimiter": null,
+            "replace": null,
+            "rollback": null
+        }
+    },
+    "time": "09:21:54"
+}
+2023-08-22 09:21:54,486 p=232993 u=rothakur n=ansible | TASK [network.backup.run : write to file] ***********************************************************************************************************************************
+2023-08-22 09:21:54,498 p=233072 u=rothakur n=ansible | redirecting (type: connection) ansible.builtin.network_cli to ansible.netcommon.network_cli
+2023-08-22 09:21:55,265 p=233072 u=rothakur n=ansible | <35.155.113.92> ESTABLISH LOCAL CONNECTION FOR USER: rothakur
+2023-08-22 09:21:55,265 p=233072 u=rothakur n=ansible | <35.155.113.92> EXEC /bin/sh -c '( umask 77 && mkdir -p "` echo /home/rothakur/.ansible/tmp/ansible-local-232993lt9to6bw `"&& mkdir "` echo /home/rothakur/.ansible/tmp/ansible-local-232993lt9to6bw/ansible-tmp-1692676315.265543-233072-42760343213119 `" && echo ansible-tmp-1692676315.265543-233072-42760343213119="` echo /home/rothakur/.ansible/tmp/ansible-local-232993lt9to6bw/ansible-tmp-1692676315.265543-233072-42760343213119 `" ) && sleep 0'
+2023-08-22 09:21:55,336 p=233072 u=rothakur n=ansible | Using module file /home/rothakur/ansible-collections/collections/ansible_collections/ansible/ansible/lib/ansible/modules/stat.py
+2023-08-22 09:21:55,336 p=233072 u=rothakur n=ansible | <35.155.113.92> PUT /home/rothakur/.ansible/tmp/ansible-local-232993lt9to6bw/tmpnzoiznzo TO /home/rothakur/.ansible/tmp/ansible-local-232993lt9to6bw/ansible-tmp-1692676315.265543-233072-42760343213119/AnsiballZ_stat.py
+2023-08-22 09:21:55,336 p=233072 u=rothakur n=ansible | <35.155.113.92> EXEC /bin/sh -c 'chmod u+x /home/rothakur/.ansible/tmp/ansible-local-232993lt9to6bw/ansible-tmp-1692676315.265543-233072-42760343213119/ /home/rothakur/.ansible/tmp/ansible-local-232993lt9to6bw/ansible-tmp-1692676315.265543-233072-42760343213119/AnsiballZ_stat.py && sleep 0'
+2023-08-22 09:21:55,339 p=233072 u=rothakur n=ansible | <35.155.113.92> EXEC /bin/sh -c '/usr/bin/python3 /home/rothakur/.ansible/tmp/ansible-local-232993lt9to6bw/ansible-tmp-1692676315.265543-233072-42760343213119/AnsiballZ_stat.py && sleep 0'
+2023-08-22 09:21:55,437 p=233072 u=rothakur n=ansible | <35.155.113.92> PUT /home/rothakur/.ansible/tmp/ansible-local-232993lt9to6bw/tmp2arjik4b TO /home/rothakur/.ansible/tmp/ansible-local-232993lt9to6bw/ansible-tmp-1692676315.265543-233072-42760343213119/source
+2023-08-22 09:21:55,437 p=233072 u=rothakur n=ansible | <35.155.113.92> EXEC /bin/sh -c 'chmod u+x /home/rothakur/.ansible/tmp/ansible-local-232993lt9to6bw/ansible-tmp-1692676315.265543-233072-42760343213119/ /home/rothakur/.ansible/tmp/ansible-local-232993lt9to6bw/ansible-tmp-1692676315.265543-233072-42760343213119/source && sleep 0'
+2023-08-22 09:21:55,514 p=233072 u=rothakur n=ansible | Using module file /home/rothakur/ansible-collections/collections/ansible_collections/ansible/ansible/lib/ansible/modules/copy.py
+2023-08-22 09:21:55,514 p=233072 u=rothakur n=ansible | <35.155.113.92> PUT /home/rothakur/.ansible/tmp/ansible-local-232993lt9to6bw/tmp5e10jom3 TO /home/rothakur/.ansible/tmp/ansible-local-232993lt9to6bw/ansible-tmp-1692676315.265543-233072-42760343213119/AnsiballZ_copy.py
+2023-08-22 09:21:55,515 p=233072 u=rothakur n=ansible | <35.155.113.92> EXEC /bin/sh -c 'chmod u+x /home/rothakur/.ansible/tmp/ansible-local-232993lt9to6bw/ansible-tmp-1692676315.265543-233072-42760343213119/ /home/rothakur/.ansible/tmp/ansible-local-232993lt9to6bw/ansible-tmp-1692676315.265543-233072-42760343213119/AnsiballZ_copy.py && sleep 0'
+2023-08-22 09:21:55,517 p=233072 u=rothakur n=ansible | <35.155.113.92> EXEC /bin/sh -c '/usr/bin/python3 /home/rothakur/.ansible/tmp/ansible-local-232993lt9to6bw/ansible-tmp-1692676315.265543-233072-42760343213119/AnsiballZ_copy.py && sleep 0'
+2023-08-22 09:21:55,613 p=233072 u=rothakur n=ansible | <35.155.113.92> EXEC /bin/sh -c 'rm -f -r /home/rothakur/.ansible/tmp/ansible-local-232993lt9to6bw/ansible-tmp-1692676315.265543-233072-42760343213119/ > /dev/null 2>&1 && sleep 0'
+2023-08-22 09:21:55,617 p=232993 u=rothakur n=ansible | changed: [rtr1] => {
+    "changed": true,
+    "checksum": "557836eb57c6088e1a6b1e03040558273ee97577",
+    "dest": "network_automation_backups/meta.yaml",
+    "diff": [],
+    "gid": 1000,
+    "group": "rothakur",
+    "invocation": {
+        "module_args": {
+            "_original_basename": "tmp2arjik4b",
+            "attributes": null,
+            "backup": false,
+            "checksum": "557836eb57c6088e1a6b1e03040558273ee97577",
+            "content": null,
+            "dest": "network_automation_backups/meta.yaml",
+            "directory_mode": null,
+            "follow": false,
+            "force": true,
+            "group": null,
+            "local_follow": null,
+            "mode": null,
+            "owner": null,
+            "remote_src": null,
+            "selevel": null,
+            "serole": null,
+            "setype": null,
+            "seuser": null,
+            "src": "/home/rothakur/.ansible/tmp/ansible-local-232993lt9to6bw/ansible-tmp-1692676315.265543-233072-42760343213119/source",
+            "unsafe_writes": false,
+            "validate": null
+        }
+    },
+    "md5sum": "a4c517fc4fddcf9ad95761d057b521d8",
+    "mode": "0644",
+    "owner": "rothakur",
+    "size": 111,
+    "src": "/home/rothakur/.ansible/tmp/ansible-local-232993lt9to6bw/ansible-tmp-1692676315.265543-233072-42760343213119/source",
+    "state": "file",
+    "uid": 1000
+}
+2023-08-22 09:21:55,619 p=232993 u=rothakur n=ansible | TASK [network.backup.run : Include build tasks] *****************************************************************************************************************************
+2023-08-22 09:21:55,632 p=232993 u=rothakur n=ansible | included: /home/rothakur/ansible_collections/network/backup/roles/run/includes/publish.yaml for rtr1
+2023-08-22 09:21:55,636 p=232993 u=rothakur n=ansible | TASK [network.backup.run : Set Timestamp] ***********************************************************************************************************************************
+2023-08-22 09:21:55,645 p=233099 u=rothakur n=ansible | redirecting (type: connection) ansible.builtin.network_cli to ansible.netcommon.network_cli
+2023-08-22 09:21:56,434 p=232993 u=rothakur n=ansible | ok: [rtr1] => {
+    "ansible_facts": {
+        "time": "2023-08-22-09-21"
+    },
+    "changed": false
+}
+2023-08-22 09:21:56,439 p=232993 u=rothakur n=ansible | TASK [network.backup.run : Create default tag] ******************************************************************************************************************************
+2023-08-22 09:21:56,448 p=233105 u=rothakur n=ansible | redirecting (type: connection) ansible.builtin.network_cli to ansible.netcommon.network_cli
+2023-08-22 09:21:57,241 p=232993 u=rothakur n=ansible | ok: [rtr1] => {
+    "ansible_facts": {
+        "default_tag": {
+            "annotation": "2023-08-22-09-21",
+            "message": "backup_on: 2023-08-22-09-21"
+        }
+    },
+    "changed": false
+}
+2023-08-22 09:21:57,242 p=232993 u=rothakur n=ansible | TASK [network.backup.run : Set default tag] *********************************************************************************************************************************
+2023-08-22 09:21:57,251 p=232993 u=rothakur n=ansible | skipping: [rtr1] => {
+    "changed": false,
+    "skip_reason": "Conditional result was False"
+}
+2023-08-22 09:21:57,254 p=232993 u=rothakur n=ansible | TASK [network.backup.run : Publish the changes] *****************************************************************************************************************************
+2023-08-22 09:21:57,266 p=233111 u=rothakur n=ansible | redirecting (type: connection) ansible.builtin.network_cli to ansible.netcommon.network_cli
+2023-08-22 09:21:59,505 p=232993 u=rothakur n=ansible | changed: [rtr1] => {
+    "changed": true,
+    "msg": "Successfully published local changes from: network_automation_backups",
+    "output": [
+        {
+            "command": "git -C network_automation_backups config --get user.name",
+            "env": "",
+            "return_code": 0,
+            "stderr_lines": [],
+            "stdout_lines": [
+                "rohitthakur2590"
+            ]
+        },
+        {
+            "command": "git -C network_automation_backups config --get user.email",
+            "env": "",
+            "return_code": 0,
+            "stderr_lines": [],
+            "stdout_lines": [
+                "rohitthakur2590@outlook.com"
+            ]
+        },
+        {
+            "command": "git -C network_automation_backups add --all",
+            "env": "",
+            "return_code": 0,
+            "stderr_lines": [],
+            "stdout_lines": []
+        },
+        {
+            "command": "git -C network_automation_backups commit --allow-empty -m 'Updates made by ansible with play: rtr1'",
+            "env": "",
+            "return_code": 0,
+            "stderr_lines": [],
+            "stdout_lines": [
+                "[ansible-rtr1-2023-08-22T092151.248556+0530 a78f44d] Updates made by ansible with play: rtr1",
+                " 2 files changed, 195 insertions(+), 2 deletions(-)",
+                " create mode 100644 rtr1.txt"
+            ]
+        },
+        {
+            "command": "git -C network_automation_backups tag -a 2023-08-22-09-21 -m 'backup_on: 2023-08-22-09-21'",
+            "env": "",
+            "return_code": 0,
+            "stderr_lines": [],
+            "stdout_lines": []
+        },
+        {
+            "command": "git -C network_automation_backups remote -v",
+            "env": "",
+            "return_code": 0,
+            "stderr_lines": [],
+            "stdout_lines": [
+                "origin\thttps://github.com/rohitthakur2590/network_automation_backups (fetch)",
+                "origin\thttps://github.com/rohitthakur2590/network_automation_backups (push)"
+            ]
+        },
+        {
+            "command": "git -C network_automation_backups -c 'http.extraheader=AUTHORIZATION: basic <TOKEN>' push --tags origin HEAD",
+            "env": "",
+            "return_code": 0,
+            "stderr_lines": [
+                "To https://github.com/rohitthakur2590/network_automation_backups",
+                " * [new branch]      HEAD -> ansible-rtr1-2023-08-22T092151.248556+0530",
+                " * [new tag]         2023-08-22-09-21 -> 2023-08-22-09-21"
+            ],
+            "stdout_lines": []
+        }
+    ],
+    "pr_url": "To https://github.com/rohitthakur2590/network_automation_backups\n * [new branch]      HEAD -> ansible-rtr1-2023-08-22T092151.248556+0530\n * [new tag]         2023-08-22-09-21 -> 2023-08-22-09-21",
+    "user_email": "rohitthakur2590@outlook.com\n",
+    "user_name": "rohitthakur2590\n"
+}
+2023-08-22 09:21:59,509 p=232993 u=rothakur n=ansible | META: role_complete for rtr1
+2023-08-22 09:21:59,510 p=232993 u=rothakur n=ansible | META: ran handlers
+2023-08-22 09:21:59,511 p=232993 u=rothakur n=ansible | META: ran handlers
+2023-08-22 09:21:59,512 p=232993 u=rothakur n=ansible | PLAY RECAP ******************************************************************************************************************************************************************
+2023-08-22 09:21:59,513 p=232993 u=rothakur n=ansible | rtr1                       : ok=14   changed=4    unreachable=0    failed=0    skipped=4    rescued=0    ignored=0   
+2023-08-22 09:21:59,613 p=233002 u=rothakur n=ansible | shutdown complete

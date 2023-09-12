@@ -1,0 +1,22 @@
+interfaces:
+-   description: Ansible
+    duplex: auto
+    enabled: true
+    name: GigabitEthernet0/0
+    speed: auto
+-   duplex: auto
+    enabled: true
+    name: GigabitEthernet0/1
+    speed: auto
+-   duplex: auto
+    enabled: true
+    name: GigabitEthernet0/2
+    speed: auto
+-   duplex: auto
+    enabled: false
+    name: GigabitEthernet0/3
+    speed: auto
+-   enabled: true
+    name: Loopback0
+-   enabled: true
+    name: Loopback1

@@ -1,0 +1,11 @@
+---
+- name: Detect Playbook
+  hosts: rtr1
+  tasks:
+    - name: Network Backup and Resource Manager
+      ansible.builtin.include_role:
+        name: network.backup.run
+      vars:
+        operation: detect
+        data_store:
+          local: "/home/rothakur/ansible-collections/collections/ansible_collections/network/backup/backups/2023-09-04/rtr1.txt"

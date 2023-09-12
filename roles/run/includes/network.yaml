@@ -1,8 +1,8 @@
 ---
 - name: Invoke backup task
-  ansible.builtin.include_tasks: includes/operation.yaml
+  ansible.builtin.include_tasks: includes/cli_backup.yaml
 
-- name: write to file
-  ansible.builtin.copy:
-    content: "{{ network_backup | to_nice_yaml }}"
-    dest: "{{ network_backup_path }}/meta.yaml"
+# - name: write to file
+#   ansible.builtin.copy:
+#     content: "{{ network_backup | to_nice_yaml }}"
+#     dest: "{{ network_backup_path }}/meta.yaml"

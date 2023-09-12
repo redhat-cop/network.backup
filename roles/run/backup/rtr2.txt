@@ -1,0 +1,306 @@
+Building configuration...
+
+Current configuration : 9065 bytes
+!
+! Last configuration change at 12:05:36 UTC Mon Sep 11 2023 by cisco
+!
+version 17.6
+service timestamps debug uptime
+service timestamps log datetime msec localtime
+service password-encryption
+service call-home
+platform qfp utilization monitor load 80
+platform punt-keepalive disable-kernel-core
+platform console serial
+!
+hostname R1
+!
+boot-start-marker
+boot-end-marker
+!
+!
+logging exception 4099
+logging buffered xml 5099 notifications
+no logging console
+logging monitor warnings
+logging cns-events warnings
+enable password 7 13061E010803
+!
+no aaa new-model
+!
+ip vrf blue
+ description blue vrf
+!
+ip vrf testVrf
+ description testvr1
+!
+ip vrf testVrf2
+ description testvr2
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+login on-success log
+!
+!
+!
+!
+!
+!
+!
+subscriber templating
+access-session mac-move deny
+!
+multilink bundle-name authenticated
+!
+!
+!
+!
+crypto pki trustpoint SLA-TrustPoint
+ enrollment pkcs12
+ revocation-check crl
+!
+crypto pki trustpoint TP-self-signed-2035728137
+ enrollment selfsigned
+ subject-name cn=IOS-Self-Signed-Certificate-2035728137
+ revocation-check none
+ rsakeypair TP-self-signed-2035728137
+!
+!
+crypto pki certificate chain SLA-TrustPoint
+ certificate ca 01
+  30820321 30820209 A0030201 02020101 300D0609 2A864886 F70D0101 0B050030 
+  32310E30 0C060355 040A1305 43697363 6F312030 1E060355 04031317 43697363 
+  6F204C69 63656E73 696E6720 526F6F74 20434130 1E170D31 33303533 30313934 
+  3834375A 170D3338 30353330 31393438 34375A30 32310E30 0C060355 040A1305 
+  43697363 6F312030 1E060355 04031317 43697363 6F204C69 63656E73 696E6720 
+  526F6F74 20434130 82012230 0D06092A 864886F7 0D010101 05000382 010F0030 
+  82010A02 82010100 A6BCBD96 131E05F7 145EA72C 2CD686E6 17222EA1 F1EFF64D 
+  CBB4C798 212AA147 C655D8D7 9471380D 8711441E 1AAF071A 9CAE6388 8A38E520 
+  1C394D78 462EF239 C659F715 B98C0A59 5BBB5CBD 0CFEBEA3 700A8BF7 D8F256EE 
+  4AA4E80D DB6FD1C9 60B1FD18 FFC69C96 6FA68957 A2617DE7 104FDC5F EA2956AC 
+  7390A3EB 2B5436AD C847A2C5 DAB553EB 69A9A535 58E9F3E3 C0BD23CF 58BD7188 
+  68E69491 20F320E7 948E71D7 AE3BCC84 F10684C7 4BC8E00F 539BA42B 42C68BB7 
+  C7479096 B4CB2D62 EA2F505D C7B062A4 6811D95B E8250FC4 5D5D5FB8 8F27D191 
+  C55F0D76 61F9A4CD 3D992327 A8BB03BD 4E6D7069 7CBADF8B DF5F4368 95135E44 
+  DFC7C6CF 04DD7FD1 02030100 01A34230 40300E06 03551D0F 0101FF04 04030201 
+  06300F06 03551D13 0101FF04 05300301 01FF301D 0603551D 0E041604 1449DC85 
+  4B3D31E5 1B3E6A17 606AF333 3D3B4C73 E8300D06 092A8648 86F70D01 010B0500 
+  03820101 00507F24 D3932A66 86025D9F E838AE5C 6D4DF6B0 49631C78 240DA905 
+  604EDCDE FF4FED2B 77FC460E CD636FDB DD44681E 3A5673AB 9093D3B1 6C9E3D8B 
+  D98987BF E40CBD9E 1AECA0C2 2189BB5C 8FA85686 CD98B646 5575B146 8DFC66A8 
+  467A3DF4 4D565700 6ADF0F0D CF835015 3C04FF7C 21E878AC 11BA9CD2 55A9232C 
+  7CA7B7E6 C1AF74F6 152E99B7 B1FCF9BB E973DE7F 5BDDEB86 C71E3B49 1765308B 
+  5FB0DA06 B92AFE7F 494E8A9E 07B85737 F3A58BE1 1A48A229 C37C1E69 39F08678 
+  80DDCD16 D6BACECA EEBC7CF9 8428787B 35202CDC 60E4616A B623CDBD 230E3AFB 
+  418616A9 4093E049 4D10AB75 27E86F73 932E35B5 8862FDAE 0275156F 719BB2F0 
+  D697DF7F 28
+  	quit
+crypto pki certificate chain TP-self-signed-2035728137
+ certificate self-signed 01
+  30820330 30820218 A0030201 02020101 300D0609 2A864886 F70D0101 05050030 
+  31312F30 2D060355 04031326 494F532D 53656C66 2D536967 6E65642D 43657274 
+  69666963 6174652D 32303335 37323831 3337301E 170D3233 30323031 31313031 
+  31355A17 0D333330 31333131 31303131 355A3031 312F302D 06035504 03132649 
+  4F532D53 656C662D 5369676E 65642D43 65727469 66696361 74652D32 30333537 
+  32383133 37308201 22300D06 092A8648 86F70D01 01010500 0382010F 00308201 
+  0A028201 0100DBD0 1EAABCE9 C96E6266 3AD611D9 37D668BF AFFD451D 9CF03A92 
+  F0B24CF2 4026D8DD 7C0D9DBA C5D35EC9 BE59BB29 6CEE2F2C 81E5688F 100313AE 
+  F8C9D586 C4A45265 D795EB5F 80B8DC69 812A9A18 CF6DFEE4 11D7995E 93F068AB 
+  93D2D751 2F4DA6FA AD9ADAB0 CDB679F6 1C4582FB DEBC1C01 54598518 6C64EF34 
+  EC6BF872 FE1581A5 D4830D46 E6E0D4F4 57796DF5 73D02875 7EEDDF3F 956117A4 
+  F61B7E1B 359FA235 769A9A3E 9752EA13 1C91A4BF CA25B808 C20DBC09 54D4C1BC 
+  26C0F2D1 3C698C3F 5257C73D 482F5D37 2C4FEE8F 15C94B3E F16A4C39 966BBAAA 
+  812BCED5 156F081F 27E0E6BF 7C42EB7E 1FE0A4AB 288CA539 42369C23 DA9E1DFF 
+  DC310610 460D0203 010001A3 53305130 0F060355 1D130101 FF040530 030101FF 
+  301F0603 551D2304 18301680 140C87C1 5CDBEE2F 6184B5BA 2B978D7F 77E3D64C 
+  09301D06 03551D0E 04160414 0C87C15C DBEE2F61 84B5BA2B 978D7F77 E3D64C09 
+  300D0609 2A864886 F70D0101 05050003 82010100 08F7F6C2 BBCA98B0 D25860F7 
+  713A12C6 2872655E 4C8E19AE 52D655A6 B32EFD54 5A5D83C6 A892BF7B 2E3FA08C 
+  82F24907 DBF60D82 E27BD362 736C0AAE C3D50416 9AA2EE28 C17D796E 05D53209 
+  0D67420E 788BA206 2B52017C 4341C0FE 2353E8B0 885FB313 5E938F83 C9FCD39C 
+  14B0E94D 37B01B08 793288F4 4D6D571C C69C40BF B710B8DD BB727E18 D3766E92 
+  381C4D0E 23BE4DA8 09B2BD44 18041BE3 D5D5B7D8 DDA336DE 13648B78 B0870AC4 
+  014077A5 B0AFEA7E 90CFEBB0 9983C302 EB72A8A6 6FF436BA B7122610 ACCB93E6 
+  802A7C75 C5B4C380 FDEF160A 28F7DDAA 55C81CDC D28FF10D 2742A0C3 884AEDDC 
+  F1C76EDC F516F4EE A6454974 CB2DF140 FA82B18F
+  	quit
+!
+license udi pid C8000V sn 9V3FP480MV0
+diagnostic bootup level minimal
+service-template DEFAULT_LINKSEC_POLICY_MUST_SECURE
+ linksec policy must-secure
+service-template DEFAULT_LINKSEC_POLICY_SHOULD_SECURE
+ linksec policy should-secure
+service-template DEFAULT_CRITICAL_VOICE_TEMPLATE
+ voice vlan
+service-template DEFAULT_CRITICAL_DATA_TEMPLATE
+service-template webauth-global-inactive
+ inactivity-timer 3600 
+memory free low-watermark processor 68484
+!
+!
+!
+!
+!
+object-group network QoS_Cloud_Nasuni_Cloud 
+ description test sdest 
+ host 209.165.200.238
+!
+object-group network QoS_Cloud_Nasuni_On-Premises 
+ description test source desc
+ host 209.165.200.237
+!
+!
+username cisco password 7 05080F1C2243
+!
+redundancy
+!
+!
+!
+!
+!
+class-map type control subscriber match-all DOT1X_FAILED
+!
+!
+!
+!
+!
+!
+!
+interface Loopback888
+ description test for ansible
+ no ip address
+ shutdown
+!
+interface Loopback999
+ no ip address
+ shutdown
+!
+interface GigabitEthernet1
+ description 04j
+ ip address dhcp
+ ip access-group google_block out
+ negotiation auto
+!
+interface GigabitEthernet2
+ description test acls
+ ip address dhcp
+ ip access-group acl_123 in
+ ip access-group test out
+ speed 1000
+ no negotiation auto
+!
+interface GigabitEthernet3
+ description Configured and Overridden by Ansible Network
+ no ip address
+ ip access-group branchoffices in
+ shutdown
+ speed 1000
+ no negotiation auto
+ ipv6 address FD5D:12C9:2201:1::1/64
+!
+interface GigabitEthernet4
+ no ip address
+ shutdown
+ negotiation auto
+!
+ip forward-protocol nd
+no ip http server
+ip http secure-server
+!
+ip route vrf blue 192.0.2.0 255.255.255.0 192.0.2.1 tag 50 name test_vrf track 150
+ip route 198.51.100.0 255.255.255.0 198.51.101.3 name route_3
+ip route 198.51.100.0 255.255.255.0 198.51.101.2 30 name route_2
+ip route 198.51.100.0 255.255.255.0 198.51.101.1 110 tag 40 name route_1 multicast
+ip ssh version 2
+ip scp server enable
+!
+ip access-list standard RM-MCAST-RP
+ 10 permit 239.0.0.0 0.255.255.255
+ip access-list standard test-rm
+ 10 permit 239.0.0.0 0.255.255.255
+ 20 permit any
+ 30 deny   232.0.0.0 0.255.255.255
+!
+ip access-list extended SNMP
+ 10 permit ip host 10.10.10.173 any
+ 20 permit ip host 10.10.10.182 any
+ 30 permit ip host 10.10.10.200 any
+ 40 deny   ip any any log
+ip access-list extended branchoffices
+ 10 permit 22 172.16.7.0 0.0.0.3 any
+ 20 permit ahp 172.16.2.0 0.0.0.255 host 172.31.5.4
+!
+!
+ip prefix-list 10 description this is replace test
+ip prefix-list 10 seq 15 deny 12.0.0.0/8 ge 15
+ip prefix-list 10 seq 20 deny 14.0.0.0/8 ge 20 le 21
+!
+ip prefix-list test description this is test
+ip prefix-list test seq 50 deny 12.0.0.0/8 ge 15
+!
+ip prefix-list test_prefix description this is for prefix-list
+ip prefix-list test_prefix seq 5 deny 35.0.0.0/8 ge 10 le 15
+ip prefix-list test_prefix seq 10 deny 35.0.0.0/8 ge 20
+!
+ip prefix-list test_replace description this is replace test
+ip prefix-list test_replace seq 10 deny 35.0.0.0/8 ge 20
+logging dmvpn rate-limit 10
+logging facility local5
+ipv6 route 2001:DB8:0:3::/64 2001:DB8:0:3::2 tag 105 name test_v6
+!
+!
+ipv6 prefix-list test_ipv6 description this is ipv6 replace test
+ipv6 prefix-list test_ipv6 seq 10 deny 2001:DB8:0:4::/64 ge 80 le 100
+route-map RM_router permit 10 
+ match ip address 2222 2 3 4 23
+ match additional-paths advertise-set all group-best best 2
+ match as-path 22
+ set clns destination 10.0121.21
+ set aigp-metric 2
+ set ip df 1
+!
+!
+!
+control-plane
+!
+banner exec ^C
+this is my login banner
+that as a multiline
+string
+^C
+banner login ^C
+this is my login banner
+that as a multiline
+string
+^C
+!
+line con 0
+ exec-timeout 0 0
+ stopbits 1
+line aux 0
+line vty 0 4
+ login local
+ transport input ssh
+!
+call-home
+ ! If contact email address in call-home is configured as sch-smart-licensing@cisco.com
+ ! the email address configured in Cisco Smart License Portal will be used as contact email address to send SCH notifications.
+ contact-email-addr sch-smart-licensing@cisco.com
+ profile "CiscoTAC-1"
+  active
+  destination transport-method http
+!
+!
+!
+!
+!
+!
+end

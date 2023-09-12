@@ -3,9 +3,25 @@
   ansible.builtin.include_tasks: includes/path.yaml
   when: data_store.scm.origin is not defined 
 
+- name: PRINT *****************
+  ansible.builtin.debug:
+    msg: "{{ inventory_hostname }}"
+
+# - name: Check if the directory exists
+#   ansible.builtin.stat:
+#     path: "{{ directory }}"
+#   register: dir_to_check
+
+# - name: Directory found
+#   ansible.builtin.debug:
+#     msg: "Directory {{ directory }} present"
+#   when: dir_to_check.stat.isdir is defined and dir_to_check.stat.isdir
+
 - name: Include retrieve tasks
   ansible.builtin.include_tasks: includes/retrieve.yaml
   when: data_store['scm']['origin'] is defined
+  ignore_errors: true
+  # run_once: True
 
 - name: Include tasks
   ansible.builtin.include_tasks: includes/network.yaml
@@ -14,3 +30,4 @@
 - name: Include build tasks
   ansible.builtin.include_tasks: includes/publish.yaml
   when: data_store.scm.origin is defined
+  # delegate_to: localhost

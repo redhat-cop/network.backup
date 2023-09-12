@@ -1,0 +1,15 @@
+bgp_global:
+    as_number: '500'
+    bgp:
+        log_neighbor_changes: true
+    neighbors:
+    -   neighbor_address: 12.0.0.1
+        peer_group: CCIE
+    -   neighbor_address: 23.0.0.1
+        remote_as: '500'
+    -   neighbor_address: CCIE
+        remote_as: '500'
+        update_source: Loopback1
+        version: 4
+    networks:
+    -   address: 10.0.0.0
