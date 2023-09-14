@@ -1,7 +1,0 @@
-ospf_interfaces:
--   name: Loopback0
--   name: Loopback1
--   name: GigabitEthernet0/0
--   name: GigabitEthernet0/1
--   name: GigabitEthernet0/2
--   name: GigabitEthernet0/3
