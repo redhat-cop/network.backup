@@ -25,6 +25,7 @@
     # tag: "{{ tag | d(default_tag) }}"
     timeout: 120
   when: tag is not defined
+  # delegate_to: localhost
 
 - name: Publish the changes
   ansible.scm.git_publish:
@@ -34,4 +35,5 @@
     tag: "{{ tag }}"
     timeout: 120
   when: tag is defined
+  # delegate_to: localhost
 

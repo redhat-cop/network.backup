@@ -29,11 +29,11 @@
 
 - name: PRINT SPLIT ^^^^^^^^------------------
   ansible.builtin.debug:
-    msg: "{{  data_store.scm.origin.url.split('.')[-1] }}"
+    msg: "{{  data_store.scm.origin.url.split('/')[-1] }}"
 
 - name: Include retrieve tasks
   ansible.builtin.set_fact:
-    network_backup_path: "{{  data_store.scm.origin.url.split('.')[-1] }}"
+    network_backup_path: "{{  data_store.scm.origin.url.split('/')[-1] }}"
   when: data_store['scm']['origin'] is defined
 
 - name: Include tasks
@@ -44,4 +44,3 @@
   ansible.builtin.include_tasks: includes/publish.yaml
   when: data_store.scm.origin is defined
   run_once: true
-  # delegate_to: localhost
