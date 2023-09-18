@@ -5,5 +5,5 @@
 - name: Run the platform specific tasks
   ansible.builtin.include_tasks: "{{ item }}"
   with_first_found:
-  - "includes/{{ operation }}.yaml"
-  - "includes/unsupported_operation.yaml"
+    - "includes/{{ operation }}.yaml"
+    - "includes/unsupported_operation.yaml"

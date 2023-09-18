@@ -20,4 +20,3 @@
   ansible.builtin.set_fact:
     src_network_backup_path: "{{  data_store.scm.origin.url.split('/')[-1] }}"
   when: data_store['scm']['origin'] is defined
-

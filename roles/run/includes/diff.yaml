@@ -11,7 +11,7 @@
     file_type: file
   register: out_dir1
 
-- name: Assess have files    
+- name: Assess have files
   ansible.builtin.find:
     paths: "{{ dir2 }}"
     file_type: file
@@ -25,7 +25,7 @@
 - name: Set Facts files_common
   ansible.builtin.set_fact:
     files_common: "{{ dir1_files|map('basename')| intersect(dir2_files|map('basename')) }}"
-    
+
 - name: Print Common Files
   ansible.builtin.debug:
     var: files_common

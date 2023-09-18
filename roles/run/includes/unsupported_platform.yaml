@@ -1,4 +1,6 @@
-- fail:
+---
+- name: Unsupported platform provided
+  ansible.builtin.fail:
     msg: |
           "{{ ansible_network_os }} is not yet supported"
           Supported platforms:

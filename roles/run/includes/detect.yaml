@@ -1,7 +1,7 @@
 ---
 - name: Build Local Backup Dir Path
   ansible.builtin.include_tasks: includes/path.yaml
-  when: data_store.scm.origin is not defined 
+  when: data_store.scm.origin is not defined
 
 - name: Set path and vars for  remote operations
   ansible.builtin.include_tasks: includes/remote_operations.yaml
