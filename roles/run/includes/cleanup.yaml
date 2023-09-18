@@ -1,0 +1,13 @@
+---
+
+- name: Delete content & directory
+  ansible.builtin.file:
+    state: absent
+    path: "{{ temp_src.path }}"
+  run_once: true
+
+- name: Delete content & directory
+  ansible.builtin.file:
+    state: absent
+    path: "{{ role_path }}/{{ src_network_backup_path }}"
+  run_once: true

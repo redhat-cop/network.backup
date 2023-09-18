@@ -1,0 +1,10 @@
+ansible_host: 35.155.113.92
+ansible_connection: network_cli
+ansible_network_os: cisco.ios.ios
+ansible_user: cisco
+ansible_ssh_pass: cisco
+ansible_ssh_port: 2013
+ansible_become: true
+ansible_become_password: cisco
+github_token: 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
+# github_token: "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"

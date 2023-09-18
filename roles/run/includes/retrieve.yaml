@@ -1,4 +1,14 @@
 ---
+# - name: Create temporary backup directory
+#   ansible.builtin.tempfile:
+#     state: directory
+#     prefix: temp
+#   register: temp_rem_src
+
+- name: Set Default Path
+  ansible.builtin.set_fact:
+    default_path: "{{ role_path }}"
+
 - name: Perform retrieve with provided credentials
   when: data_store.scm.origin.token is defined
   block:
@@ -7,9 +17,8 @@
         origin:
           url: "{{ data_store['scm']['origin']['url'] }}"
           token: "{{ data_store['scm']['origin']['token'] }}"
-        parent_directory: "{{ data_store.scm.parent_directory | default('./') }}"
+        parent_directory: "{{ data_store.scm.parent_directory | default(default_path) }}"
       register: resource_manager_result
-      # ignore_errors: true
 
     - name: Update data store path
       ansible.builtin.set_fact:
@@ -22,9 +31,8 @@
       ansible.scm.git_retrieve:
         origin:
           url: "{{ data_store['scm']['origin']['url'] }}"
-        parent_directory: "{{ data_store.scm.parent_directory | default('./') }}"
+        parent_directory: "{{ data_store.scm.parent_directory | default(default_path) }}"
       register: resource_manager_result
-      # ignore_errors: true
 
     - name: Update data store path
       ansible.builtin.set_fact:

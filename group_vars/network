@@ -1,0 +1,5 @@
+network:
+  hosts:
+    rtr1
+    rtr2
+# ansible_host: 35.155.113.92

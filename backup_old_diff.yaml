@@ -1,0 +1,45 @@
+---
+- name: Set Facts
+  ansible.builtin.set_fact:
+    dir1: "{{ src_network_backup_path }}"
+    dir2: "{{ network_backup_path }}"
+
+
+- name: Assess want files
+  ansible.builtin.find:
+    paths: "{{ dir1 }}"
+    file_type: file
+  register: out_dir1
+
+- name: Assess have files    
+  ansible.builtin.find:
+    paths: "{{ dir2 }}"
+    file_type: file
+  register: out_dir2
+
+- name: Set Facts
+  ansible.builtin.set_fact:
+    dir1_files: "{{ out_dir1.files|map(attribute='path') }}"
+    dir2_files: "{{ out_dir2.files|map(attribute='path') }}"
+
+- name: Set Facts files_common
+  ansible.builtin.set_fact:
+    files_common: "{{ dir1_files|map('basename')| intersect(dir2_files|map('basename')) }}"
+    
+- name: Print Common Files
+  ansible.builtin.debug:
+    var: files_common
+
+- name: Get Diff
+  ansible.builtin.command: "diff {{ dir1 }}/{{ item }} {{ dir2 }}/{{ item }}"
+  loop: "{{ files_common }}"
+  ignore_errors: true
+  register: out_diff
+
+- name: Print
+  ansible.builtin.debug:
+    msg: |
+      {% for i in out_diff.results %}
+      {{ i.cmd|join(' ') }}: |
+        {{ i.stdout|indent(2) }}
+
