@@ -1,0 +1,5 @@
+- fail:
+    msg: |
+          "{{ ansible_network_os }} is not yet supported"
+          Supported platforms:
+          "{{ supported_platforms }}"

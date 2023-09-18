@@ -3,33 +3,10 @@
   ansible.builtin.include_tasks: includes/path.yaml
   when: data_store.scm.origin is not defined 
 
-- name: PRINT *****************
-  ansible.builtin.debug:
-    msg: "{{ inventory_hostname }}"
-
-# - name: Check if the directory exists
-#   ansible.builtin.stat:
-#     path: "{{ directory }}"
-#   register: dir_to_check
-
-# - name: Directory found
-#   ansible.builtin.debug:
-#     msg: "Directory {{ directory }} present"
-#   when: dir_to_check.stat.isdir is defined and dir_to_check.stat.isdir
-
 - name: Include retrieve tasks
   ansible.builtin.include_tasks: includes/retrieve.yaml
   when: data_store['scm']['origin'] is defined
-  # ignore_errors: true
   run_once: true
-
-- name: PRINT SPLIT ^^^^^^^^------------------
-  ansible.builtin.debug:
-    msg: "{{  data_store.scm.origin.url }}"
-
-- name: PRINT SPLIT ^^^^^^^^------------------
-  ansible.builtin.debug:
-    msg: "{{  data_store.scm.origin.url.split('/')[-1] }}"
 
 - name: Include retrieve tasks
   ansible.builtin.set_fact:
@@ -38,7 +15,6 @@
 
 - name: Include tasks
   ansible.builtin.include_tasks: includes/network.yaml
-  # ansible.builtin.include_tasks: ./backups/{{ ansible_network_os.split('.')[2] }}.yaml
 
 - name: Include build tasks
   ansible.builtin.include_tasks: includes/publish.yaml

@@ -1,5 +1,4 @@
 ---
-
 - name: Delete content & directory
   ansible.builtin.file:
     state: absent

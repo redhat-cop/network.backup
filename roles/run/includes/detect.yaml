@@ -9,11 +9,16 @@
 
 - name: Include retrieve tasks
   ansible.builtin.set_fact:
-    src_network_backup_path: "{{  network_backup_path }}/{{ inventory_hostname }}.txt"
+    src_network_backup_path: "{{ network_backup_path }}/{{ inventory_hostname }}.txt"
   when: data_store['scm']['origin'] is not defined
 
 - name: Manage files and path settings
   ansible.builtin.include_tasks: includes/files.yaml
+
+- name: Read static config
+  ansible.builtin.set_fact:
+    want: "{{lookup('ansible.builtin.file', src_network_backup_path) }}"
+  when: data_store.scm.origin is not defined
 
 - name: Include tasks
   ansible.builtin.include_tasks: includes/network.yaml
