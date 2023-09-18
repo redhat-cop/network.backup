@@ -33,7 +33,7 @@
 
 - name: Include retrieve tasks
   ansible.builtin.set_fact:
-    network_backup_path: "{{  data_store.scm.origin.url.split('/')[-1] }}"
+    network_backup_path: "{{ role_path }}/{{  data_store.scm.origin.url.split('/')[-1] }}"
   when: data_store['scm']['origin'] is defined
 
 - name: Include tasks
