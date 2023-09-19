@@ -5,11 +5,11 @@ dependencies:
   "ansible.netcommon": ">=5.1.1"
   "ansible.utils": ">=2.9.0"
 license_file: LICENSE
-name: bgp
+name: backup
 description: Ansible Network Backup collection platform-agnostic single entry point management for network backup.
 namespace: network
 readme: README.md
-repository: https://github.com/redhat-cop/network.backup
-issues: https://github.com/redhat-cop/network.backup/issues
+repository: https://github.com/ansible-network/network.backup
+issues: https://github.com/ansible-network/network.backup/issues
 tags: [networking]
 version: 1.0.0
