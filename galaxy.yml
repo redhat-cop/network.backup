@@ -9,7 +9,7 @@ name: backup
 description: Ansible Network Backup collection platform-agnostic single entry point management for network backup.
 namespace: network
 readme: README.md
-repository: https://github.com/ansible-network/network.backup
-issues: https://github.com/ansible-network/network.backup/issues
+repository: https://github.com/redhat-cop/network.backup
+issues:  https://github.com/redhat-cop/network.backup/issues
 tags: [networking]
 version: 1.0.0
