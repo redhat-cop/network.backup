@@ -1,6 +1,6 @@
 ---
 authors:
-  - Rohit Thakur (rohitthakur2590)
+  - Rohit Thakur (@rohitthakur2590)
 dependencies:
   "ansible.netcommon": ">=5.1.1"
   "ansible.utils": ">=2.9.0"
@@ -10,6 +10,6 @@ description: Ansible Network Backup collection platform-agnostic single entry po
 namespace: network
 readme: README.md
 repository: https://github.com/redhat-cop/network.backup
-issues:  https://github.com/redhat-cop/network.backup/issues
+issues: https://github.com/redhat-cop/network.backup/issues
 tags: [networking]
 version: 1.0.0
