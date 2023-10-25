@@ -13,4 +13,3 @@ on:  # yamllint disable-line rule:truthy
 jobs:
   ack:
     uses: ansible/devtools/.github/workflows/ack.yml@main
-
