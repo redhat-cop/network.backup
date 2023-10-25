@@ -1,0 +1,4 @@
+---
+# see https://github.com/ansible-community/devtools
+_extends: ansible-community/devtools
+
