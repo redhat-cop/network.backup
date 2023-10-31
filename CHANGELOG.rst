@@ -1,6 +1,6 @@
-=====================================
-Network Base Collection Release Notes
-=====================================
+=======================================
+Network Backup Collection Release Notes
+=======================================
 
 .. contents:: Topics
 

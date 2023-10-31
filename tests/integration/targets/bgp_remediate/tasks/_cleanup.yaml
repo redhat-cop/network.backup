@@ -1,5 +1,0 @@
----
-- name: Clean persist operation output
-  ansible.builtin.file:
-    path: "~/test_backup"
-    state: absent
