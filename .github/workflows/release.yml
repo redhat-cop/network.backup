@@ -1,0 +1,14 @@
+---
+name: Release
+
+on:   # yamllint disable-line rule:truthy
+  release:
+    types: [published]
+
+jobs:
+  release_automation_hub:
+    uses: ansible/devtools/.github/workflows/release_ah.yml@main
+    with:
+      environment: ah
+    secrets:
+      ah_token: ${{ secrets.AH_TOKEN }}
