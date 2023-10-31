@@ -1,6 +1,9 @@
 =====================================
-Network brm Collection Release Notes
+Network Base Collection Release Notes
 =====================================
 
 .. contents:: Topics
- 
+
+
+v1.0.0
+======
