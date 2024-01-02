@@ -3,12 +3,38 @@
 [![CI](https://github.com/ansible-network/network.backup/actions/workflows/tests.yml/badge.svg?event=schedule)](https://github.com/ansible-network/network.backup/actions/workflows/tests.yml)
 [![OpenSSF Best Practices](https://bestpractices.coreinfrastructure.org/projects/7404/badge)](https://bestpractices.coreinfrastructure.org/projects/7404)
 
-Ansible Network Backup Collection provides a platform-agnostic way of managing network backup on supported network devices.
 
+# About 
+- Ansible Network Backup Collection contains the  the role which provides a platform-agnostic way of managing network backup on supported network platforms.This collection provides the user the capabilities to create, compare and tag backups supporting local and  remote data stores.
 
-## Using the platform-agnostic role network.backup.run as part of a network.backup collection.
+- Network Backup collection  can be used by anyone who are looking for managing and maintaining network infrastructure, automate the backup process, ensuring data is regularly and securely backed up. This includes system administrators and IT professionals.
 
-## Capabilities
+# Requirements
+- Requires `ansible >= 2.14.0`
+
+# Installation
+To consume this Validated Content from Automation Hub, the following needs to be added to ansible.cfg:
+```
+[galaxy]
+server_list = automation_hub
+
+[galaxy_server.automation_hub]
+url=https://cloud.redhat.com/api/automation-hub/
+auth_url=https://sso.redhat.com/auth/realms/redhat-external/protocol/openid-connect/token
+token=<SuperSecretToken>
+```
+
+Get the required token from the [Automation Hub Web UI](https://console.redhat.com/ansible/automation-hub/token).
+
+With this configured, simply run the following commands:
+
+```
+ansible-galaxy collection install network.base
+ansible-galaxy collection install network.backup
+```
+
+# Use Cases
+
 `Full Backup`:
 - This enables the user to fetch running configuration from the device and save the backup to local or remote data-store
 - Users can also push backup files onto GitHub with tags.
@@ -18,7 +44,6 @@ Ansible Network Backup Collection provides a platform-agnostic way of managing n
 - Users can use this operation to get differential backup and save the backed-up files to either the local data store or to the GitHub repository
 - Users can also push backup files onto GitHub with tags.
 
-## Examples
 
 ### Full Network Backup
 
@@ -105,6 +130,42 @@ run.yml
                 email: "{{ email }}"
 ```
 
+# Testing
+
+### ansible-core
+
+The project uses tox to run `ansible-lint` and `ansible-test sanity`.
+Assuming this repository is checked out in the proper structure,
+e.g. `collections_root/ansible_collections/network/backup`, run:
+
+```shell
+  tox -e ansible-lint
+  tox -e py39-sanity
+```
+
+To run integration tests, ensure that your inventory has a `network_base` group.
+Depending on what test target you are running, comment out the host(s).
+
+```shell
+[network_hosts]
+ios
+junos
+
+[ios:vars]
+< enter inventory details for this group >
+
+[junos:vars]
+< enter inventory details for this group >
+```
+
+```shell
+  ansible-test network-integration -i /path/to/inventory --python 3.9 [target]
+```
+
+# Release notes
+
+Release notes are available [here](https://github.com/redhat-cop/network.backup/blob/main/CHANGELOG.rst).
+
 ### See Also:
 
 * [Ansible Using roles](https://docs.ansible.com/ansible/2.9/user_guide/playbooks_reuse_roles.html) for more details.
@@ -118,7 +179,7 @@ This collection follows the Ansible project's
 Please read and familiarize yourself with this document.
 
 
-## More information
+# Related information
 
 - [Developing network resource modules](https://docs.ansible.com/ansible/latest/network/dev_guide/developing_resource_modules_network.html#developing-resource-modules)
 - [Ansible network resources](https://docs.ansible.com/ansible/latest/network/getting_started/network_resources.html)
