@@ -1,7 +1,7 @@
 
 # Ansible Network Backup
 [![CI](https://github.com/ansible-network/network.backup/actions/workflows/tests.yml/badge.svg?event=schedule)](https://github.com/ansible-network/network.backup/actions/workflows/tests.yml)
-[![OpenSSF Best Practices](https://bestpractices.coreinfrastructure.org/projects/7404/badge)](https://bestpractices.coreinfrastructure.org/projects/8253)
+[![OpenSSF Best Practices](https://bestpractices.coreinfrastructure.org/projects/7404/badge)](https://bestpractices.coreinfrastructure.org/projects/7404)
 
 
 # About 
@@ -19,7 +19,7 @@ To consume this Validated Content from Automation Hub, the following needs to be
 server_list = automation_hub
 
 [galaxy_server.automation_hub]
-url=https://cloud.redhat.com/api/automation-hub/
+url=https://console.redhat.com/api/automation-hub/content/published/
 auth_url=https://sso.redhat.com/auth/realms/redhat-external/protocol/openid-connect/token
 token=<SuperSecretToken>
 ```
@@ -36,11 +36,11 @@ ansible-galaxy collection install network.backup
 # Use Cases
 
 `Full Backup`:
-- This enables the user to fetch running configuration from the device and save the backup to a local or remote data store
+- This enables the user to fetch running network configuration from the device and save the backup to a local or remote data store
 - Users can also push backup files onto GitHub with tags.
  
 `Differential backup`:
-- This enables users to backup configuration only when there has been some change since the last time we did a backup.
+- This enables users to backup network configuration only when there has been some change since the last time we did a backup.
 - Users can use this operation to get differential backup and save the backed-up files to either the local data store or to the GitHub repository
 - Users can also push backup files onto GitHub with tags.
 
@@ -132,8 +132,6 @@ run.yml
 
 # Testing
 
-### ansible-core
-
 The project uses tox to run `ansible-lint` and `ansible-test sanity`.
 Assuming this repository is checked out in the proper structure,
 e.g. `collections_root/ansible_collections/network/backup`, run:
@@ -162,22 +160,18 @@ junos
   ansible-test network-integration -i /path/to/inventory --python 3.9 [target]
 ```
 
-# Release notes
+# Contributing
 
-Release notes are available [here](https://github.com/redhat-cop/network.backup/blob/main/CHANGELOG.rst).
+We welcome community contributions to this collection. If you find problems, please open an issue or create a PR against this repository.
 
-### See Also:
-
-* [Ansible Using roles](https://docs.ansible.com/ansible/2.9/user_guide/playbooks_reuse_roles.html) for more details.
-
-## Advantages of Using this Role
-Provide a single platform agnostics entry point to manage network backup and restore use cases.
-
-### Code of Conduct
+## Code of Conduct
 This collection follows the Ansible project's
 [Code of Conduct](https://docs.ansible.com/ansible/devel/community/code_of_conduct.html).
 Please read and familiarize yourself with this document.
 
+# Release notes
+
+Release notes are available [here](https://github.com/redhat-cop/network.backup/blob/main/CHANGELOG.rst).
 
 # Related information
 
