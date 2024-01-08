@@ -4,15 +4,15 @@
 [![OpenSSF Best Practices](https://bestpractices.coreinfrastructure.org/projects/7404/badge)](https://bestpractices.coreinfrastructure.org/projects/7404)
 
 
-# About 
+## About
 - Ansible Network Backup Collection contains the role which provides a platform-agnostic way of managing network backup on supported network platforms. This collection provides the user the capabilities to create, compare and tag backups supporting local and remote data stores.
 
 - Network Backup collection can be used by anyone who are looking to manage and maintain network infrastructure, automate the backup process, and ensure data is regularly and securely backed up. This includes system administrators and IT professionals.
 
-# Requirements
+## Requirements
 - Requires `ansible >= 2.14.0`
 
-# Installation
+## Installation
 To consume this Validated Content from Automation Hub, the following needs to be added to ansible.cfg:
 ```
 [galaxy]
@@ -33,7 +33,7 @@ ansible-galaxy collection install network.base
 ansible-galaxy collection install network.backup
 ```
 
-# Use Cases
+## Use Cases
 
 `Full Backup`:
 - This enables the user to fetch running network configuration from the device and save the backup to a local or remote data store
@@ -130,7 +130,7 @@ run.yml
                 email: "{{ email }}"
 ```
 
-# Testing
+## Testing
 
 The project uses tox to run `ansible-lint` and `ansible-test sanity`.
 Assuming this repository is checked out in the proper structure,
@@ -160,20 +160,20 @@ junos
   ansible-test network-integration -i /path/to/inventory --python 3.9 [target]
 ```
 
-# Contributing
+## Contributing
 
 We welcome community contributions to this collection. If you find problems, please open an issue or create a PR against this repository.
 
-## Code of Conduct
+### Code of Conduct
 This collection follows the Ansible project's
 [Code of Conduct](https://docs.ansible.com/ansible/devel/community/code_of_conduct.html).
 Please read and familiarize yourself with this document.
 
-# Release notes
+## Release notes
 
 Release notes are available [here](https://github.com/redhat-cop/network.backup/blob/main/CHANGELOG.rst).
 
-# Related information
+## Related information
 
 - [Developing network resource modules](https://docs.ansible.com/ansible/latest/network/dev_guide/developing_resource_modules_network.html#developing-resource-modules)
 - [Ansible network resources](https://docs.ansible.com/ansible/latest/network/getting_started/network_resources.html)
