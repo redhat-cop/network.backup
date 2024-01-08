@@ -164,6 +164,16 @@ junos
 
 We welcome community contributions to this collection. If you find problems, please open an issue or create a PR against this repository.
 
+Don't know how to start? Refer to the [Ansible community guide](https://docs.ansible.com/ansible/devel/community/index.html)!
+
+Want to submit code changes? Take a look at the [Quick-start development guide](https://docs.ansible.com/ansible/devel/community/create_pr_quick_start.html).
+
+We also use the following guidelines:
+
+* [Collection review checklist](https://docs.ansible.com/ansible/devel/community/collection_contributors/collection_reviewing.html)
+* [Ansible development guide](https://docs.ansible.com/ansible/devel/dev_guide/index.html)
+* [Ansible collection development guide](https://docs.ansible.com/ansible/devel/dev_guide/developing_collections.html#contributing-to-collections)
+
 ### Code of Conduct
 This collection follows the Ansible project's
 [Code of Conduct](https://docs.ansible.com/ansible/devel/community/code_of_conduct.html).
