@@ -1,13 +1,13 @@
 
 # Ansible Network Backup
 [![CI](https://github.com/ansible-network/network.backup/actions/workflows/tests.yml/badge.svg?event=schedule)](https://github.com/ansible-network/network.backup/actions/workflows/tests.yml)
-[![OpenSSF Best Practices](https://bestpractices.coreinfrastructure.org/projects/7404/badge)](https://bestpractices.coreinfrastructure.org/projects/7404)
+[![OpenSSF Best Practices](https://bestpractices.coreinfrastructure.org/projects/7404/badge)](https://bestpractices.coreinfrastructure.org/projects/8253)
 
 
 # About 
-- Ansible Network Backup Collection contains the  the role which provides a platform-agnostic way of managing network backup on supported network platforms.This collection provides the user the capabilities to create, compare and tag backups supporting local and  remote data stores.
+- Ansible Network Backup Collection contains the role which provides a platform-agnostic way of managing network backup on supported network platforms. This collection provides the user the capabilities to create, compare and tag backups supporting local and remote data stores.
 
-- Network Backup collection  can be used by anyone who are looking for managing and maintaining network infrastructure, automate the backup process, ensuring data is regularly and securely backed up. This includes system administrators and IT professionals.
+- Network Backup collection can be used by anyone who are looking to manage and maintain network infrastructure, automate the backup process, and ensure data is regularly and securely backed up. This includes system administrators and IT professionals.
 
 # Requirements
 - Requires `ansible >= 2.14.0`
@@ -36,7 +36,7 @@ ansible-galaxy collection install network.backup
 # Use Cases
 
 `Full Backup`:
-- This enables the user to fetch running configuration from the device and save the backup to local or remote data-store
+- This enables the user to fetch running configuration from the device and save the backup to a local or remote data store
 - Users can also push backup files onto GitHub with tags.
  
 `Differential backup`:
