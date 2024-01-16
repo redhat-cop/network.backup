@@ -1,5 +1,4 @@
 ---
-
 - name: Set supported platform list
   ansible.builtin.set_fact:
     supported_platforms:
@@ -12,4 +11,4 @@
 
 - name: Conditional test
   ansible.builtin.include_tasks: "includes/unsupported_platform.yaml"
-  when: 'ansible_network_os in supported_platforms'
+  when: ansible_network_os.split('.')[-1] not in supported_platforms
