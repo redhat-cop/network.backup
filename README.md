@@ -13,6 +13,12 @@
 - [Requires Ansible](https://github.com/redhat-cop/network.backup/blob/main/meta/runtime.yml)
 - [Requires Content Collections](https://github.com/redhat-cop/network.backup/blob/main/galaxy.yml#L5https://forum.ansible.com/c/news/5/none)
 - [Testing Requirements](https://github.com/redhat-cop/network.backup/blob/main/test-requirements.txt)
+- Users also need to include platform collections as per their requirements. The supported platform collections are:
+  - [arista.eos](https://github.com/ansible-collections/arista.eos)
+  - [cisco.ios](https://github.com/ansible-collections/cisco.ios)
+  - [cisco.iosxr](https://github.com/ansible-collections/cisco.iosxr)
+  - [cisco.nxos](https://github.com/ansible-collections/cisco.nxos)
+  - [junipernetworks.junos](https://github.com/ansible-collections/junipernetworks.junos)
 
 ## Installation
 To consume this Validated Content from Automation Hub, the following needs to be added to ansible.cfg:
@@ -187,8 +193,8 @@ Release notes are available [here](https://github.com/redhat-cop/network.backup/
 
 ## Related information
 
-- [Developing network resource modules](https://docs.ansible.com/ansible/latest/network/dev_guide/developing_resource_modules_network.html#developing-resource-modules)
-- [Ansible network resources](https://docs.ansible.com/ansible/latest/network/getting_started/network_resources.html)
+- [Developing network resource modules](https://github.com/ansible-network/networking-docs/blob/main/rm_dev_guide.md)
+- [Ansible Networking docs](https://github.com/ansible-network/networking-docs)
 - [Ansible Collection Overview](https://github.com/ansible-collections/overview)
 - [Ansible Roles overview](https://docs.ansible.com/ansible/2.9/user_guide/playbooks_reuse_roles.html)
 - [Ansible User guide](https://docs.ansible.com/ansible/latest/user_guide/index.html)
