@@ -10,7 +10,9 @@
 - Network Backup collection can be used by anyone who are looking to manage and maintain network infrastructure, automate the backup process, and ensure data is regularly and securely backed up. This includes system administrators and IT professionals.
 
 ## Requirements
-- Requires `ansible >= 2.14.0`
+- [Requires Ansible](https://github.com/redhat-cop/network.backup/blob/main/meta/runtime.yml)
+- [Requires Content Collections](https://github.com/redhat-cop/network.backup/blob/main/galaxy.yml#L5https://forum.ansible.com/c/news/5/none)
+- [Testing Requirements](https://github.com/redhat-cop/network.backup/blob/main/test-requirements.txt)
 
 ## Installation
 To consume this Validated Content from Automation Hub, the following needs to be added to ansible.cfg:
