@@ -4,13 +4,31 @@ releases:
     release_date: '2023-10-31'
   2.0.0:
     changes:
-      release_summary:
-        Starting from this release, the minimum `ansible-core` version
-        this collection requires is `2.14.0`. The last known version compatible with
-        ansible-core<2.14 is `v1.0.0`.
       major_changes:
       - Update workflow and prepare release 2.0.0
+      release_summary: Starting from this release, the minimum `ansible-core` version
+        this collection requires is `2.14.0`. The last known version compatible with
+        ansible-core<2.14 is `v1.0.0`.
     fragments:
     - major_rel.yaml
     - trivial_changes.yaml
     release_date: '2024-01-02'
+  3.0.0:
+    changes:
+      bugfixes:
+      - Fix the task to allow supported os name without fqcn.
+      doc_changes:
+      - Revised the instructions on when to utilize the token.
+      - Update README
+      - Updated the URL to point to validated content instead of certified content.
+      major_changes:
+      - Bumping `requires_ansible` to `>=2.15.0`, since previous ansible-core versions
+        are EoL now.
+      release_summary: 'With this release, the minimum required version of `ansible-core`
+        for this collection is `2.15.0`. The last version known to be compatible with
+        `ansible-core` versions below `2.15` is v2.0.0.'
+    fragments:
+    - bump_to_215.yaml
+    - readme_changes.yaml
+    - without_fqcn_os_fix.yaml
+    release_date: '2024-06-12'

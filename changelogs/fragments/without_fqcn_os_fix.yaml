@@ -1,3 +1,0 @@
----
-bugfixes:
-  - Fix the task to allow supported os name without fqcn.
