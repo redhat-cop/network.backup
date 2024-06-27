@@ -34,6 +34,7 @@
   ansible.builtin.command: "diff {{ dir1 }}/{{ item }} {{ dir2 }}/{{ item }}"
   loop: "{{ files_common }}"
   ignore_errors: true
+  changed_when: true
   register: out_diff
 
 - name: Print

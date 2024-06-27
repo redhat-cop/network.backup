@@ -31,7 +31,7 @@
 
 - name: Delete backup from appliance
   ansible.builtin.include_tasks: "{{ delete_path }}/{{ network_os }}.yaml"
-  when: delete_backup_from_dest == true
+  when: delete_backup_from_dest
 
 - name: Remove locally cloned repo
   ansible.builtin.file:
