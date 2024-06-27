@@ -22,7 +22,7 @@
         data_store: "{{ test_data_store }}"
 
     - name: Assert file generations
-      ansible.builtin.include_tasks: includes/assertions.yaml
+      ansible.builtin.include_tasks: assertions.yaml
 
     - name: Run network.backup validated content with persist operation
       ansible.builtin.include_role:

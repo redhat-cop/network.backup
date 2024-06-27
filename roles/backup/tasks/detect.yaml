@@ -1,10 +1,10 @@
 ---
 - name: Build Local Backup Dir Path
-  ansible.builtin.include_tasks: includes/path.yaml
+  ansible.builtin.include_tasks: path.yaml
   when: data_store.scm.origin is not defined
 
 - name: Set path and vars for  remote operations
-  ansible.builtin.include_tasks: includes/remote_operations.yaml
+  ansible.builtin.include_tasks: remote_operations.yaml
   when: data_store['scm']['origin'] is defined
 
 - name: Include retrieve tasks
@@ -13,7 +13,7 @@
   when: data_store['scm']['origin'] is not defined
 
 - name: Manage files and path settings
-  ansible.builtin.include_tasks: includes/files.yaml
+  ansible.builtin.include_tasks: files.yaml
 
 - name: Read static config
   ansible.builtin.set_fact:
@@ -21,7 +21,7 @@
   when: data_store.scm.origin is not defined
 
 - name: Include tasks
-  ansible.builtin.include_tasks: includes/network.yaml
+  ansible.builtin.include_tasks: network.yaml
 
 - name: Set network backup path for gathered config
   ansible.builtin.set_fact:
@@ -38,4 +38,4 @@
   register: result
 
 - name: Include cleanup tasks
-  ansible.builtin.include_tasks: includes/cleanup.yaml
+  ansible.builtin.include_tasks: cleanup.yaml

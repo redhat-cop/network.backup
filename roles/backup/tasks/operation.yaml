@@ -1,3 +1,3 @@
 ---
 - name: Include tasks
-  ansible.builtin.include_tasks: includes/{{ operation }}.yaml
+  ansible.builtin.include_tasks: {{ operation }}.yaml

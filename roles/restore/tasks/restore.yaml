@@ -10,8 +10,8 @@
   when: data_store['local'] is defined
 
 - name: Retrieve a repository from a distant location and make it available locally
-  ansible.builtin.include_tasks: includes/retrieve.yaml
+  ansible.builtin.include_tasks: retrieve.yaml
   when: data_store.scm is defined
 
 - name: Include tasks
-  ansible.builtin.include_tasks: includes/network.yaml
+  ansible.builtin.include_tasks: network.yaml

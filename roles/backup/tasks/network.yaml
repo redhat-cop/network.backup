@@ -1,3 +1,3 @@
 ---
 - name: Invoke backup task
-  ansible.builtin.include_tasks: includes/cli_backup.yaml
+  ansible.builtin.include_tasks: cli_backup.yaml

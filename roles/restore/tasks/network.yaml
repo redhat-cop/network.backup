@@ -11,9 +11,9 @@
     network_os: "{{ ansible_network_os.split('.')[2] }}"
 
 - name: Invoke restore
-  ansible.builtin.include_tasks: "includes/cli_restore.yaml"
+  ansible.builtin.include_tasks: "cli_restore.yaml"
   when: network_os not in supported_cli_restore
 
 - name: Invoke cli specific backup task
-  ansible.builtin.include_tasks: "includes/cli_restore_config.yaml"
+  ansible.builtin.include_tasks: "cli_restore_config.yaml"
   when: network_os not in supported_plugin_restore

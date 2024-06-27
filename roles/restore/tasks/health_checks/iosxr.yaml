@@ -13,4 +13,4 @@
     set_fact: appliance_dir_data
 
 - name: Include task to compare file size with free space
-  ansible.builtin.include_tasks: "includes/common/healthcheck_common.yaml"
+  ansible.builtin.include_tasks: "common/healthcheck_common.yaml"

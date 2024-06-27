@@ -1,6 +1,6 @@
 ---
 - name: Include retrieve tasks
-  ansible.builtin.include_tasks: includes/retrieve.yaml
+  ansible.builtin.include_tasks: retrieve.yaml
   when: data_store['scm']['origin'] is defined
   run_once: true
 
