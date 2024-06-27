@@ -1,0 +1,16 @@
+---
+- name: Set EOS directory - content specific facts
+  ansible.builtin.set_fact:
+    dest_dir: "/mnt/flash/"
+    appliance_dir: "flash:/"
+
+- name: Parse free space information
+  ansible.utils.cli_parse:
+    command: "show file systems | free"
+    parser:
+      name: ansible.netcommon.content_templates
+      template_path: "{{ tmplt_path }}/{{ network_os }}.yaml"
+    set_fact: appliance_dir_data
+
+- name: Include task to compare file size with free space
+  ansible.builtin.include_tasks: "includes/common/healthcheck_common.yaml"

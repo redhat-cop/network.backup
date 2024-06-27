@@ -1,0 +1,17 @@
+---
+- name: Check restore file size
+  ansible.builtin.stat:
+    path: "{{ network_restore_backup_path }}"
+  register: restore_file_data
+
+- name: Inspect appliance size
+  ansible.builtin.debug:
+    var: appliance_dir_data
+
+- name: Inspect restore file size
+  ansible.builtin.debug:
+    var: restore_file_data
+
+- name: Assert file sizes
+  assert:
+    that: restore_file_data.stat.size < appliance_dir_data.free_bytes

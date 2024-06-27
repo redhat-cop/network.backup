@@ -1,0 +1,4 @@
+---
+- name: Invalid operation provided
+  ansible.builtin.fail:
+    msg: "Invalid operation: {{ operation }}"

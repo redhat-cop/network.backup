@@ -1,0 +1,44 @@
+---
+- name: Delete eos hostname config
+  register: result
+  arista.eos.eos_hostname:
+    config:
+    state: deleted
+
+- name: Add hostname config
+  register: result
+  arista.eos.eos_hostname:
+    config:
+      hostname: "DemoTest"
+    state: merged
+
+- name: Include backup task
+  ansible.builtin.include_tasks: create_backup.yaml
+
+- name: Modify hostname in backup file
+  ansible.builtin.replace:
+    path: "~/{{ inventory_hostname }}.txt"
+    regexp: DemoTest
+    replace: DemoTest restored
+
+- name: The network restore task
+  ansible.builtin.include_role:
+    name: network.restore.run
+  vars:
+    operation: restore
+    data_store:
+      local: "~/{{ inventory_hostname }}.txt"
+
+- name: Get hostname configuration
+  register: result
+  arista.eos.eos_hostname:
+    state: gathered
+
+- name: Assert that interface config change is reflected on device
+  ansible.builtin.assert:
+    that:
+      - result.gathered['hostname'] == "DemoTest restored"
+
+- name: Delete hostname config
+  arista.eos.eos_hostname:
+    state: deleted

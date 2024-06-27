@@ -1,0 +1,5 @@
+---
+- name: Delete the backup file post backup
+  cisco.iosxr.iosxr_command:
+    commands:
+      - command: "delete {{ dest_dir }}{{ file_name }}.txt"

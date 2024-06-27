@@ -1,0 +1,5 @@
+---
+- name: Restore operation for {{ network_os }}
+  junipernetworks.junos.junos_config:
+    update: replace
+    src: "{{ network_restore_backup_path }}"
