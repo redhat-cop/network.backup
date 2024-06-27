@@ -1,7 +1,7 @@
 ---
 - name: Set Timestamp
-  set_fact:
-    time: "{{lookup('pipe','date \"+%Y-%m-%d-%H-%M\"')}}"
+  ansible.builtin.set_fact:
+    time: "{{ lookup('pipe','date \"+%Y-%m-%d-%H-%M\"') }}"
   run_once: true
 
 - name: Create default tag

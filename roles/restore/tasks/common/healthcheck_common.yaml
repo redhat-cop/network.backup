@@ -13,5 +13,5 @@
     var: restore_file_data
 
 - name: Assert file sizes
-  assert:
+  ansible.builtin.assert:
     that: restore_file_data.stat.size < appliance_dir_data.free_bytes

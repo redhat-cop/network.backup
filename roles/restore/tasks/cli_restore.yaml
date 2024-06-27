@@ -34,7 +34,7 @@
   when: delete_backup_from_dest == true
 
 - name: Remove locally cloned repo
-  file:
+  ansible.builtin.file:
     path: "{{ network_restore_backup_repo }}"
     state: absent
   when: data_store.scm.origin.path is defined

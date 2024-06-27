@@ -1,3 +1,4 @@
 ---
-- fail:
+- name: unsupported_task | Fail
+  ansible.builtin.fail:
     msg: "{{ perform_task }} is not yet supported"

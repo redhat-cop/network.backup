@@ -1,17 +1,17 @@
 ---
 - name: Set file path
   ansible.builtin.set_fact:
-    file_path: "{{src_network_backup_path}}/{{ inventory_hostname }}.txt"
+    file_path: "{{ src_network_backup_path }}/{{ inventory_hostname }}.txt"
     want: ''
 
 - name: Check if file exists
-  stat:
+  ansible.builtin.stat:
     path: file_path
   register: file_status
 
 - name: Read static config
   ansible.builtin.set_fact:
-    want: "{{lookup('ansible.builtin.file', file_path) }}"
+    want: "{{ lookup('ansible.builtin.file', file_path) }}"
   when: file_status.stat.exists
 
 - name: Create temporary backup directory

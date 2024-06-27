@@ -17,7 +17,7 @@
 
 - name: Read static config
   ansible.builtin.set_fact:
-    want: "{{lookup('ansible.builtin.file', src_network_backup_path) }}"
+    want: "{{ lookup('ansible.builtin.file', src_network_backup_path) }}"
   when: data_store.scm.origin is not defined
 
 - name: Include tasks
@@ -25,11 +25,11 @@
 
 - name: Set network backup path for gathered config
   ansible.builtin.set_fact:
-    gathered_config_path: "{{network_backup_path}}/{{inventory_hostname}}.txt"
+    gathered_config_path: "{{ network_backup_path }}/{{ inventory_hostname }}.txt"
 
 - name: Read fetched config
   ansible.builtin.set_fact:
-    have: "{{lookup('ansible.builtin.file', gathered_config_path) }}"
+    have: "{{ lookup('ansible.builtin.file', gathered_config_path) }}"
 
 - name: Show the difference in configuration
   ansible.utils.fact_diff:
