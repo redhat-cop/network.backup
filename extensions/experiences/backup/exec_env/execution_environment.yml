@@ -1,0 +1,11 @@
+---
+version: 3
+images:
+  base_image:
+    name: ghcr.io/rohitthakur2590/experience_automation_ee:latest
+
+dependencies:
+  galaxy:
+    collections:
+      - name: cisco.ios
+      - name: git+https://github.com/rohitthakur2590/network.backup
