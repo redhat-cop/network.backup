@@ -1,0 +1,4 @@
+---
+# Not sure this file is actually needed
+- name: Include tasks
+  ansible.builtin.include_tasks: "{{ operation }}.yaml"

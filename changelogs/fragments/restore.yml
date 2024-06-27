@@ -1,0 +1,6 @@
+---
+breaking_changes:
+  - Renamed collection and renamed role from run to backup.
+
+major_changes:
+  - Added restore role

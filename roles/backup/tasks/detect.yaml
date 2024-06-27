@@ -1,0 +1,41 @@
+---
+- name: Build Local Backup Dir Path
+  ansible.builtin.include_tasks: path.yaml
+  when: data_store.scm.origin is not defined
+
+- name: Set path and vars for  remote operations
+  ansible.builtin.include_tasks: remote_operations.yaml
+  when: data_store['scm']['origin'] is defined
+
+- name: Include retrieve tasks
+  ansible.builtin.set_fact:
+    src_network_backup_path: "{{ network_backup_path }}/{{ inventory_hostname }}.txt"
+  when: data_store['scm']['origin'] is not defined
+
+- name: Manage files and path settings
+  ansible.builtin.include_tasks: files.yaml
+
+- name: Read static config
+  ansible.builtin.set_fact:
+    want: "{{ lookup('ansible.builtin.file', src_network_backup_path) }}"
+  when: data_store.scm.origin is not defined
+
+- name: Include tasks
+  ansible.builtin.include_tasks: network.yaml
+
+- name: Set network backup path for gathered config
+  ansible.builtin.set_fact:
+    gathered_config_path: "{{ network_backup_path }}/{{ inventory_hostname }}.txt"
+
+- name: Read fetched config
+  ansible.builtin.set_fact:
+    have: "{{ lookup('ansible.builtin.file', gathered_config_path) }}"
+
+- name: Show the difference in configuration
+  ansible.utils.fact_diff:
+    before: "{{ want }}"
+    after: "{{ have }}"
+  register: result
+
+- name: Include cleanup tasks
+  ansible.builtin.include_tasks: cleanup.yaml
