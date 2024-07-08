@@ -1,0 +1,44 @@
+---
+# Labels
+#
+controller_labels:
+  - name: operations
+    organization: Default
+
+# Projects
+#
+controller_projects:
+  - name: Network Backup Automation Experience Project
+    organization: Default
+    scm_branch: main
+    scm_clean: 'no'
+    scm_delete_on_update: 'no'
+    scm_type: git
+    scm_update_on_launch: 'no'
+    scm_credential: "rothakurgithubPAT"
+    scm_url: https://github.com/rohitthakur2590/network.backup
+
+
+# Job Templates
+#
+controller_templates:
+  - name: Operations / Create Full Network Backup Job
+    inventory: Network Validated Inventory
+    project: Network Backup Automation Experience Project
+    playbook: extensions/experiences/backup/playbooks/full_backup_remote.yaml
+    job_type: "run"
+    organization: "Default"
+    labels: operations
+    credentials: cml-instance
+    survey_enabled: true
+    survey_spec: "{{ lookup('template', '{{ playbook_dir }}/templates/backup.j2') }}"
+    execution_environment: ee_network.backup_backup
+  - name:  Operations / Create Differential Network Backup Job
+    inventory: Network Validated Inventory
+    project: Network Backup Automation Experience Project
+    playbook: extensions/experiences/backup/playbooks/diff_backup_remote.yaml
+    job_type: "run"
+    organization: "Default"
+    labels: operations
+    credentials: cml-instance
+    execution_environment: ee_network.backup_backup
