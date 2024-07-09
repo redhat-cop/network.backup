@@ -5,13 +5,23 @@
 
 
 ## About
-- Ansible Network Backup Collection contains the role which provides a platform-agnostic way of managing network backup on supported network platforms. This collection provides the user the capabilities to create, compare and tag backups supporting local and remote data stores.
+- Ansible Network Backup Collection contains the role `backup` which provides a platform-agnostic way of managing network backup on supported network platforms. This collection provides the user the capabilities to create, compare and tag backups supporting local and remote data stores.
 
-- Network Backup collection can be used by anyone who are looking to manage and maintain network infrastructure, automate the backup process, and ensure data is regularly and securely backed up. This includes system administrators and IT professionals.
+- This collection contains another role `restore` that provides a platform-agnostic way of managing network restores on supported network platforms. This collection provides the user the capabilities to fetch backups from remote or local data stores and perform restore config.
 
-- Ansible Network Restore Collection contains a role that provides a platform-agnostic way of managing network restores on supported network platforms. This collection provides the user the capabilities to fetch backups from remote or local data stores and perform restore config.
+- Network Backup collection can be used by anyone who are looking to manage and maintain network infrastructure, automate the backup and restore process, and ensure data is regularly and securely backed up and available to restore when required. This includes system administrators and IT professionals.
 
-- Network Restore collection can be used by anyone who is looking to manage and maintain network infrastructure, automate the restore process, and ensure data is regularly and securely backed up. This includes system administrators and IT professionals.
+## Included content
+
+Click on the name of a role, playbook, or rulebook to view that content's documentation:
+
+<!--start collection content-->
+### Roles
+Name | Description
+--- | ---
+[network.backup.backup](roles/backup/README.md)|A platform agnostic role to manage network backup operations.
+[network.backup.restore](roles/restore/README.md)|A platform agnostic role to manage network restore operations.
+<!--end collection content-->
 
 ## Requirements
 - [Requires Ansible](https://github.com/redhat-cop/network.backup/blob/main/meta/runtime.yml)
@@ -49,14 +59,17 @@ ansible-galaxy collection install network.backup
 
 ## Use Cases
 
-`Full Backup`:
-- This enables the user to fetch running network configuration from the device and save the backup to a local or remote data store
-- Users can also push backup files onto GitHub with tags.
- 
-`Differential backup`:
-- This enables users to backup network configuration only when there has been some change since the last time we did a backup.
-- Users can use this operation to get differential backup and save the backed-up files to either the local data store or to the GitHub repository
-- Users can also push backup files onto GitHub with tags.
+**Full Backup**:
+- Allows users to retrieve the running network configuration from the device and save it to a local or remote data store.
+- Users can also upload backup files to GitHub, with the option to add tags for better organization.
+
+**Differential Backup**:
+- Enables users to back up the network configuration only if there have been changes since the last backup.
+- Users can perform a differential backup and save the updated files either to a local data store or a GitHub repository, with the option to add tags for better organization.
+
+**Restore Configuration**:
+- Allows users to restore a previously backed-up configuration.
+- Users can compare the running configuration with the backup to identify differences and restore the configuration only if differences are found.
 
 
 ### Full Network Backup
@@ -70,7 +83,7 @@ run.yml
   tasks:
     - name: Network Backup and Resource Manager
       ansible.builtin.include_role:
-        name: network.backup.run
+        name: network.backup.backup
       vars:
         operation: backup
         type: full
@@ -87,7 +100,7 @@ run.yml
   tasks:
     - name: Network Backup and Resource Manager
       ansible.builtin.include_role:
-        name: network.backup.run
+        name: network.backup.backup
       vars:
         operation: backup
         type: full
@@ -112,7 +125,7 @@ run.yml
   tasks:
     - name: Network Backup and Resource Manager
       ansible.builtin.include_role:
-        name: network.backup.run
+        name: network.backup.backup
       vars:
         operation: backup
         type: diff
@@ -129,7 +142,7 @@ run.yml
   tasks:
     - name: Network Backup and Resource Manager
       ansible.builtin.include_role:
-        name: network.backup.run
+        name: network.backup.backup
       vars:
         operation: backup
         type: diff
@@ -142,6 +155,49 @@ run.yml
               user:
                 name: "{{ username }}"
                 email: "{{ email }}"
+```
+
+#### Fetch backup and restore a network appliance's configuration.
+```yaml
+run.yml
+---
+- name: Restore config
+  hosts: ios
+  gather_facts: true
+
+  tasks:
+    - name: Restore from locally backed up config
+      ansible.builtin.include_role:
+        name: network.backup.restore
+      vars:
+        operation: restore
+        data_store:
+          local: "{{ network_backup_path }}"
+```
+
+#### Fetch backup from remote repo and restore to a network appliance's configuration.
+```yaml
+run.yml
+---
+- name: Restore config
+  hosts: ios
+  gather_facts: true
+
+  tasks:
+    - name: Restore config fetched from remote data store
+      ansible.builtin.include_role:
+        name: network.backup.restore
+      vars:
+        operation: restore
+        data_store:
+          scm:
+            origin:
+              url: "{{ github_repo }}"
+              user:
+                name: "{{ github_username }}"
+                email: "{{ user_email }}"
+              token: "{{ token }}"
+              path: "{{ path_to_backup_file }}"
 ```
 
 ## Testing

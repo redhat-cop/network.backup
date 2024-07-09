@@ -1,0 +1,8 @@
+---
+major_changes:
+  - Consolidated the `network.backup` and `network.restore` collections into a single `network.backup` collection.
+  - Renamed the roles:
+      - `run` to `backup` for `backup` role
+      - `run` ro restore for `restore` role
+  - Updated the documentation to reflect these changes.
+  
