@@ -6,10 +6,10 @@
 - name: Set content specific facts
   ansible.builtin.set_fact:
     file_name: "{{ timestamp }}_{{ ansible_network_os.split('.')[2] }}_{{ inventory_hostname }}"
-    tmplt_path: "{{ role_path }}/health_checks/templates"
-    prepare_path: "{{ role_path }}/prepare"
-    delete_path: "{{ role_path }}/delete"
-    health_check_path: "{{ role_path }}/health_checks"
+    tmplt_path: "{{ role_path }}/tasks/health_checks/templates"
+    prepare_path: "{{ role_path }}/tasks/prepare"
+    delete_path: "{{ role_path }}/tasks/delete"
+    health_check_path: "{{ role_path }}/tasks/health_checks"
     delete_backup_from_dest: true
 
 - name: Check if file copy is possible

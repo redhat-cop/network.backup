@@ -1,7 +1,7 @@
 ---
 - name: Network Backup and Resource Manager
   ansible.builtin.include_role:
-    name: network.backup.run
+    name: network.backup.backup
   vars:
     operation: backup
     data_store:

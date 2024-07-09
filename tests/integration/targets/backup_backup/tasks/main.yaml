@@ -15,7 +15,7 @@
 
     - name: Run network.backup validated content with persist operation
       ansible.builtin.include_role:
-        name: network.backup.run
+        name: network.backup.backup
       vars:
         operations:
           - name: backup
@@ -26,7 +26,7 @@
 
     - name: Run network.backup validated content with persist operation
       ansible.builtin.include_role:
-        name: network.backup.run
+        name: network.backup.backup
       vars:
         operations:
           - name: backup

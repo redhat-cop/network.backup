@@ -27,7 +27,7 @@
 
 - name: The network restore task
   ansible.builtin.include_role:
-    name: network.restore.run
+    name: network.backup.restore
   vars:
     operation: restore
     data_store:

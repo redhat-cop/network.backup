@@ -2,5 +2,6 @@
 - name: Configurable backup path
   ansible.netcommon.cli_backup:
     dir_path: "{{ network_backup_path }}"
-    filename: "{{ inventory_hostname }}.txt"
+    filename:  "{{ data_store.backup_file_name | default(inventory_hostname) }}.txt"
+
   register: network_backup
