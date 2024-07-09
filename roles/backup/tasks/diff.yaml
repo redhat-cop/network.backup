@@ -19,12 +19,12 @@
 
 - name: Set Facts
   ansible.builtin.set_fact:
-    dir1_files: "{{ out_dir1.files|map(attribute='path') }}"
-    dir2_files: "{{ out_dir2.files|map(attribute='path') }}"
+    dir1_files: "{{ out_dir1.files | map(attribute='path') }}"
+    dir2_files: "{{ out_dir2.files | map(attribute='path') }}"
 
 - name: Set Facts files_common
   ansible.builtin.set_fact:
-    files_common: "{{ dir1_files|map('basename')| intersect(dir2_files|map('basename')) }}"
+    files_common: "{{ dir1_files | map('basename') | intersect(dir2_files | map('basename')) }}"
 
 - name: Print Common Files
   ansible.builtin.debug:
@@ -41,5 +41,5 @@
   ansible.builtin.debug:
     msg: |
       {% for i in out_diff.results %}
-      {{ i.cmd|join(' ') }}: |
-        {{ i.stdout|indent(2) }}
+        {{ i.cmd | join(' ') }}: |
+          {{ i.stdout | indent(2) }}
