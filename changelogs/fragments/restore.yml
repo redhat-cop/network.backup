@@ -1,6 +1,6 @@
 ---
-breaking_changes:
-  - Renamed collection and renamed role from run to backup.
-
 major_changes:
-  - Added restore role
+  - Consolidated the `network.backup` and `network.restore` collections into a single `network.backup` collection.
+  - Renamed t`run` to `backup` for `backup` role
+  - Renamed `run` ro restore for `restore` role
+  - Updated the documentation to reflect these changes.
