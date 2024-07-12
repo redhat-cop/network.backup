@@ -1,0 +1,5 @@
+---
+- name: Delete the backup file post backup
+  cisco.nxos.nxos_command:
+    commands:
+      - command: "delete {{ appliance_dir }}{{ file_name }}.txt no-prompt"

@@ -1,0 +1,10 @@
+# fmt: off
+[
+  {
+    "name": "free_space",
+    "getval": '''(?P<total_bytes>\d+)\sbytes\stotal\s\((?P<free_bytes>\d+)\sbytes\sfree\)''',
+    "result":
+      { "total_bytes": "{{ total_bytes }}", "free_bytes": "{{ free_bytes }}" },
+  },
+]
+# fmt: on

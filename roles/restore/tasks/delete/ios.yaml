@@ -1,0 +1,10 @@
+---
+- name: Make file promt quite
+  cisco.ios.ios_config:
+    lines:
+      - "file prompt quiet"
+
+- name: Delete the backup file post backup
+  cisco.ios.ios_command:
+    commands:
+      - command: "delete /force {{ dest_dir }}{{ file_name }}.txt"

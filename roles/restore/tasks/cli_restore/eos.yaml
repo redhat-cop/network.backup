@@ -1,0 +1,9 @@
+---
+- name: Read backed-up configuration file
+  ansible.builtin.slurp:
+    src: "{{ network_restore_backup_path }}"
+  register: backedup_config
+
+- name: Apply backed-up configuration
+  arista.eos.eos_config:
+    lines: "{{ backedup_config.content | b64decode }}"

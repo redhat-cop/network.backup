@@ -1,0 +1,40 @@
+---
+- name: Get current timestamp
+  ansible.builtin.set_fact:
+    timestamp: "{{ lookup('pipe', 'date +%Y%m%d%H%M%S') }}"
+
+- name: Set content specific facts
+  ansible.builtin.set_fact:
+    file_name: "{{ timestamp }}_{{ ansible_network_os.split('.')[2] }}_{{ inventory_hostname }}"
+    tmplt_path: "{{ role_path }}/tasks/health_checks/templates"
+    prepare_path: "{{ role_path }}/tasks/prepare"
+    delete_path: "{{ role_path }}/tasks/delete"
+    health_check_path: "{{ role_path }}/tasks/health_checks"
+    delete_backup_from_dest: true
+
+- name: Check if file copy is possible
+  ansible.builtin.include_tasks: "{{ health_check_path }}/{{ network_os }}.yaml"
+
+- name: Copy file from src to a network device
+  ansible.netcommon.net_put:
+    src: "{{ network_restore_backup_path }}"
+    protocol: scp
+    dest: "{{ dest_dir }}{{ file_name }}.txt"
+
+- name: Prepare appliance for a restore operation
+  ansible.builtin.include_tasks: "{{ prepare_path }}/{{ network_os }}.yaml"
+
+- name: Restore operation for {{ network_os }}
+  ansible.netcommon.cli_restore:
+    filename: "{{ file_name }}.txt"
+    path: "{{ appliance_dir }}"
+
+- name: Delete backup from appliance
+  ansible.builtin.include_tasks: "{{ delete_path }}/{{ network_os }}.yaml"
+  when: delete_backup_from_dest
+
+- name: Remove locally cloned repo
+  ansible.builtin.file:
+    path: "{{ network_restore_backup_repo }}"
+    state: absent
+  when: data_store.scm.origin.path is defined

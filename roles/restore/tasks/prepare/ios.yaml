@@ -1,0 +1,10 @@
+---
+- name: Prepare appliance for restore
+  ansible.builtin.debug:
+    msg:
+      - "Task to prepare appliance for restore operation"
+
+- name: Overwrite startup config - archive
+  cisco.ios.ios_config:
+    lines:
+      - "archive"

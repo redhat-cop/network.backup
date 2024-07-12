@@ -1,0 +1,5 @@
+---
+- name: Prepare appliance for restore
+  ansible.builtin.debug:
+    msg:
+      - "Task to prepare appliance for restore operation"

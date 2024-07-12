@@ -1,0 +1,7 @@
+---
+major_changes:
+  - These changes are outcome of the discussion here (https://github.com/ansible/validated-content-discussion/issues/18).
+  - Consolidated the `network.backup` and `network.restore` collections into a single `network.backup` collection.
+  - Renamed `run` to `backup` for `backup` role
+  - Renamed `run` ro restore for `restore` role
+  - Updated the documentation to reflect these changes.

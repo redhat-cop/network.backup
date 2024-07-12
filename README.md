@@ -5,20 +5,37 @@
 
 
 ## About
-- Ansible Network Backup Collection contains the role which provides a platform-agnostic way of managing network backup on supported network platforms. This collection provides the user the capabilities to create, compare and tag backups supporting local and remote data stores.
+- The Ansible Network Backup Validated Content provides a comprehensive solution for managing network backups and restores across supported network platforms. This validated content offers two key functionalities: `backup` and `restore`, each designed to be platform-agnostic and user-friendly.
 
-- Network Backup collection can be used by anyone who are looking to manage and maintain network infrastructure, automate the backup process, and ensure data is regularly and securely backed up. This includes system administrators and IT professionals.
+- The `backup` role allows users to create, compare, and tag backups, supporting both local and remote data stores. This ensures that network configurations are regularly and securely backed up, providing a reliable method to safeguard network infrastructure.
+
+- The `restore` role enables users to fetch backups from local or remote data stores and perform configuration restores. This functionality ensures that network configurations can be swiftly and accurately restored when needed, minimizing downtime and maintaining network stability.
+
+- The Network Backup Content is ideal for system administrators and IT professionals who need to manage and maintain network infrastructure, automate the backup and restore process, and ensure data is regularly and securely backed up and available for restoration as required.
+
+## Included content
+
+Click on the name of a role, playbook, or rulebook to view that content's documentation:
+
+<!--start collection content-->
+### Roles
+Name | Description
+--- | ---
+[network.backup.backup](roles/backup/README.md)|A platform agnostic role to manage network backup operations.
+[network.backup.restore](roles/restore/README.md)|A platform agnostic role to manage network restore operations.
+<!--end collection content-->
 
 ## Requirements
 - [Requires Ansible](https://github.com/redhat-cop/network.backup/blob/main/meta/runtime.yml)
 - [Requires Content Collections](https://github.com/redhat-cop/network.backup/blob/main/galaxy.yml#L5https://forum.ansible.com/c/news/5/none)
 - [Testing Requirements](https://github.com/redhat-cop/network.backup/blob/main/test-requirements.txt)
 - Users also need to include platform collections as per their requirements. The supported platform collections are:
-  - [arista.eos](https://github.com/ansible-collections/arista.eos)
-  - [cisco.ios](https://github.com/ansible-collections/cisco.ios)
-  - [cisco.iosxr](https://github.com/ansible-collections/cisco.iosxr)
-  - [cisco.nxos](https://github.com/ansible-collections/cisco.nxos)
-  - [junipernetworks.junos](https://github.com/ansible-collections/junipernetworks.junos)
+  - [arista.eos](https://github.com/ansible-collections/arista.eos) >= v9.0.0
+  - [cisco.ios](https://github.com/ansible-collections/cisco.ios) >= v8.0.0
+  - [cisco.iosxr](https://github.com/ansible-collections/cisco.iosxr) >= v9.0.0
+  - [cisco.nxos](https://github.com/ansible-collections/cisco.nxos) >= v8.0.0
+  - [junipernetworks.junos](https://github.com/ansible-collections/junipernetworks.junos) >= v8.0.0
+
 
 ## Installation
 To consume this Validated Content from Automation Hub, the following needs to be added to ansible.cfg:
@@ -38,20 +55,22 @@ token from the [Automation Hub Web UI](https://console.redhat.com/ansible/automa
 With this configured, simply run the following commands:
 
 ```
-ansible-galaxy collection install network.base
 ansible-galaxy collection install network.backup
 ```
 
 ## Use Cases
 
-`Full Backup`:
-- This enables the user to fetch running network configuration from the device and save the backup to a local or remote data store
-- Users can also push backup files onto GitHub with tags.
- 
-`Differential backup`:
-- This enables users to backup network configuration only when there has been some change since the last time we did a backup.
-- Users can use this operation to get differential backup and save the backed-up files to either the local data store or to the GitHub repository
-- Users can also push backup files onto GitHub with tags.
+**Full Backup**:
+- Allows users to retrieve the running network configuration from the device and save it to a local or remote data store.
+- Users can also upload backup files to GitHub, with the option to add tags for better organization.
+
+**Differential Backup**:
+- Enables users to back up the network configuration only if there have been changes since the last backup.
+- Users can perform a differential backup and save the updated files either to a local data store or a GitHub repository, with the option to add tags for better organization.
+
+**Restore Configuration**:
+- Allows users to restore a previously backed-up configuration.
+- Users can compare the running configuration with the backup to identify differences and restore the configuration only if differences are found.
 
 
 ### Full Network Backup
@@ -63,9 +82,9 @@ run.yml
 - hosts: rtr1
   gather_facts: true
   tasks:
-    - name: Network Backup and Resource Manager
+    - name: Backup Network Configuration to Local Storage
       ansible.builtin.include_role:
-        name: network.backup.run
+        name: network.backup.backup
       vars:
         operation: backup
         type: full
@@ -80,9 +99,9 @@ run.yml
 - hosts: rtr1
   gather_facts: true
   tasks:
-    - name: Network Backup and Resource Manager
+    - name: Backup Network Configuration to Remote/Cloud Storage
       ansible.builtin.include_role:
-        name: network.backup.run
+        name: network.backup.backup
       vars:
         operation: backup
         type: full
@@ -105,9 +124,9 @@ run.yml
 - hosts: rtr1
   gather_facts: true
   tasks:
-    - name: Network Backup and Resource Manager
+    - name: Backup Network Configuration to Local Storage when Config Diff Found.
       ansible.builtin.include_role:
-        name: network.backup.run
+        name: network.backup.backup
       vars:
         operation: backup
         type: diff
@@ -122,9 +141,9 @@ run.yml
 - hosts: rtr1
   gather_facts: true
   tasks:
-    - name: Network Backup and Resource Manager
+    - name: Backup Network Configuration to Remote/CLoud Storage when Config Diff Found.
       ansible.builtin.include_role:
-        name: network.backup.run
+        name: network.backup.backup
       vars:
         operation: backup
         type: diff
@@ -139,6 +158,49 @@ run.yml
                 email: "{{ email }}"
 ```
 
+#### Fetch backup and restore a network appliance's configuration.
+```yaml
+run.yml
+---
+- name: Restore config
+  hosts: ios
+  gather_facts: true
+
+  tasks:
+    - name: Restore Network Configuration from Local Storage
+      ansible.builtin.include_role:
+        name: network.backup.restore
+      vars:
+        operation: restore
+        data_store:
+          local: "{{ network_backup_path }}"
+```
+
+#### Fetch backup from remote repo and restore to a network appliance's configuration.
+```yaml
+run.yml
+---
+- name: Restore config
+  hosts: ios
+  gather_facts: true
+
+  tasks:
+    - name: Restore Network Configuration from Remote Storage
+      ansible.builtin.include_role:
+        name: network.backup.restore
+      vars:
+        operation: restore
+        data_store:
+          scm:
+            origin:
+              url: "{{ github_repo }}"
+              user:
+                name: "{{ github_username }}"
+                email: "{{ user_email }}"
+              token: "{{ token }}"
+              path: "{{ path_to_backup_file }}"
+```
+
 ## Testing
 
 The project uses tox to run `ansible-lint` and `ansible-test sanity`.
@@ -150,7 +212,7 @@ e.g. `collections_root/ansible_collections/network/backup`, run:
   tox -e py39-sanity
 ```
 
-To run integration tests, ensure that your inventory has a `network_base` group.
+To run integration tests, ensure that your inventory has a `network_backup` group.
 Depending on what test target you are running, comment out the host(s).
 
 ```shell
