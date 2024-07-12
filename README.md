@@ -5,11 +5,13 @@
 
 
 ## About
-- Ansible Network Backup Collection contains the role `backup` which provides a platform-agnostic way of managing network backup on supported network platforms. This collection provides the user the capabilities to create, compare and tag backups supporting local and remote data stores.
+- The Ansible Network Backup Validated Content provides a comprehensive solution for managing network backups and restores across supported network platforms. This validated content offers two key functionalities: `backup` and `restore`, each designed to be platform-agnostic and user-friendly.
 
-- This collection contains another role `restore` that provides a platform-agnostic way of managing network restores on supported network platforms. This collection provides the user the capabilities to fetch backups from remote or local data stores and perform restore config.
+- The `backup` role allows users to create, compare, and tag backups, supporting both local and remote data stores. This ensures that network configurations are regularly and securely backed up, providing a reliable method to safeguard network infrastructure.
 
-- Network Backup collection can be used by anyone who are looking to manage and maintain network infrastructure, automate the backup and restore process, and ensure data is regularly and securely backed up and available to restore when required. This includes system administrators and IT professionals.
+- The `restore` role enables users to fetch backups from local or remote data stores and perform configuration restores. This functionality ensures that network configurations can be swiftly and accurately restored when needed, minimizing downtime and maintaining network stability.
+
+- The Network Backup Content is ideal for system administrators and IT professionals who need to manage and maintain network infrastructure, automate the backup and restore process, and ensure data is regularly and securely backed up and available for restoration as required.
 
 ## Included content
 
@@ -53,7 +55,6 @@ token from the [Automation Hub Web UI](https://console.redhat.com/ansible/automa
 With this configured, simply run the following commands:
 
 ```
-ansible-galaxy collection install network.base
 ansible-galaxy collection install network.backup
 ```
 
@@ -81,7 +82,7 @@ run.yml
 - hosts: rtr1
   gather_facts: true
   tasks:
-    - name: Network Backup and Resource Manager
+    - name: Backup Network Configuration to Local Storage
       ansible.builtin.include_role:
         name: network.backup.backup
       vars:
@@ -98,7 +99,7 @@ run.yml
 - hosts: rtr1
   gather_facts: true
   tasks:
-    - name: Network Backup and Resource Manager
+    - name: Backup Network Configuration to Remote/Cloud Storage
       ansible.builtin.include_role:
         name: network.backup.backup
       vars:
@@ -123,7 +124,7 @@ run.yml
 - hosts: rtr1
   gather_facts: true
   tasks:
-    - name: Network Backup and Resource Manager
+    - name: Backup Network Configuration to Local Storage when Config Diff Found.
       ansible.builtin.include_role:
         name: network.backup.backup
       vars:
@@ -140,7 +141,7 @@ run.yml
 - hosts: rtr1
   gather_facts: true
   tasks:
-    - name: Network Backup and Resource Manager
+    - name: Backup Network Configuration to Remote/CLoud Storage when Config Diff Found.
       ansible.builtin.include_role:
         name: network.backup.backup
       vars:
@@ -166,7 +167,7 @@ run.yml
   gather_facts: true
 
   tasks:
-    - name: Restore from locally backed up config
+    - name: Restore Network Configuration from Local Storage
       ansible.builtin.include_role:
         name: network.backup.restore
       vars:
@@ -184,7 +185,7 @@ run.yml
   gather_facts: true
 
   tasks:
-    - name: Restore config fetched from remote data store
+    - name: Restore Network Configuration from Remote Storage
       ansible.builtin.include_role:
         name: network.backup.restore
       vars:
@@ -211,7 +212,7 @@ e.g. `collections_root/ansible_collections/network/backup`, run:
   tox -e py39-sanity
 ```
 
-To run integration tests, ensure that your inventory has a `network_base` group.
+To run integration tests, ensure that your inventory has a `network_backup` group.
 Depending on what test target you are running, comment out the host(s).
 
 ```shell
@@ -223,108 +224,6 @@ junos
 < enter inventory details for this group >
 
 [junos:vars]
-< enter inventory details for this group >
-```
-
-```shell
-  ansible-test network-integration -i /path/to/inventory --python 3.9 [target]
-```
-
-# Ansible Network Restore
-
-[![CI](https://github.com/redhat-cop/network.restore/actions/workflows/tests.yml/badge.svg?branch=main)](https://github.com/redhat-cop/network.restore/actions/workflows/tests.yml)[![OpenSSF Best Practices](https://bestpractices.coreinfrastructure.org/projects/8823/badge)](https://bestpractices.coreinfrastructure.org/projects/8823)
-
-This repository contains the `network.restore` Ansible Collection.
-
-## Installation
-To consume this Validated Content from Automation Hub, the following needs to be added to ansible.cfg:
-```
-[galaxy]
-server_list = automation_hub
-
-[galaxy_server.automation_hub]
-url=https://console.redhat.com/api/automation-hub/content/published/
-auth_url=https://sso.redhat.com/auth/realms/redhat-external/protocol/openid-connect/token
-token=<SuperSecretToken>
-```
-
-Get the required token from the [Automation Hub Web UI](https://console.redhat.com/ansible/automation-hub/token).
-
-With this configured, simply run the following commands:
-
-```
-ansible-galaxy collection install network.base
-ansible-galaxy collection install network.restore
-```
-
-## Use Cases
-
-#### Fetch backup and restore a network appliance's configuration.
-```yaml
-run.yml
----
-- name: The network.restore play
-  hosts: ios
-  gather_facts: true
-
-  tasks:
-    - name: The network restore task
-      ansible.builtin.include_role:
-        name: network.restore.run
-      vars:
-        operation: restore
-        data_store:
-          local: "{{ network_backup_path }}"
-```
-
-#### Fetch backup from remote repo and restore a network appliance's configuration.
-```yaml
-run.yml
----
-- name: The network.restore play
-  hosts: ios
-  gather_facts: true
-
-  tasks:
-    - name: The network restore task
-      ansible.builtin.include_role:
-        name: network.restore.run
-      vars:
-        operation: restore
-        data_store:
-          scm:
-            origin:
-              url: "{{ github_repo }}"
-              user:
-                name: "{{ github_username }}"
-                email: "{{ user_email }}"
-              token: "{{ token }}"
-              path: "{{ path_to_backup_file }}"
-```
-
-## Testing
-
-The project uses tox to run `ansible-lint` and `ansible-test sanity`.
-Assuming this repository is checked out in the proper structure,
-e.g. `collections_root/ansible_collections/network/restore`, run:
-
-```shell
-  tox -e ansible-lint
-  tox -e py39-sanity
-```
-
-To run integration tests, ensure that your inventory has a `network_restore` group.
-Depending on what test target you are running, comment out the host(s).
-
-```shell
-[network_hosts]
-ios
-nxos
-
-[ios:vars]
-< enter inventory details for this group >
-
-[nxos:vars]
 < enter inventory details for this group >
 ```
 

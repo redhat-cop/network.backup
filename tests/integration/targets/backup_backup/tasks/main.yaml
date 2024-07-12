@@ -1,7 +1,7 @@
 ---
 - name: Debug
   ansible.builtin.debug:
-    msg: "START network.backup persist opeartion integration tests on connection={{ ansible_connection }}"
+    msg: "START network.backup persist operation integration tests on connection={{ ansible_connection }}"
 
 - name: Cleanup, gather and persist
   block:
@@ -22,7 +22,7 @@
         data_store: "{{ test_data_store }}"
 
     - name: Assert file generations
-      ansible.builtin.include_tasks: assertions.yaml
+      ansible.builtin.include_tasks: ./includes/assertions.yaml
 
     - name: Run network.backup validated content with persist operation
       ansible.builtin.include_role:
