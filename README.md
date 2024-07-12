@@ -252,7 +252,7 @@ Please read and familiarize yourself with this document.
 
 ## Release notes
 
-Release notes are available [here](https://github.com/redhat-cop/network.restore/blob/main/CHANGELOG.rst).
+Release notes are available [here](https://github.com/redhat-cop/network.backup/blob/main/CHANGELOG.rst).
 
 ## Related information
 
