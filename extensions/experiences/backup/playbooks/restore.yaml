@@ -1,0 +1,25 @@
+---
+- name: Restore Play
+  hosts: rtr1
+  gather_facts: false
+  collections:
+    - cisco.ios
+    - junipernetworks.junos
+    - cisco.iosxr
+    - cisco.nxos
+  # vars:
+  #   network_backup_path: "/home/rothakur/restore_backup_demo/10.0.148.231.txt"
+  tasks:
+    - name: The network restore task
+      ansible.builtin.include_role:
+        name: network.restore.run
+      vars:
+        operation: restore
+        data_store:
+          scm:
+            origin:
+              # url: "https://github.com/rohitthakur2590/network_validated_content_automation.git"
+              url: "https://github.com/rohitthakur2590/network_automation_backups"
+              token: "{{ VALIDATED_RO_KEY }}"
+              path: "./rtr1.txt"
+              # path: "./backups/remote_ios_backup.txt"

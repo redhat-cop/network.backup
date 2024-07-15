@@ -1,0 +1,10 @@
+---
+minor_changes:
+  - Add extensions/experience/backup directory which contain These directories will contain
+    the necessary playbooks for projects, job templates, surveys, labels, and other relevant resources
+  - The `extensions/experiences/backup/setup.yml` YAML file is pivotal for creating projects
+     and job templates within the backup experience.
+  - The `extensions/experiences/backup/playbooks` houses playbooks crucial for different backup
+    operations, including differential backup, full backup, and pre-validation tasks.
+  - The `Survey Configuration` comprehensive survey configuration is essential for gathering input
+    from users and configuring backup processes according to specific requirements.

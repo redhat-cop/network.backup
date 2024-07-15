@@ -1,0 +1,52 @@
+{
+  "name": "Backup Type Survey",
+  "description": "Choose the type of backup you want to perform",
+  "spec": [
+    {
+      "type": "multiplechoice",
+      "question_name": "Backup Type",
+      "question_description": "Select the type of backup",
+      "variable": "backup_type",
+      "choices": [
+        "full",
+        "differential"
+      ],
+      "required": true,
+      "default": "full"
+    }
+  ]
+}
+{
+  "name": "Backup Frequency Survey",
+  "description": "Choose how often you want to take backups",
+  "spec": [
+    {
+      "type": "multiplechoice",
+      "question_name": "Backup Frequency",
+      "question_description": "How often do you want to take backups?",
+      "variable": "backup_frequency",
+      "choices": [
+        "Hourly",
+        "Daily",
+        "Weekly",
+        "Monthly"
+      ],
+      "required": true,
+      "default": "Daily"
+    }
+  ]
+}
+{
+  "name": "Backup Location Survey",
+  "description": "Choose the location for storing backups",
+  "spec": [
+    {
+      "type": "text",
+      "question_name": "Backup Location",
+      "question_description": "Enter the location where backups should be stored",
+      "variable": "backup_location",
+      "required": true,
+      "default": "/var/backups/network"
+    }
+  ]
+}
