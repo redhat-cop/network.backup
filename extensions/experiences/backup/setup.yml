@@ -25,19 +25,10 @@ controller_templates:
   - name: Network Operations / Create Full Network Backup
     ask_inventory_on_launch: true
     project: Network Operations Backup Experience Project
-    playbook: extensions/experiences/backup/playbooks/create_full_backup.yaml
+    playbook: extensions/experiences/backup/playbooks/run_network_backup.yaml
     job_type: "run"
     organization: "Default"
     labels: network
     credentials: cml-instance
     survey_enabled: true
     survey_spec: "{{ lookup('template', 'network.backup/extensions/experiences/backup/playbooks/template_surveys/backup.j2') }}"
-
-  - name:  Network Operations / Create Differential Network Backup
-    inventory: Network Validated Inventory
-    project: Network Operations Backup Experience Project
-    playbook: extensions/experiences/backup/playbooks/diff_backup_remote.yaml
-    job_type: "run"
-    organization: "Default"
-    labels: network
-    credentials: cml-instance
