@@ -1,0 +1,16 @@
+---
+- name: Network Restore Play
+  hosts: rtr1
+  gather_facts: false
+  tasks:
+    - name: Perform Network Restore With Provided Backup
+      ansible.builtin.include_role:
+        name: network.backup.restore
+      vars:
+        operation: restore
+        data_store:
+          scm:
+            origin:
+              url: "https://github.com/rohitthakur2590/network_automation_backups"
+              token: "{{ VALIDATED_RO_KEY }}"
+              path: "./rtr1.txt"

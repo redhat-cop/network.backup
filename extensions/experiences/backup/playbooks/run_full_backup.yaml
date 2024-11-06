@@ -1,5 +1,5 @@
 ---
-- name: Create Full Backup Play
+- name: Create Network Backup Play
   hosts: rtr1
   gather_facts: false
   vars:
@@ -8,15 +8,12 @@
     - name: Create time stamp for play
       ansible.builtin.set_fact:
         datetime: "{{ lookup('pipe', 'date +%Y-%m-%d-%H-%M') }}"
-      # delegate_to: localhost
-      # delegate_facts: true
-      # run_once: true
 
     - name: Perform pre-run checks
       ansible.builtin.include_tasks:
         file: ./pre_remote_validation.yaml
 
-    - name: Network Backup and Resource Manager
+    - name: Create Network Backup and Push to SCM
       ansible.builtin.include_role:
         name: network.backup.backup
       vars:
