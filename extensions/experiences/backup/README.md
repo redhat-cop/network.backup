@@ -12,10 +12,6 @@ This experience includes the following key components:
 
 - **Backup Project Template**: Defined within the `setup.yaml` playbook, this template helps organize and manage all necessary components for the network backup experience. It ensures that relevant files, roles, and configurations are logically arranged, making it easier to maintain and execute automation tasks.
 
-### Execution Environment (EE)
-
-- **Custom EE Definitions**: A tailored execution environment that ensures compatibility and functionality of all necessary Ansible modules and dependencies required for network backup tasks.
-
 ### Job Templates
 
 - **Create Full Backup Job Template**: Pre-configured to execute the network backup playbook, streamlining the process of creating full backups of network configurations.
@@ -28,19 +24,14 @@ This experience includes the following key components:
 ### Surveys
 
 - **Backup Surveys**: Defined within the `backup.j2` file, backup surveys provide a dynamic interaction mechanism for users to specify parameters for the backup jobs. These surveys enable users to:
-  - Choose the type of backup to be created (full, differential)
-  - Define the location for storing the backups
-  - Set the backup frequency (Hourly, Daily, Weekly, Monthly)
+  - Choose the type of backup to be created (full, diff)
 
 ## Resources Created by This Experience
 
 1. **Project Templates**
     - Ensure that all relevant files, roles, and configurations are logically arranged, facilitating easier maintenance and execution of automation tasks.
 
-2. **Execution Environment (EE)**
-    - A customized execution environment is created to run the network backup tasks, ensuring all necessary dependencies are included.
-
-3. **Job Templates**
+2. **Job Templates**
     - Outline the necessary parameters and configurations to perform network backups using the provided playbooks.
 
 ## How to Use
