@@ -1,14 +1,18 @@
 {
-  "name": "Backup Location Survey",
-  "description": "Choose the location for storing backups",
+  "name": "Backup Type Survey",
+  "description": "Choose the type of backup you want to perform",
   "spec": [
     {
-      "type": "text",
-      "question_name": "Backup Location",
-      "question_description": "Enter the location where backups should be stored",
-      "variable": "backup_location",
+      "type": "multiplechoice",
+      "question_name": "Backup Type",
+      "question_description": "Select the type of backup",
+      "variable": "backup_type",
+      "choices": [
+        "full",
+        "diff"
+      ],
       "required": true,
-      "default": "/var/backups/network"
+      "default": "full"
     }
   ]
 }

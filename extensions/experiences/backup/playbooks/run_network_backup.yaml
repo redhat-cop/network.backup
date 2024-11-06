@@ -18,6 +18,7 @@
         name: network.backup.backup
       vars:
         operation: backup
+        type: "{{ backup_type }}"
         data_store:
           scm:
             origin:
