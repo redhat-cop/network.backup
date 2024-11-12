@@ -1,30 +1,16 @@
 ---
-- name: Create Network Backup Play
-  hosts: rtr1
+- name: Network Restore Play
+  hosts: all
   gather_facts: false
-  vars:
-    GH_REPO: "https://github.com/rohitthakur2590/network_automation_backups"
   tasks:
-    - name: Create time stamp for play
-      ansible.builtin.set_fact:
-        datetime: "{{ lookup('pipe', 'date +%Y-%m-%d-%H-%M') }}"
-
-    - name: Perform pre-run checks
-      ansible.builtin.include_tasks:
-        file: ./pre_remote_validation.yaml
-
-    - name: Create Network Backup and Push to SCM
+    - name: Perform Network Restore With Provided Backup
       ansible.builtin.include_role:
-        name: network.backup.backup
+        name: network.backup.restore
       vars:
-        operation: backup
-        type: "{{ backup_type }}"
+        operation: restore
         data_store:
           scm:
             origin:
-              url: "{{ GH_REPO }}"
-              token: "{{ GH_TOKEN }}"
-              user:
-                name: rohitthakur2590
-                email: rohitthakur2590@outlook.com
-          backup_file_name: "{{ datetime }}"
+              url: "https://github.com/rohitthakur2590/network_automation_backups"
+              token: "{{ VALIDATED_RO_KEY }}"
+              path: "./rtr1.txt"

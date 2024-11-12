@@ -1,6 +1,6 @@
 ---
 - name: Network Restore Play
-  hosts: rtr1
+  hosts: all
   gather_facts: false
   tasks:
     - name: Perform Network Restore With Provided Backup
