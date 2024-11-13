@@ -1,0 +1,55 @@
+{
+  "name": "Backup Configuration Survey",
+  "description": "Survey to configure network backup options",
+  "spec": [
+    {
+      "type": "multiplechoice",
+      "question_name": "Backup Type",
+      "question_description": "Select the type of backup",
+      "variable": "backup_type",
+      "choices": [
+        "full",
+        "diff"
+      ],
+      "required": true,
+      "default": "full"
+    },
+    {
+      "type": "text",
+      "question_name": "GitHub Repository URL",
+      "question_description": "URL of the GitHub repository for storing the backup",
+      "variable": "GH_REPO",
+      "required": true,
+    },
+    {
+      "type": "password",
+      "question_name": "GitHub Token",
+      "question_description": "Personal access token for GitHub repository",
+      "variable": "GH_TOKEN",
+      "required": true
+    },
+    {
+      "type": "text",
+      "question_name": "GitHub Username",
+      "question_description": "GitHub username for the repository",
+      "variable": "GH_USER",
+      "required": true,
+      "default": "rohitthakur2590"
+    },
+    {
+      "type": "text",
+      "question_name": "GitHub Email",
+      "question_description": "GitHub email associated with the repository",
+      "variable": "GH_EMAIL",
+      "required": true,
+      "default": "rohitthakur2590@outlook.com"
+    },
+    {
+      "type": "text",
+      "question_name": "Backup File Name",
+      "question_description": "Name of the backup file (optional). If not provided, a timestamp will be used.",
+      "variable": "backup_file_name",
+      "required": false
+    }
+  ]
+}

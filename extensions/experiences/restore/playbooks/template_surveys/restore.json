@@ -1,0 +1,27 @@
+{
+  "name": "Network Restore Survey",
+  "description": "Survey to configure network restore options",
+  "spec": [
+    {
+      "type": "text",
+      "question_name": "GitHub Repository URL",
+      "question_description": "URL of the GitHub repository containing the backup",
+      "variable": "GH_REPO",
+      "required": true,
+    },
+    {
+      "type": "password",
+      "question_name": "GitHub Token",
+      "question_description": "Personal access token for GitHub repository",
+      "variable": "GH_TOKEN",
+      "required": true
+    },
+    {
+      "type": "text",
+      "question_name": "File Path for Restore",
+      "question_description": "Path to the specific backup file in the GitHub repository",
+      "variable": "file_path",
+      "required": true
+    }
+  ]
+}

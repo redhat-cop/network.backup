@@ -1,0 +1,54 @@
+---
+argument_specs:
+  operation:
+    description:
+      - Specifies the operation to perform. Can be "restore" to restore a network configuration from a backup.
+    type: str
+    required: true
+    choices:
+      - restore
+
+  data_store:
+    description:
+      - Specifies the data store configuration from which the backup will be restored. This can include either a local path or an SCM configuration.
+    type: dict
+    required: true
+    options:
+      local:
+        description:
+          - Specifies the local data store.
+        type: dict
+        required: false
+        options:
+          path:
+            type: str
+            required: true
+            description:
+              - Local directory path where the backup file to be restored is stored.
+      scm:
+        description:
+          - Specifies the SCM data store.
+        type: dict
+        required: false
+        options:
+          origin:
+            type: dict
+            required: true
+            options:
+              url:
+                type: str
+                required: true
+                description:
+                  - URL of the SCM repository (e.g., GitHub) where the backup file is stored.
+              token:
+                type: str
+                required: true
+                no_log: true
+                description:
+                  - Authentication token for accessing the SCM repository.
+              path:
+                type: str
+                required: true
+                description:
+                  - Path to the specific backup file in the SCM repository to be restored.
+  
