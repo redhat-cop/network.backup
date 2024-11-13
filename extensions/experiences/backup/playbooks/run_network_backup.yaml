@@ -1,16 +1,29 @@
 ---
-- name: Network Restore Play
+- name: Create Network Backup Play
   hosts: all
   gather_facts: false
   tasks:
-    - name: Perform Network Restore With Provided Backup
+    - name: Create timestamp for backup if backup_file_name is not provided
+      ansible.builtin.set_fact:
+        datetime: "{{ lookup('pipe', 'date +%Y-%m-%d-%H-%M') }}"
+      when: backup_file_name is not defined
+
+    - name: Set backup file name
+      ansible.builtin.set_fact:
+        backup_file_name_final: "{{ backup_file_name | default(datetime) }}"
+
+    - name: Create Network Backup and Push to SCM
       ansible.builtin.include_role:
-        name: network.backup.restore
+        name: network.backup.backup
       vars:
-        operation: restore
+        operation: backup
+        type: "{{ backup_type }}"  # Set by survey
         data_store:
           scm:
             origin:
-              url: "https://github.com/rohitthakur2590/network_automation_backups"
-              token: "{{ VALIDATED_RO_KEY }}"
-              path: "./rtr1.txt"
+              url: "{{ GH_REPO }}"  # Set by survey
+              token: "{{ GH_TOKEN }}"  # Set by survey
+              user:
+                name: "{{ GH_USER }}"  # Set by survey
+                email: "{{ GH_EMAIL }}"  # Set by survey
+          backup_file_name: "{{ backup_file_name_final }}"  # Use conditional name

@@ -8,7 +8,7 @@ controller_labels:
 # Projects
 #
 controller_projects:
-  - name: Network Operations Backup Experience Project
+  - name: Network Operations - Backup Project
     organization: Default
     scm_branch: main
     scm_clean: 'no'
@@ -22,13 +22,16 @@ controller_projects:
 # Job Templates
 #
 controller_templates:
-  - name: Network Operations / Create Full Network Backup
+  - name: Network Operations - Create Full Network Backup
     ask_inventory_on_launch: true
     project: Network Operations Backup Experience Project
     playbook: extensions/experiences/backup/playbooks/run_network_backup.yaml
     job_type: "run"
     organization: "Default"
-    labels: network
+    labels:
+      - network.backup
+      - backup_experience
+      - run_network_backup 
     credentials: cml-instance
     survey_enabled: true
     survey_spec: "{{ lookup('template', 'network.backup/extensions/experiences/backup/playbooks/template_surveys/backup.j2') }}"
