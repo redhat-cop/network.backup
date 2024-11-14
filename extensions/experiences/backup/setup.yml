@@ -2,14 +2,18 @@
 # Labels
 #
 controller_labels:
-  - name: operations
-    organization: Default
+  - name: network.backup
+    organization: "{{ organization | default('Default') }}"
+  - name: backup_experience
+    organization: "{{ organization | default('Default') }}"
+  - name: run_network_backup
+    organization: "{{ organization | default('Default') }}"
 
 # Projects
 #
 controller_projects:
-  - name: Network Operations - Backup Project
-    organization: Default
+  - name: Network Operations / Backup & Restore Experience Project
+    organization: "{{ organization | default('Default') }}"
     scm_branch: main
     scm_clean: 'no'
     scm_delete_on_update: 'no'
@@ -22,16 +26,16 @@ controller_projects:
 # Job Templates
 #
 controller_templates:
-  - name: Network Operations - Create Full Network Backup
+  - name: Network Operations / Create Full Network Backup
     ask_inventory_on_launch: true
-    project: Network Operations Backup Experience Project
+    project: Network Operations / Backup & Restore Experience Project
     playbook: extensions/experiences/backup/playbooks/run_network_backup.yaml
     job_type: "run"
-    organization: "Default"
+    organization: "{{ organization | default('Default') }}"
     labels:
       - network.backup
       - backup_experience
       - run_network_backup 
     credentials: cml-instance
     survey_enabled: true
-    survey_spec: "{{ lookup('template', 'network.backup/extensions/experiences/backup/playbooks/template_surveys/backup.j2') }}"
+    survey_spec: "{{ lookup('file', experience.path.replace('setup.yml', '') + 'template_surveys/backup.yaml') | from_yaml }}"
