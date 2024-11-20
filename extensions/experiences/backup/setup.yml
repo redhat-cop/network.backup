@@ -12,15 +12,14 @@ controller_labels:
 # Projects
 #
 controller_projects:
-  - name: Network Operations / Backup & Restore Experience Project
+  - name: Network Operations / Backup & Restore Project
     organization: "{{ organization | default('Default') }}"
     scm_branch: main
     scm_clean: 'no'
     scm_delete_on_update: 'no'
     scm_type: git
     scm_update_on_launch: 'no'
-    scm_credential: "rothakurgithubPAT"
-    scm_url: https://github.com/rohitthakur2590/network.backup.git
+    scm_url: https://github.com/redhat-cop/network.backup.git
 
 
 # Job Templates
@@ -28,7 +27,8 @@ controller_projects:
 controller_templates:
   - name: Network Operations / Create Full Network Backup
     ask_inventory_on_launch: true
-    project: Network Operations / Backup & Restore Experience Project
+    ask_execution_environment_on_launch: true
+    project: Network Operations / Backup & Restore Project
     playbook: extensions/experiences/backup/playbooks/run_network_backup.yaml
     job_type: "run"
     organization: "{{ organization | default('Default') }}"
@@ -36,6 +36,5 @@ controller_templates:
       - network.backup
       - backup_experience
       - run_network_backup 
-    credentials: cml-instance
     survey_enabled: true
     survey_spec: "{{ lookup('file', experience.path.replace('setup.yml', '') + 'template_surveys/backup.yaml') | from_yaml }}"
