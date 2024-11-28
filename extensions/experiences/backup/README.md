@@ -23,7 +23,7 @@ This experience includes the following key components:
 
 ### Surveys
 
-- **Backup Surveys**: Defined within the `backup.j2` file, backup surveys provide a dynamic interaction mechanism for users to specify parameters for the backup jobs. These surveys enable users to:
+- **Backup Surveys**: Defined within the `backup.yaml` file, backup surveys provide a dynamic interaction mechanism for users to specify parameters for the backup jobs. These surveys enable users to:
   - Choose the type of backup to be created (full, diff)
 
 ## Resources Created by This Experience
@@ -37,10 +37,10 @@ This experience includes the following key components:
 ## How to Use
 
 1. **Use Seed Red Hat Experience Job**
-    - Ensure the custom EE is correctly built and available in your Ansible Automation PlatformExecute the "Seed Red Hat Experience" job within the Ansible Automation Platform, and select the "Network" category to load this experience.
+    - Ensure the custom EE is correctly built and available in your Ansible Automation Platform. Execute the "Seed Red Hat Experience" job within the Ansible Automation Platform, and select the "Network" category to load this experience.
 
 2. **Use the Job Templates**
-    - In the `Network Backup Automation Experience Project` execute the required job templates to perform network backups. Monitor the job execution and verify that the backups are correctly stored.
+    - In the `Network Operations / Backup & Restore Project` execute the required job templates to perform network backups. Monitor the job execution and verify that the backups are correctly stored.
 
 ## Contribution
 
@@ -50,8 +50,8 @@ Contributions to this project are welcome. Please fork the repository, make your
 
 GNU General Public License v3.0 or later.
 
-See [LICENSE](https://www.gnu.org/licenses/gpl-3.0.txt) to see the full text.This project is licensed under the MIT License. See the [LICENSE](https://github.com/rohitthakur2590/network.backup/blob/main/LICENSE) file for details.
+See [LICENSE](https://www.gnu.org/licenses/gpl-3.0.txt) to see the full text. This project is licensed under the MIT License. See the [LICENSE](https://github.com/redhat-cop/network.backup/blob/main/LICENSE) file for details.
 
 ---
 
-For any issues or questions, please open an issue on the [GitHub issue tracker](https://github.com/rohitthakur2590/network.backup/issues).
+For any issues or questions, please open an issue on the [GitHub issue tracker](https://github.com/redhat-cop/network.backup/issues).

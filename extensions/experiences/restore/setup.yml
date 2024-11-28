@@ -14,6 +14,10 @@ controller_labels:
 #
 controller_projects:
   - name: Network Operations / Backup & Restore Project
+    description: >
+      This project provides the foundation for automating the restoration of network configurations.
+      It organizes all necessary resources, including playbooks, job templates, and surveys, to ensure
+      seamless recovery of network settings.
     organization: "{{ organization | default('Default') }}"
     scm_branch: main
     scm_clean: 'no'
@@ -29,6 +33,13 @@ controller_templates:
   - name: Network Operations / Restore Config
     ask_inventory_on_launch: true
     ask_execution_environment_on_launch: true
+    description: >
+      This job template restores network configurations from a previously created backup,
+      applying device settings and operational data as required. It ensures network resilience by
+      enabling quick recovery of configurations in disaster recovery scenarios or to maintain operational
+      continuity. Suitable for routine or on-demand restore tasks, this job ensures a seamless recovery
+      process tailored to user-defined parameters.
+
     project: Network Operations / Backup & Restore Project
     playbook: extensions/experiences/restore/playbooks/run_network_restore.yaml
     job_type: "run"
