@@ -4,7 +4,7 @@
 controller_labels:
   - name: network.backup
     organization: "{{ organization | default('Default') }}"
-  - name: restore_experience
+  - name: restore_pattern
     organization: "{{ organization | default('Default') }}"
   - name: run_network_restore
     organization: "{{ organization | default('Default') }}"
@@ -41,12 +41,12 @@ controller_templates:
       process tailored to user-defined parameters.
 
     project: Network Operations / Backup & Restore Project
-    playbook: extensions/experiences/restore/playbooks/run_network_restore.yaml
+    playbook: extensions/patterns/restore/playbooks/run_network_restore.yaml
     job_type: "run"
     organization: "Default"
     labels:
       - network.backup
-      - restore_experience
+      - restore_pattern
       - run_network_restore
     survey_enabled: true
     survey_spec: "{{ lookup('file', experience.path.replace('setup.yml', '') + 'template_surveys/restore.yaml') | from_yaml }}"

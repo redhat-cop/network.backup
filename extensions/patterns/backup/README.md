@@ -1,16 +1,16 @@
-# Network Backup Experience
+# Network Backup Pattren
 
 ## Description
 
-This experience is designed to facilitate the automated backup of network configurations using Ansible. It provides a streamlined way to seed the necessary resources and create, manage, and execute backup tasks, ensuring that network configurations are safely stored and can be easily restored if needed.
+This pattern is designed to facilitate the automated backup of network configurations using Ansible. It provides a streamlined way to seed the necessary resources and create, manage, and execute backup tasks, ensuring that network configurations are safely stored and can be easily restored if needed.
 
-## What This Experience Covers
+## What This Pattern Covers
 
-This experience includes the following key components:
+This pattern includes the following key components:
 
 ### Project Templates
 
-- **Backup Project Template**: Defined within the `setup.yaml` playbook, this template helps organize and manage all necessary components for the network backup experience. It ensures that relevant files, roles, and configurations are logically arranged, making it easier to maintain and execute automation tasks.
+- **Backup Project Template**: Defined within the `setup.yaml` playbook, this template helps organize and manage all necessary components for the network backup pattern. It ensures that relevant files, roles, and configurations are logically arranged, making it easier to maintain and execute automation tasks.
 
 ### Job Templates
 
@@ -26,7 +26,7 @@ This experience includes the following key components:
 - **Backup Surveys**: Defined within the `backup.yaml` file, backup surveys provide a dynamic interaction mechanism for users to specify parameters for the backup jobs. These surveys enable users to:
   - Choose the type of backup to be created (full, diff)
 
-## Resources Created by This Experience
+## Resources Created by This Pattren
 
 1. **Project Templates**
     - Ensure that all relevant files, roles, and configurations are logically arranged, facilitating easier maintenance and execution of automation tasks.
@@ -36,8 +36,8 @@ This experience includes the following key components:
 
 ## How to Use
 
-1. **Use Seed Red Hat Experience Job**
-    - Ensure the custom EE is correctly built and available in your Ansible Automation Platform. Execute the "Seed Red Hat Experience" job within the Ansible Automation Platform, and select the "Network" category to load this experience.
+1. **Use Seed Red Hat pattern Job**
+    - Ensure the custom EE is correctly built and available in your Ansible Automation Platform. Execute the "Seed Red Hat pattern" job within the Ansible Automation Platform, and select the "Network" category to load this pattern.
 
 2. **Use the Job Templates**
     - In the `Network Operations / Backup & Restore Project` execute the required job templates to perform network backups. Monitor the job execution and verify that the backups are correctly stored.

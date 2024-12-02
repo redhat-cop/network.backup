@@ -4,7 +4,7 @@
 controller_labels:
   - name: network.backup
     organization: "{{ organization | default('Default') }}"
-  - name: backup_experience
+  - name: backup_pattern
     organization: "{{ organization | default('Default') }}"
   - name: run_network_backup
     organization: "{{ organization | default('Default') }}"
@@ -41,12 +41,12 @@ controller_templates:
       for routine or on-demand backup tasks, this job provides a reliable mechanism to safeguard critical
       network configurations.
     project: Network Operations / Backup & Restore Project
-    playbook: extensions/experiences/backup/playbooks/run_network_backup.yaml
+    playbook: extensions/patterns/backup/playbooks/run_network_backup.yaml
     job_type: "run"
     organization: "{{ organization | default('Default') }}"
     labels:
       - network.backup
-      - backup_experience
+      - backup_pattern
       - run_network_backup 
     survey_enabled: true
     survey_spec: "{{ lookup('file', experience.path.replace('setup.yml', '') + 'template_surveys/backup.yaml') | from_yaml }}"

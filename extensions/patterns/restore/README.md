@@ -1,18 +1,18 @@
-# Network Restore Experience
+# Network Restore pattern
 
 ## Description
 
-This experience is designed to facilitate the automated **restore** of network configurations using Ansible. It provides a streamlined way to seed the necessary resources and create, manage, and execute restore tasks, ensuring that network configurations can be efficiently recovered to maintain operational continuity.
+This pattern is designed to facilitate the automated **restore** of network configurations using Ansible. It provides a streamlined way to seed the necessary resources and create, manage, and execute restore tasks, ensuring that network configurations can be efficiently recovered to maintain operational continuity.
 
 ---
 
-## What This Experience Covers
+## What This pattern Covers
 
-This experience includes the following key components:
+This pattern includes the following key components:
 
 ### Project Templates
 
-- **Restore Project Template**: Defined within the `setup.yml` playbook, this template helps organize and manage all necessary components for the network restore experience. It ensures that relevant files, roles, and configurations are logically arranged, making it easier to maintain and execute automation tasks.
+- **Restore Project Template**: Defined within the `setup.yml` playbook, this template helps organize and manage all necessary components for the network restore pattern. It ensures that relevant files, roles, and configurations are logically arranged, making it easier to maintain and execute automation tasks.
 
 ### Job Templates
 
@@ -30,7 +30,7 @@ This experience includes the following key components:
 
 ---
 
-## Resources Created by This Experience
+## Resources Created by This pattern
 
 1. **Project Templates**
     - Ensure that all relevant files, roles, and configurations are logically arranged, facilitating easier maintenance and execution of automation tasks.
@@ -42,9 +42,9 @@ This experience includes the following key components:
 
 ## How to Use
 
-1. **Use Seed Red Hat Experience Job**
+1. **Use Seed Red Hat pattern Job**
     - Ensure the custom EE is correctly built and available in your Ansible Automation Platform.
-    - Execute the "Seed Red Hat Experience" job within the Ansible Automation Platform, and select the "Network" category to load this experience.
+    - Execute the "Seed Red Hat pattern" job within the Ansible Automation Platform, and select the "Network" category to load this pattern.
 
 2. **Use the Job Templates**
     - In the `Network Operations / Backup & Restore Project`, execute the required job templates to restore network configurations. Monitor the job execution and verify that the configurations are correctly applied.
