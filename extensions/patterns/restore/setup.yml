@@ -49,4 +49,4 @@ controller_templates:
       - restore_pattern
       - run_network_restore
     survey_enabled: true
-    survey_spec: "{{ lookup('file', experience.path.replace('setup.yml', '') + 'template_surveys/restore.yaml') | from_yaml }}"
+    survey_spec: "{{ lookup('file', pattern.path.replace('setup.yml', '') + 'template_surveys/restore.yaml') | from_yaml }}"
