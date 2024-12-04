@@ -1,0 +1,125 @@
+apiVersion: scaffolder.backstage.io/v1beta3
+kind: Template
+metadata:
+  name: network-create-full-network-backup
+  title: Network backup
+  description: >-
+    This wizard will guide you on how to create, compare, and tag network
+    backups
+  namespace: default
+  tags:
+    - aap-operations
+    - intermediate
+    - network
+spec:
+  type: service
+  parameters:
+    - title: Prompts
+      description: >-
+        Manage network backups on supported network platforms in a
+        platform-agnostic way
+      required:
+        - token
+        - inventory
+        - executionEnvironment
+      properties:
+        token:
+          title: Token
+          type: string
+          description: Oauth2 token
+          ui:field: AAPTokenField
+          ui:widget: password
+          ui:backstage:
+            review:
+              show: false
+        inventory:
+          title: Inventory
+          description: Please enter the inventory you want to use the services on
+          resource: inventories
+          ui:field: AAPResourcePicker
+        executionEnvironment:
+          title: Execution environment
+          description: >-
+            Please enter the execution environment you want to use the services
+            on
+          resource: execution_environments
+          ui:field: AAPResourcePicker
+    - title: Survey
+      required:
+        - backupType
+        - ghRepo
+        - ghToken
+        - ghUserName
+        - ghEmail
+      description: >-
+        Manage network backups on supported network platforms in a
+        platform-agnostic way
+      properties:
+        backupType:
+          title: Backup Type
+          description: Select the type of backup
+          type: string
+          enum:
+            - ''
+            - full
+            - diff
+        ghRepo:
+          title: GitHub Repository URL
+          type: string
+          description: URL of the GitHub repository for storing the backup
+          ui:options:
+            rows: 5
+        ghToken:
+          title: GitHub Token
+          type: string
+          description: Personal access token for GitHub repository
+          ui:options:
+            rows: 5
+        ghUserName:
+          title: GitHub Username
+          type: string
+          description: GitHub username for the repository
+          ui:options:
+            rows: 5
+        ghEmail:
+          title: GitHub Email
+          type: string
+          description: GitHub email associated with the repository
+          ui:options:
+            rows: 5
+        backupFileName:
+          title: Backup File Name
+          type: string
+          description: >-
+            Name of the backup file (optional). If not provided, a timestamp
+            will be used.
+          ui:options:
+            rows: 5
+  steps:
+    - id: launch-job
+      name: Launch Network Operations / Create Full Network Backup
+      action: rhaap:launch-job-template
+      input:
+        token: ${{ parameters.token }}
+        values:
+          templateID: null
+          inventory: ${{ parameters.inventory  }}
+          executionEnvironment: ${{ parameters.executionEnvironment }}
+          extraVariables:
+            backup_type: ${{ parameters.backupType }}
+            GH_REPO: ${{ parameters.ghRepo }}
+            GH_TOKEN: ${{ parameters.ghToken }}
+            GH_USER: ${{ parameters.ghUserName }}
+            GH_EMAIL: ${{ parameters.ghEmail }}
+            backup_file_name: ${{ parameters.backupFileName }}
+  output:
+    text:
+      - title: >-
+          Network Operations / Create Full Network Backup template executed
+          successfully
+        content: |
+          **Job ID:** ${{ steps['launch-job'].output.data.id }}
+          **Job STATUS:** ${{ steps['launch-job'].output.data.status }}
+    links:
+      - title: View in RH AAP
+        url: ${{ steps['launch-job'].output.data.url }}

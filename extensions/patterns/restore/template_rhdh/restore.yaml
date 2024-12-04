@@ -1,0 +1,96 @@
+apiVersion: scaffolder.backstage.io/v1beta3
+kind: Template
+metadata:
+  name: network-restore-config
+  title: Network backup restore
+  description: >-
+    This wizard will guide you on how to fetch backups from local or remote data
+    stores and perform configuration restores
+  namespace: default
+  tags:
+    - aap-operations
+    - intermediate
+    - network
+spec:
+  type: service
+  parameters:
+    - title: Prompts
+      description: >-
+        Manage network restores on supported network platforms in a
+        platform-agnostic way
+      required:
+        - token
+        - inventory
+        - executionEnvironment
+      properties:
+        token:
+          title: Token
+          type: string
+          description: Oauth2 token
+          ui:field: AAPTokenField
+          ui:widget: password
+          ui:backstage:
+            review:
+              show: false
+        inventory:
+          title: Inventory
+          description: Please enter the inventory you want to use the services on
+          resource: inventories
+          ui:field: AAPResourcePicker
+        executionEnvironment:
+          title: Execution environment
+          description: >-
+            Please enter the execution environment you want to use the services
+            on
+          resource: execution_environments
+          ui:field: AAPResourcePicker
+    - title: Survey
+      required:
+        - ghRepo
+        - ghToken
+        - filePath
+      description: >-
+        Manage network restores on supported network platforms in a
+        platform-agnostic way
+      properties:
+        ghRepo:
+          title: GitHub Repository URL
+          type: string
+          description: URL of the GitHub repository containing the backup file
+          ui:options:
+            rows: 5
+        ghToken:
+          title: GitHub Token
+          type: string
+          description: Personal access token for GitHub repository
+          ui:options:
+            rows: 5
+        filePath:
+          title: File Path for Restore
+          type: string
+          description: Path to the specific backup file in the GitHub repository
+          ui:options:
+            rows: 5
+  steps:
+    - id: launch-job
+      name: Launch Network Operations / Create Full Network Backup
+      action: rhaap:launch-job-template
+      input:
+        token: ${{ parameters.token }}
+        values:
+          templateID: null
+          inventory: ${{ parameters.inventory  }}
+          executionEnvironment: ${{ parameters.executionEnvironment }}
+          extraVariables:
+            GH_REPO: ${{ parameters.ghRepo }}
+            GH_TOKEN: ${{ parameters.ghToken }}
+            file_path: ${{ parameters.filePath }}
+  output:
+    text:
+      - title: Network Operations / Restore Config template executed successfully
+        content: |
+          **Job ID:** ${{ steps['launch-job'].output.data.id }}
+          **Job STATUS:** ${{ steps['launch-job'].output.data.status }}
+    links:
+      - title: View in RH AAP
+        url: ${{ steps['launch-job'].output.data.url }}

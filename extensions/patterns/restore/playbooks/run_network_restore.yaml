@@ -1,0 +1,16 @@
+---
+- name: Network Restore Play
+  hosts: all
+  gather_facts: false
+  tasks:
+    - name: Perform Network Restore With Provided Backup
+      ansible.builtin.include_role:
+        name: network.backup.restore
+      vars:
+        operation: restore
+        data_store:
+          scm:
+            origin:
+              url: "{{ GH_REPO }}"  # Set by survey
+              token: "{{ GH_TOKEN }}"  # Set by survey
+              path: "{{ file_path }}"  # Set by survey

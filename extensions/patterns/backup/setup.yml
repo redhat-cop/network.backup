@@ -1,0 +1,52 @@
+---
+# Labels
+#
+controller_labels:
+  - name: network.backup
+    organization: "{{ organization | default('Default') }}"
+  - name: backup_pattern
+    organization: "{{ organization | default('Default') }}"
+  - name: run_network_backup
+    organization: "{{ organization | default('Default') }}"
+
+# Projects
+#
+controller_projects:
+  - name: Network Operations / Backup & Restore Project
+    description: >
+      This project provides the foundation for automating the backup of network configurations.
+      It organizes all necessary resources, including playbooks, job templates, and surveys, to ensure
+      secure and reliable archiving of device settings and operational data. Designed to support network
+      backups, it enables users to safeguard critical network configurations for
+      disaster recovery and operational continuity.
+    organization: "{{ organization | default('Default') }}"
+    scm_branch: main
+    scm_clean: 'no'
+    scm_delete_on_update: 'no'
+    scm_type: git
+    scm_update_on_launch: 'no'
+    scm_url: https://github.com/redhat-cop/network.backup.git
+
+
+# Job Templates
+#
+controller_templates:
+  - name: Network Operations / Create Full Network Backup
+    ask_inventory_on_launch: true
+    ask_execution_environment_on_launch: true
+    description: >
+      This job template performs a comprehensive backup of the entire network configuration,
+      capturing device settings and operational data. It ensures network resilience by securely
+      archiving all necessary configurations for disaster recovery and operational continuity. Suitable
+      for routine or on-demand backup tasks, this job provides a reliable mechanism to safeguard critical
+      network configurations.
+    project: Network Operations / Backup & Restore Project
+    playbook: extensions/patterns/backup/playbooks/run_network_backup.yaml
+    job_type: "run"
+    organization: "{{ organization | default('Default') }}"
+    labels:
+      - network.backup
+      - backup_pattern
+      - run_network_backup 
+    survey_enabled: true
+    survey_spec: "{{ lookup('file', experience.path.replace('setup.yml', '') + 'template_surveys/backup.yaml') | from_yaml }}"

@@ -1,0 +1,72 @@
+---
+argument_specs:
+  operation:
+    description:
+      - Specifies the operation to perform. Can be "backup" to create a backup of the network configuration. 
+    type: str
+    required: true
+    choices:
+      - backup
+
+  type:
+    description:
+      - Defines the type of backup to perform. Options are "full", "incremental", or "diff".
+    type: str
+    required: true
+    choices:
+      - full
+      - incremental
+      - diff
+
+  data_store:
+    description:
+      - Specifies the data store configuration, which can be either local or SCM. Includes details like path for local storage or URL, token, and user info for SCM.
+    type: dict
+    required: true
+    options:
+      local:
+        description:
+          - specify the local data store.
+        type: dict
+        required: false
+        options:
+          path:
+            type: str
+            required: true
+            description:
+              - Local directory path where backups will be saved if using a local data store.
+      scm:
+        description:
+          - specify the scm data store.
+        type: dict
+        required: false
+        options:
+          origin:
+            type: dict
+            required: true
+            options:
+              url:
+                type: str
+                required: true
+                description:
+                  - URL of the SCM repository (e.g., GitHub) where backups are stored.
+              token:
+                type: str
+                required: true
+                no_log: true
+                description:
+                  - Authentication token for accessing the SCM repository.
+              user:
+                type: dict
+                required: true
+                options:
+                  name:
+                    type: str
+                    required: true
+                    description:
+                      - Username for the SCM repository.
+                  email:
+                    type: str
+                    required: true
+                    description:
+                      - Email associated with the SCM repository account.
