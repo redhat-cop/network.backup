@@ -26,7 +26,7 @@ This pattern includes the following key components:
 - **Backup Surveys**: Defined within the `backup.yaml` file, backup surveys provide a dynamic interaction mechanism for users to specify parameters for the backup jobs. These surveys enable users to:
   - Choose the type of backup to be created (full, diff)
 
-## Resources Created by This Pattren
+## Resources Created by This Pattern
 
 1. **Project Templates**
     - Ensure that all relevant files, roles, and configurations are logically arranged, facilitating easier maintenance and execution of automation tasks.
