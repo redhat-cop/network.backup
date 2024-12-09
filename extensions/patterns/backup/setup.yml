@@ -9,6 +9,14 @@ controller_labels:
   - name: run_network_backup
     organization: "{{ organization | default('Default') }}"
 
+# Execution Environment
+#
+controller_execution_environments:
+  - name: apd-ee-25-networking
+    description: Allow running Network experience demo. Based on apd-ee 25.
+    image: quay.io/rothakur18/network_operation_experience003:latest
+    pull: always
+
 # Projects
 #
 controller_projects:
@@ -33,7 +41,8 @@ controller_projects:
 controller_templates:
   - name: Network Operations / Create Full Network Backup
     ask_inventory_on_launch: true
-    ask_execution_environment_on_launch: true
+    ask_credential_on_launch: true
+    execution_environment: apd-ee-25-networking
     description: >
       This job template performs a comprehensive backup of the entire network configuration,
       capturing device settings and operational data. It ensures network resilience by securely
