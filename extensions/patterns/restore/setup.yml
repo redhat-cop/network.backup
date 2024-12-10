@@ -15,7 +15,7 @@ controller_labels:
 controller_execution_environments:
   - name: apd-ee-25-networking
     description: Allow running Network experience demo. Based on apd-ee 25.
-    image: quay.io/rothakur18/network_operation_experience003:latest
+    image: quay.io/portal_mvp_patterns/redhat-cop-network-backup-ee:latest
     pull: always
 
 # Projects
