@@ -21,7 +21,7 @@ spec:
       required:
         - token
         - inventory
-        - executionEnvironment
+        - credentials
       properties:
         token:
           title: Token
@@ -37,13 +37,19 @@ spec:
           description: Please enter the inventory you want to use the services on
           resource: inventories
           ui:field: AAPResourcePicker
-        executionEnvironment:
-          title: Execution environment
+        credentials:
+          title: Credentials
           description: >-
-            Please enter the execution environment you want to use the services
-            on
-          resource: execution_environments
+            Select credentials for accessing the nodes this job will be ran
+            against. You can only select one credential of each type. For
+            machine credentials (SSH), checking "Prompt on launch" without
+            selecting credentials will require you to select a machine
+            credential at run time. If you select credentials and check "Prompt
+            on launch", the selected credential(s) become the defaults that can
+            be updated at run time.
+          type: array
           ui:field: AAPResourcePicker
+          resource: credentials
     - title: Survey
       required:
         - backupType
@@ -104,7 +110,7 @@ spec:
         values:
           templateID: null
           inventory: ${{ parameters.inventory  }}
-          executionEnvironment: ${{ parameters.executionEnvironment }}
+          credentials: ${{ parameters.credentials }}
           extraVariables:
             backup_type: ${{ parameters.backupType }}
             GH_REPO: ${{ parameters.ghRepo }}
