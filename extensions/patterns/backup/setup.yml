@@ -32,7 +32,7 @@ controller_projects:
     scm_clean: 'no'
     scm_delete_on_update: 'no'
     scm_type: git
-    scm_update_on_launch: 'no'
+    scm_update_on_launch: 'yes'
     scm_url: https://github.com/redhat-cop/network.backup.git
     credential: "{{ credential | default(omit, true) }}"
 
