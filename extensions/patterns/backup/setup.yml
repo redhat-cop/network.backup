@@ -34,6 +34,7 @@ controller_projects:
     scm_type: git
     scm_update_on_launch: 'no'
     scm_url: https://github.com/redhat-cop/network.backup.git
+    credential: "{{ credential | default(omit, true) }}"
 
 
 # Job Templates
