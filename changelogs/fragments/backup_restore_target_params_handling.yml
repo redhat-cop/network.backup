@@ -1,0 +1,6 @@
+---
+minor_changes:
+  - Added workaround to support SCP file transfer on Cisco IOS devices by bypassing libssh limitations and using system SCP CLI as a fallback.
+  - Introduced support for user-defined custom `path` and `filename` variables for both local and remote (SCM) datastores.
+  - Removed redundant `operation` variable from role defaults and tasks, as it is no longer needed due to improved task variable handling.
+  

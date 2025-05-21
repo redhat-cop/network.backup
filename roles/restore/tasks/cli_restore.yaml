@@ -17,9 +17,20 @@
 
 - name: Copy file from src to a network device
   ansible.netcommon.net_put:
-    src: "{{ network_restore_backup_path }}"
-    protocol: scp
-    dest: "{{ dest_dir }}{{ file_name }}.txt"
+    src: "{{ network_restore_backup_path }}/{{ network_backup_restore_filename }}"
+    dest: "{{ file_name }}.txt"
+  when: network_os in ['iosxr', 'nxos', 'eos', 'junos']
+
+
+- name: Copy file using system SCP CLI as a workaround for ios quirk and libssh SCP
+  ansible.builtin.command: >
+    sshpass -p '{{ ansible_ssh_pass }}'
+    scp -O -P {{ ansible_ssh_port | default(22) }}
+    -o StrictHostKeyChecking=no
+    {{ network_restore_backup_path }}/{{ network_backup_restore_filename }}
+    {{ ansible_ssh_user }}@{{ ansible_host }}:{{ file_name }}.txt
+  delegate_to: localhost
+  when: network_os == "ios"
 
 - name: Prepare appliance for a restore operation
   ansible.builtin.include_tasks: "{{ prepare_path }}/{{ network_os }}.yaml"

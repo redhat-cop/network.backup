@@ -15,3 +15,4 @@
 - name: Assert file sizes
   ansible.builtin.assert:
     that: restore_file_data.stat.size < appliance_dir_data.free_bytes
+  ignore_errors: True

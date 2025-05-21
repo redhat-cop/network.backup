@@ -33,3 +33,8 @@
     user: "{{ data_store['scm']['origin']['user'] | d({}) }}"
     timeout: 120
   when: tag is not defined
+
+- name: Remove cloned repository directory
+  ansible.builtin.file:
+    path: "{{ network_backup_path_root }}"
+    state: absent

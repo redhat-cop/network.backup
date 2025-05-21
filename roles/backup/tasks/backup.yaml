@@ -8,10 +8,21 @@
   when: data_store['scm']['origin'] is defined
   run_once: true
 
-- name: Include retrieve tasks
+- name: Get scm url
   ansible.builtin.set_fact:
-    network_backup_path: "{{ role_path }}/{{  data_store.scm.origin.url.split('/')[-1] }}"
+    network_backup_path_root: "{{ role_path }}/{{  data_store.scm.origin.url.split('/')[-1] }}"
   when: data_store['scm']['origin'] is defined
+
+- name: Get file name
+  ansible.builtin.set_fact:
+    network_backup_path: "{{ network_backup_path_root }}/{{  data_store.scm.origin.path }}"
+  when: data_store['scm']['origin'] is defined
+
+- name: Get file name
+  ansible.builtin.set_fact:
+    network_backup_filename: "{{  data_store.scm.origin.filename }}"
+  when: data_store['scm']['origin'] is defined
+
 
 - name: Include tasks
   ansible.builtin.include_tasks: network.yaml
