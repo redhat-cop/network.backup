@@ -3,7 +3,4 @@
   ansible.builtin.include_tasks: common/validation.yaml
 
 - name: Run the platform specific tasks
-  ansible.builtin.include_tasks: "{{ item }}"
-  with_first_found:
-    - "{{ operation }}.yaml"
-    - "common/unsupported_operation.yaml"
+  ansible.builtin.include_tasks: "restore.yaml"
