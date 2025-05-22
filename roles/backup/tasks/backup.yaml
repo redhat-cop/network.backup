@@ -1,4 +1,8 @@
 ---
+- name: DEBUG
+  ansible.builtin.debug:
+    msg: "{{ vars }}"
+
 - name: Build Local Backup Dir Path
   ansible.builtin.include_tasks: path.yaml
   when: data_store.scm.origin is not defined
