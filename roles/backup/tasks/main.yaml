@@ -1,4 +1,8 @@
 ---
+- name: DEBUG
+  ansible.builtin.debug:
+    msg: "{{ vars }}"
+
 - name: Include tasks
   ansible.builtin.include_tasks: validation.yaml
 
