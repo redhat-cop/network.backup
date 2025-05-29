@@ -4,40 +4,46 @@ description: "Survey to configure network backup options"
 spec:
   - type: "multiplechoice"
     question_name: "Backup Type"
-    question_description: "Select the type of backup"
+    question_description: "Select the type of backup to perform — a full or differential (diff) backup."
     variable: "backup_type"
     choices:
       - "full"
       - "diff"
-    required: true
+    required: false
     default: "full"
 
   - type: "text"
+    question_name: "GitHub Username"
+    question_description: "Enter your GitHub username associated with the target repository."
+    variable: "gh_user"
+    required: true
+  
+  - type: "text"
+    question_name: "GitHub Email"
+    question_description: "Enter the email address linked to your GitHub account that owns the target repository."
+    variable: "gh_email"
+    required: false
+
+  - type: "text"
     question_name: "GitHub Repository URL"
-    question_description: "URL of the GitHub repository for storing the backup"
-    variable: "GH_REPO"
+    question_description: "Enter the GitHub repository URL you want to use."
+    variable: "gh_url"
     required: true
 
   - type: "password"
     question_name: "GitHub Token"
-    question_description: "Personal access token for GitHub repository"
-    variable: "GH_TOKEN"
+    question_description: "Enter your GitHub personal access token with access to the target repository."
+    variable: "gh_token"
     required: true
 
   - type: "text"
-    question_name: "GitHub Username"
-    question_description: "GitHub username for the repository"
-    variable: "GH_USER"
-    required: true
-
+    question_name: "Path"
+    question_description: "Specify the relative path inside your GitHub repository where the backup file should be saved. If left blank, the default role path (<role_path>) will be used."
+    variable: "path"
+    required: false
+  
   - type: "text"
-    question_name: "GitHub Email"
-    question_description: "GitHub email associated with the repository"
-    variable: "GH_EMAIL"
-    required: true
-
-  - type: "text"
-    question_name: "Backup File Name"
-    question_description: "Name of the backup file (optional). If not provided, a timestamp will be used."
-    variable: "backup_file_name"
+    question_name: "Backup Filename"
+    question_description: "Provide a name for the backup file (e.g., device_backup.txt). If left blank, a default filename will be generated using the device name and timestamp."
+    variable: "filename"
     required: false
