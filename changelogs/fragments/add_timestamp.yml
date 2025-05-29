@@ -1,3 +1,0 @@
----
-minor_changes:
-  - update backup task with timestamp as part of default file name.
