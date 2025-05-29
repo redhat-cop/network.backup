@@ -5,7 +5,7 @@ Network Backup Collection Release Notes
 .. contents:: Topics
 
 
-v3.1.0
+v4.0.0
 ======
 
 Major Changes
