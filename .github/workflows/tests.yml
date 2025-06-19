@@ -10,7 +10,7 @@ on:  # yamllint disable-line rule:truthy
     branches: [main]
   workflow_dispatch:
   schedule:
-    - cron: '* * * * *'
+    - cron: '0 0 * * *'
 
 jobs:
   changelog:
@@ -23,7 +23,7 @@ jobs:
   sanity:
     uses: ansible/ansible-content-actions/.github/workflows/sanity.yaml@main
   all_green:
-    if: ${{ always() && (github.event_name != 'schedule') }}
+    if: ${{ always() }}
     needs:
       - changelog
       - sanity
