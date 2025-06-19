@@ -57,6 +57,6 @@ controller_templates:
     labels:
       - network.backup
       - backup_pattern
-      - run_network_backup 
+      - run_network_backup
     survey_enabled: true
     survey_spec: "{{ lookup('file', pattern.path.replace('setup.yml', '') + 'template_surveys/backup.yaml') | from_yaml }}"

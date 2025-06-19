@@ -14,5 +14,8 @@
 
 - name: Assert file sizes
   ansible.builtin.assert:
-    that: restore_file_data.stat.size < appliance_dir_data.free_bytes
-  ignore_errors: True
+    that:
+      - restore_file_data.stat.size < appliance_dir_data.free_bytes
+    fail_msg: "Restore file is too large for available appliance space."
+    success_msg: "File size is within allowed space."
+  failed_when: false

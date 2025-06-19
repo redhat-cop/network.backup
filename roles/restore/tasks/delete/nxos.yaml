@@ -3,4 +3,10 @@
   cisco.nxos.nxos_command:
     commands:
       - command: "delete {{ appliance_dir }}{{ file_name }}.txt no-prompt"
-  ignore_errors: True
+  register: delete_result
+  failed_when: false
+
+- name: Warn if file deletion might have failed
+  ansible.builtin.debug:
+    msg: "Warning: Backup file deletion may have failed."
+  when: delete_result.failed

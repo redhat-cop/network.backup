@@ -1,72 +1,79 @@
 ---
 argument_specs:
-  operation:
+  main:
+    short_description: Create network backup and write to datastore.
     description:
-      - Specifies the operation to perform. Can be "backup" to create a backup of the network configuration. 
-    type: str
-    required: true
-    choices:
-      - backup
-
-  type:
-    description:
-      - Defines the type of backup to perform. Options are "full", "incremental", or "diff".
-    type: str
-    required: true
-    choices:
-      - full
-      - incremental
-      - diff
-
-  data_store:
-    description:
-      - Specifies the data store configuration, which can be either local or SCM. Includes details like path for local storage or URL, token, and user info for SCM.
-    type: dict
-    required: true
+      - Create network backup and write to datastore.
+    author:
+      - Rohit Thakur (rohitthakur2590)
     options:
-      local:
+      operation:
         description:
-          - specify the local data store.
+          - Specifies the operation to perform. Can be "backup" to create a backup of the network configuration.
+        type: str
+        required: true
+        choices:
+          - backup
+
+      type:
+        description:
+          - Defines the type of backup to perform. Options are "full", "incremental", or "diff".
+        type: str
+        required: true
+        choices:
+          - full
+          - incremental
+          - diff
+
+      data_store:
+        description:
+          - Specifies the data store configuration, which can be either local or SCM. Includes details like path for local storage or URL, token, and user info for SCM.
         type: dict
-        required: false
+        required: true
         options:
-          path:
-            type: str
-            required: true
+          local:
             description:
-              - Local directory path where backups will be saved if using a local data store.
-      scm:
-        description:
-          - specify the scm data store.
-        type: dict
-        required: false
-        options:
-          origin:
+              - Specify the local data store.
             type: dict
-            required: true
+            required: false
             options:
-              url:
+              path:
                 type: str
                 required: true
                 description:
-                  - URL of the SCM repository (e.g., GitHub) where backups are stored.
-              token:
-                type: str
-                required: true
-                no_log: true
-                description:
-                  - Authentication token for accessing the SCM repository.
-              user:
+                  - Local directory path where backups will be saved if using a local data store.
+          scm:
+            description:
+              - Specify the SCM data store.
+            type: dict
+            required: false
+            options:
+              origin:
                 type: dict
                 required: true
                 options:
-                  name:
+                  url:
                     type: str
                     required: true
                     description:
-                      - Username for the SCM repository.
-                  email:
+                      - URL of the SCM repository (e.g., GitHub) where backups are stored.
+                  token:
                     type: str
                     required: true
+                    no_log: true
                     description:
-                      - Email associated with the SCM repository account.
+                      - Authentication token for accessing the SCM repository.
+                  user:
+                    type: dict
+                    required: true
+                    options:
+                      name:
+                        type: str
+                        required: true
+                        description:
+                          - Username for the SCM repository.
+                      email:
+                        type: str
+                        required: true
+                        description:
+                          - Email associated with the SCM repository account.
