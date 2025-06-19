@@ -1,0 +1,4 @@
+---
+bugfixes:
+  - Fixes the lint and sanity errors.
+  - Adds the changelog fragments.

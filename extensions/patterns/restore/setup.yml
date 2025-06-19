@@ -8,7 +8,6 @@ controller_labels:
     organization: "{{ organization | default('Default') }}"
   - name: run_network_restore
     organization: "{{ organization | default('Default') }}"
-  
 
 # Execution Environment
 #
