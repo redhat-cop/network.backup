@@ -5,6 +5,15 @@ Network Backup Collection Release Notes
 .. contents:: Topics
 
 
+v4.0.1
+======
+
+Bugfixes
+--------
+
+- Adds the changelog fragments.
+- Fixes the lint and sanity errors.
+
 v4.0.0
 ======
 
