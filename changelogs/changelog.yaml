@@ -65,3 +65,11 @@ releases:
     - restore.yml
     - upate_path_for_survey_spec.yaml
     release_date: '2025-05-29'
+  4.0.1:
+    changes:
+      bugfixes:
+      - Adds the changelog fragments.
+      - Fixes the lint and sanity errors.
+    fragments:
+    - fixlintissues_minorbugfix.yaml
+    release_date: '2025-06-19'
