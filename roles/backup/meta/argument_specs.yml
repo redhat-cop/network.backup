@@ -7,19 +7,11 @@ argument_specs:
     author:
       - Rohit Thakur (rohitthakur2590)
     options:
-      operation:
-        description:
-          - Specifies the operation to perform. Can be "backup" to create a backup of the network configuration.
-        type: str
-        required: true
-        choices:
-          - backup
-
       type:
         description:
           - Defines the type of backup to perform. Options are "full", "incremental", or "diff".
         type: str
-        required: true
+        required: false
         choices:
           - full
           - incremental
@@ -41,7 +33,12 @@ argument_specs:
                 type: str
                 required: true
                 description:
-                  - Local directory path where backups will be saved if using a local data store.
+                  - Path inside the SCM repository where the backup will be saved (e.g., data/backups/<date>/<platform>).
+              filename:
+                type: str
+                required: false
+                description:
+                  - Filename for the backup stored in the SCM (e.g., <platform>_<date>.txt).
           scm:
             description:
               - Specify the SCM data store.
@@ -77,3 +74,13 @@ argument_specs:
                         required: true
                         description:
                           - Email associated with the SCM repository account.
+                  path:
+                    type: str
+                    required: true
+                    description:
+                      - Path inside the SCM repository where the backup will be saved (e.g., data/backups/<date>/<platform>).
+                  filename:
+                    type: str
+                    required: true
+                    description:
+                      - Filename for the backup stored in the SCM (e.g., <platform>_<date>.txt).

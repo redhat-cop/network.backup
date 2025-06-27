@@ -12,4 +12,4 @@
 - name: Set local backup path
   ansible.builtin.set_fact:
     network_backup_filename: "{{ data_store['local']['filename'] }}"
-  when: data_store['local'] is defined
+  when: data_store['local']['filename'] is defined
