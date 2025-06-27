@@ -10,12 +10,12 @@
 
 - name: Get scm url
   ansible.builtin.set_fact:
-    network_backup_path_root: "{{ role_path }}/{{  data_store.scm.origin.url.split('/')[-1] }}"
+    network_backup_path_root: "{{ role_path }}/{{ data_store.scm.origin.url.split('/')[-1] }}"
   when: data_store['scm']['origin'] is defined
 
 - name: Get file name
   ansible.builtin.set_fact:
-    network_backup_path: "{{ network_backup_path_root }}/{{  data_store.scm.origin.path | default(role_path, true)}}"
+    network_backup_path: "{{ network_backup_path_root }}/{{ data_store.scm.origin.path | default(role_path, true) }}"
   when: data_store['scm']['origin'] is defined
 
 - name: Get timestamp
