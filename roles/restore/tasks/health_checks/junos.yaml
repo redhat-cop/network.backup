@@ -4,14 +4,14 @@
     dest_dir: "/var/tmp/"
     appliance_dir: "/var/tmp/"
 
-- name: Parse free space information
-  connection: ansible.netcommon.network_cli
-  ansible.utils.cli_parse:
-    command: "show system storage detail"
-    parser:
-      name: ansible.netcommon.content_templates
-      template_path: "{{ tmplt_path }}/{{ network_os }}.yaml"
-    set_fact: appliance_dir_data
+# - name: Parse free space information
+#   connection: ansible.netcommon.network_cli
+#   ansible.utils.cli_parse:
+#     command: "show system storage detail"
+#     parser:
+#       name: ansible.netcommon.content_templates
+#       template_path: "{{ tmplt_path }}/{{ network_os }}.yaml"
+#     set_fact: appliance_dir_data
 
-- name: Include task to compare file size with free space
-  ansible.builtin.include_tasks: "common/healthcheck_common.yaml"
+# - name: Include task to compare file size with free space
+#   ansible.builtin.include_tasks: "common/healthcheck_common.yaml"

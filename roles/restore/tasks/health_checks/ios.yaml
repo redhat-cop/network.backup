@@ -4,13 +4,13 @@
     dest_dir: "flash:"
     appliance_dir: "flash://"
 
-- name: Parse free space information
-  ansible.utils.cli_parse:
-    command: "dir /all | section free"
-    parser:
-      name: ansible.netcommon.content_templates
-      template_path: "{{ tmplt_path }}/{{ network_os }}.yaml"
-    set_fact: appliance_dir_data
+# - name: Parse free space information
+#   ansible.utils.cli_parse:
+#     command: "dir /all | section free"
+#     parser:
+#       name: ansible.netcommon.content_templates
+#       template_path: "{{ tmplt_path }}/{{ network_os }}.yaml"
+#     set_fact: appliance_dir_data
 
-- name: Include task to compare file size with free space
-  ansible.builtin.include_tasks: "common/healthcheck_common.yaml"
+# - name: Include task to compare file size with free space
+#   ansible.builtin.include_tasks: "common/healthcheck_common.yaml"
