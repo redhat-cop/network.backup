@@ -26,6 +26,7 @@
   ansible.builtin.set_fact:
     network_backup_filename: >-
       {{ data_store.scm.origin.filename | default(inventory_hostname ~ '_' ~ timestamp ~ '.txt', true) }}
+  when: network_backup_filename is undefined
 
 - name: Include tasks
   ansible.builtin.include_tasks: network.yaml
