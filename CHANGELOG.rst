@@ -7,6 +7,16 @@ Network Backup Collection Release Notes
 v5.0.0
 ======
 
+Release Summary
+---------------
+
+With this release, the minimum required version of `ansible-core` for this collection is `2.19.0`. The last version known to be compatible with `ansible-core` versions below `2.19` is v4.0.1.
+
+Major Changes
+-------------
+
+- Bumping `dependencies` of ansible.netcommon to `>=8.1.0`, since previous versions of the dependency had compatibility issues with `ansible-core>=2.19`.
+
 Minor Changes
 -------------
 
