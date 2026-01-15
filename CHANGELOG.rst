@@ -4,6 +4,14 @@ Network Backup Collection Release Notes
 
 .. contents:: Topics
 
+v5.1.0
+======
+
+Minor Changes
+-------------
+
+- Add ssh support for backup and restore. Also fixes CI.
+
 v5.0.0
 ======
 

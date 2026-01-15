@@ -1,0 +1,23 @@
+objects:
+  role:
+    backup:
+      description: Create network backup and write to datastore.
+      name: backup
+      version_added: null
+plugins:
+  become: {}
+  cache: {}
+  callback: {}
+  cliconf: {}
+  connection: {}
+  filter: {}
+  httpapi: {}
+  inventory: {}
+  lookup: {}
+  module: {}
+  netconf: {}
+  shell: {}
+  strategy: {}
+  test: {}
+  vars: {}
+version: 5.1.0
