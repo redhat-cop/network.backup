@@ -4,7 +4,7 @@ authors:
 dependencies:
   "ansible.netcommon": ">=8.1.0"
   "ansible.utils": ">=3.0.0"
-  "ansible.scm": ">=2.0.0"
+  "ansible.scm": ">=3.1.0"
 license_file: LICENSE
 name: backup
 description: Ansible Network Backup collection platform-agnostic single entry point management for network backup.
