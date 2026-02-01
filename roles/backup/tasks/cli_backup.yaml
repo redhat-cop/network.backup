@@ -4,3 +4,4 @@
     dir_path: "{{ network_backup_path }}"
     filename: "{{ network_backup_filename | default(inventory_hostname) }}"
   register: network_backup
+  tags: always

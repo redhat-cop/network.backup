@@ -3,30 +3,37 @@
   ansible.builtin.set_fact:
     network_restore_backup_path: "./tmp_backup"
   when: data_store.local is not defined
+  tags: always
 
 - name: Set default host vars path
   ansible.builtin.set_fact:
     network_restore_backup_path: "{{ data_store['local']['path'] }}"
   when: data_store['local'] is defined
+  tags: always
 
 - name: Set default host vars filename
   ansible.builtin.set_fact:
     network_backup_restore_filename: "{{ data_store['local']['filename'] }}"
   when: data_store['local'] is defined
+  tags: always
 
 - name: Set default host vars path
   ansible.builtin.set_fact:
-    network_backup_restore_relative_path: "{{ data_store['scm']['origin']['path'] }}"
+    network_restore_backup_relative_path: "{{ data_store['scm']['origin']['path'] }}"
   when: data_store['scm'] is defined
+  tags: always
 
 - name: Set default host vars filename
   ansible.builtin.set_fact:
     network_backup_restore_filename: "{{ data_store['scm']['origin']['filename'] }}"
   when: data_store['scm'] is defined
+  tags: always
 
 - name: Retrieve a repository from a distant location and make it available locally
   ansible.builtin.include_tasks: retrieve.yaml
   when: data_store.scm is defined
+  tags: always
 
 - name: Include tasks
   ansible.builtin.include_tasks: network.yaml
+  tags: always

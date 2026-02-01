@@ -1,0 +1,99 @@
+---
+# Differential backup logic for SCM (Git) data stores
+# Compares current backup with previous backup, normalizing timestamps/metadata
+# Only publishes if there are actual configuration changes
+
+- name: Set default backup type to full if not specified
+  ansible.builtin.set_fact:
+    backup_type: "{{ type | default('full') }}"
+  tags: always
+
+# Previous backup was already read in differential_scm_read_previous.yaml
+# before the current backup was created (to avoid overwriting the file)
+# Check if previous backup exists (for conditional logic)
+- name: Check if previous backup file exists
+  ansible.builtin.stat:
+    path: "{{ network_backup_path }}/{{ network_backup_filename }}"
+  register: previous_backup_stat
+  when: 
+    - data_store['scm']['origin'] is defined
+    - backup_type == "diff"
+  tags: always
+
+- name: Debug normalized previous backup result (from pre-read)
+  ansible.builtin.debug:
+    msg: "Normalized previous backup result (read before current backup): {{ normalized_previous_backup | default('NOT SET - previous backup may not exist') }}"
+  when:
+    - data_store['scm']['origin'] is defined
+    - backup_type == "diff"
+  tags: always
+
+- name: Normalize current backup file (remove timestamps and metadata)
+  ansible.builtin.shell: |
+    sed -E \
+      -e '/^!Command:/d' \
+      -e '/^!Running configuration last done at:/d' \
+      -e '/^! Last configuration change at /d' \
+      -e '/^!Time:/d' \
+      -e '/^!NVRAM config last updated at:/d' \
+      -e '/^!No configuration change since last restart/d' \
+      "{{ network_backup_path }}/{{ network_backup_filename }}" | grep -v '^[[:space:]]*$'
+  register: normalized_current_result
+  changed_when: false
+  when:
+    - data_store['scm']['origin'] is defined
+    - backup_type == "diff"
+  tags: always
+
+- name: Debug normalized current backup result
+  ansible.builtin.debug:
+    msg: "Normalized current backup result: {{ normalized_current_result.stdout }}"
+  when:
+    - data_store['scm']['origin'] is defined
+    - backup_type == "diff"
+  tags: always
+
+- name: Set normalized content facts (use pre-read previous backup)
+  ansible.builtin.set_fact:
+    normalized_previous: "{{ normalized_previous_backup | default('') }}"
+    normalized_current: "{{ normalized_current_result.stdout | default('') }}"
+  when:
+    - data_store['scm']['origin'] is defined
+    - backup_type == "diff"
+  tags: always
+
+- name: Compare normalized backups (using pre-read previous backup)
+  ansible.builtin.set_fact:
+    backup_has_changes: "{{ normalized_previous != normalized_current }}"
+  when:
+    - data_store['scm']['origin'] is defined
+    - backup_type == "diff"
+    - normalized_previous_backup is defined
+    - normalized_previous_backup != ""
+  tags: always
+
+- name: Set backup_has_changes to true if no previous backup exists
+  ansible.builtin.set_fact:
+    backup_has_changes: true
+  when:
+    - data_store['scm']['origin'] is defined
+    - backup_type == "diff"
+    - normalized_previous_backup is not defined or normalized_previous_backup == ""
+  tags: always
+
+- name: Set backup_has_changes to true for full backup type
+  ansible.builtin.set_fact:
+    backup_has_changes: true
+  when:
+    - data_store['scm']['origin'] is defined
+    - backup_type != "diff"
+  tags: always
+
+- name: Display differential backup result
+  ansible.builtin.debug:
+    msg: "Differential backup: {{ 'Changes detected - will publish' if backup_has_changes else 'No changes detected - skipping publish' }}"
+  when:
+    - data_store['scm']['origin'] is defined
+    - backup_type == "diff"
+  tags: always
+

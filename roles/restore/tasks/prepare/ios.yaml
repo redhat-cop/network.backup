@@ -4,6 +4,10 @@
     msg:
       - "Task to prepare appliance for restore operation"
 
+- name: Set IOS directory for restore operation
+  ansible.builtin.set_fact:
+    appliance_dir: "flash://"
+
 - name: Overwrite startup config - archive
   cisco.ios.ios_config:
     lines:

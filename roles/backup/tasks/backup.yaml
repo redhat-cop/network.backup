@@ -2,36 +2,69 @@
 - name: Build Local Backup Dir Path
   ansible.builtin.include_tasks: path.yaml
   when: data_store.scm.origin is not defined
+  tags: always
 
 - name: Include retrieve tasks
   ansible.builtin.include_tasks: retrieve.yaml
   when: data_store['scm']['origin'] is defined
   run_once: true
+  tags: always
 
-- name: Get scm url
+- name: Get scm url - Use actual repo path from retrieve.yaml
   ansible.builtin.set_fact:
-    network_backup_path_root: "{{ role_path }}/{{ data_store.scm.origin.url.split('/')[-1] | regex_replace('\\.git$', '') }}"
+    network_backup_path_root: "{{ network_backup_path | default(role_path ~ '/' ~ (data_store.scm.origin.url.split('/')[-1] | regex_replace('\\.git$', ''))) }}"
   when: data_store['scm']['origin'] is defined
+  tags: always
 
 - name: Get file name
   ansible.builtin.set_fact:
     network_backup_path: "{{ network_backup_path_root }}/{{ data_store.scm.origin.path | default(role_path, true) }}"
   when: data_store['scm']['origin'] is defined
+  tags: always
 
 - name: Get timestamp
   ansible.builtin.set_fact:
     timestamp: "{{ lookup('pipe', 'date +%Y-%m-%d_%H-%M-%S') }}"
+  tags: always
 
 - name: Set default filename
   ansible.builtin.set_fact:
     network_backup_filename: >-
       {{ data_store.scm.origin.filename | default(inventory_hostname ~ '_' ~ timestamp ~ '.txt', true) }}
   when: network_backup_filename is undefined
+  tags: always
+
+- name: Read previous backup for differential comparison (before current backup is created)
+  ansible.builtin.include_tasks: differential_scm_read_previous.yaml
+  when: 
+    - data_store['scm']['origin'] is defined
+    - type | default('full') == "diff"
+  tags: always
 
 - name: Include tasks
   ansible.builtin.include_tasks: network.yaml
+  tags: always
+
+- name: Check for differential backup (SCM only)
+  ansible.builtin.include_tasks: differential_scm.yaml
+  when: data_store['scm']['origin'] is defined
+  tags: always
 
 - name: Include build tasks
   ansible.builtin.include_tasks: publish.yaml
-  when: data_store.scm.origin is defined
+  when: 
+    - data_store.scm.origin is defined
+    - backup_has_changes | default(true)
   run_once: true
+  tags: always
+
+- name: Cleanup cloned repository when publish is skipped
+  ansible.builtin.file:
+    path: "{{ network_backup_path_root }}"
+    state: absent
+  when:
+    - data_store.scm.origin is defined
+    - not (backup_has_changes | default(true))
+  run_once: true
+  delegate_to: localhost
+  tags: always

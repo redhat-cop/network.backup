@@ -1,0 +1,55 @@
+---
+# Read previous backup BEFORE current backup is created
+# This prevents the current backup from overwriting the previous backup file
+# before we can read it for comparison
+
+- name: Set default backup type to full if not specified
+  ansible.builtin.set_fact:
+    backup_type: "{{ type | default('full') }}"
+  tags: always
+
+- name: Check if previous backup file exists
+  ansible.builtin.stat:
+    path: "{{ network_backup_path }}/{{ network_backup_filename }}"
+  register: previous_backup_stat
+  when: 
+    - data_store['scm']['origin'] is defined
+    - backup_type == "diff"
+  tags: always
+
+- name: Normalize previous backup file (remove timestamps and metadata)
+  ansible.builtin.shell: |
+    sed -E \
+      -e '/^!Command:/d' \
+      -e '/^!Running configuration last done at:/d' \
+      -e '/^! Last configuration change at /d' \
+      -e '/^!Time:/d' \
+      -e '/^!NVRAM config last updated at:/d' \
+      -e '/^!No configuration change since last restart/d' \
+      "{{ network_backup_path }}/{{ network_backup_filename }}" | grep -v '^[[:space:]]*$'
+  register: normalized_previous_result
+  changed_when: false
+  failed_when: false
+  when:
+    - data_store['scm']['origin'] is defined
+    - backup_type == "diff"
+    - previous_backup_stat.stat.exists | default(false)
+  tags: always
+
+- name: Store normalized previous backup for later comparison
+  ansible.builtin.set_fact:
+    normalized_previous_backup: "{{ normalized_previous_result.stdout | default('') }}"
+  when:
+    - data_store['scm']['origin'] is defined
+    - backup_type == "diff"
+    - previous_backup_stat.stat.exists | default(false)
+  tags: always
+
+- name: Set normalized_previous to empty if no previous backup exists
+  ansible.builtin.set_fact:
+    normalized_previous_backup: ""
+  when:
+    - data_store['scm']['origin'] is defined
+    - backup_type == "diff"
+    - not (previous_backup_stat.stat.exists | default(false))
+  tags: always

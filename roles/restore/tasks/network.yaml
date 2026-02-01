@@ -9,11 +9,14 @@
       - "ios"
       - "junos"
     network_os: "{{ ansible_network_os.split('.')[2] }}"
+  tags: always
 
 - name: Invoke restore
   ansible.builtin.include_tasks: "cli_restore.yaml"
   when: network_os not in supported_cli_restore
+  tags: always
 
 - name: Invoke cli specific backup task
   ansible.builtin.include_tasks: "cli_restore_config.yaml"
   when: network_os not in supported_plugin_restore
+  tags: always

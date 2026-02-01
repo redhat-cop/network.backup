@@ -1,3 +1,4 @@
 ---
 - name: Invoke backup task
   ansible.builtin.include_tasks: cli_backup.yaml
+  tags: always

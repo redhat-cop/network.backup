@@ -6,14 +6,18 @@
       token: "{{ data_store.scm.origin.get('token') if data_store.scm.origin.get('token') else omit }}"
       ssh_key_file: "{{ data_store.scm.origin.get('ssh_key_file') if data_store.scm.origin.get('ssh_key_file') else omit }}"
       ssh_key_content: "{{ data_store.scm.origin.get('ssh_key_content') if data_store.scm.origin.get('ssh_key_content') else omit }}"
-    parent_directory: "{{ role_path }}/{{ network_restore_backup_path }}"
+    # Use parent_directory from data_store.scm if provided, otherwise default to role_path
+    parent_directory: "{{ data_store.scm.parent_directory | default(role_path ~ '/' ~ network_restore_backup_path) }}"
   changed_when: false
   register: resource_manager_result
+  tags: always
 
 - name: Update Inventory Path
   ansible.builtin.set_fact:
     network_restore_backup_repo: "{{ resource_manager_result['path'] }}"
+  tags: always
 
 - name: Update Inventory Path
   ansible.builtin.set_fact:
     network_restore_backup_path: "{{ resource_manager_result['path'] }}/{{ data_store['scm']['origin']['path'] }}"
+  tags: always

@@ -8,7 +8,9 @@
       - "nxos"
       - "iosxr"
       - "vyos"
+  tags: always
 
 - name: Conditional test
   ansible.builtin.include_tasks: "unsupported_platform.yaml"
   when: ansible_network_os.split('.')[-1] not in supported_platforms
+  tags: always

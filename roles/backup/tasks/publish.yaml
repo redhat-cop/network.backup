@@ -3,12 +3,14 @@
   ansible.builtin.set_fact:
     time: "{{ lookup('pipe', 'date \"+%Y-%m-%d-%H-%M\"') }}"
   run_once: true
+  tags: always
 
 - name: Create default tag
   ansible.builtin.set_fact:
     default_tag:
       annotation: "{{ time }}"
       message: "backup_on: {{ time }}"
+  tags: always
 
 - name: Set default tag
   ansible.builtin.set_fact:
@@ -16,10 +18,11 @@
   when:
     - tag is defined
     - tag  == "default"
+  tags: always
 
 - name: Publish the changes with tag
   ansible.scm.git_publish:
-    path: "{{ network_backup_path }}"
+    path: "{{ network_backup_path_root }}"
     token: "{{ data_store.scm.origin.get('token') if data_store.scm.origin.get('token') else omit }}"
     user: "{{ data_store['scm']['origin']['user'] | d({}) }}"
     tag: "{{ tag }}"
@@ -27,18 +30,21 @@
     ssh_key_file: "{{ data_store.scm.origin.get('ssh_key_file') if data_store.scm.origin.get('ssh_key_file') else omit }}"
     ssh_key_content: "{{ data_store.scm.origin.get('ssh_key_content') if data_store.scm.origin.get('ssh_key_content') else omit }}"
   when: tag is defined
+  tags: always
 
 - name: Publish the changes
   ansible.scm.git_publish:
-    path: "{{ network_backup_path }}"
+    path: "{{ network_backup_path_root }}"
     token: "{{ data_store.scm.origin.get('token') if data_store.scm.origin.get('token') else omit }}"
     user: "{{ data_store['scm']['origin']['user'] | d({}) }}"
     timeout: 120
     ssh_key_file: "{{ data_store.scm.origin.get('ssh_key_file') if data_store.scm.origin.get('ssh_key_file') else omit }}"
     ssh_key_content: "{{ data_store.scm.origin.get('ssh_key_content') if data_store.scm.origin.get('ssh_key_content') else omit }}"
   when: tag is not defined
+  tags: always
 
 - name: Remove cloned repository directory
   ansible.builtin.file:
     path: "{{ network_backup_path_root }}"
     state: absent
+  tags: always

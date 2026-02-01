@@ -1,6 +1,8 @@
 ---
 - name: Include tasks
   ansible.builtin.include_tasks: validation.yaml
+  tags: always
 
 - name: Run the platform specific tasks
   ansible.builtin.include_tasks: "backup.yaml"
+  tags: always

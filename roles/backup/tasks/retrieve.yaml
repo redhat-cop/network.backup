@@ -2,9 +2,11 @@
 - name: Set Default Path
   ansible.builtin.set_fact:
     default_path: "{{ role_path }}"
+  tags: always
 
 - name: Perform retrieve with provided credentials
   when: data_store.scm.origin.token is defined
+  tags: always
   block:
     - name: Retrieve the host vars with provided token access
       ansible.scm.git_retrieve:
@@ -13,14 +15,37 @@
           token: "{{ data_store['scm']['origin']['token'] }}"
         parent_directory: "{{ data_store.scm.parent_directory | default(default_path) }}"
       register: resource_manager_result
+      tags: always
 
     - name: Update data store path
       ansible.builtin.set_fact:
         network_backup_repository: "{{ resource_manager_result }}"
+      tags: always
 
 - name: Perform retrieve with default settings or SSH key
   when: data_store.scm.origin.token is undefined
+  tags: always
   block:
+    - name: Set repository path
+      ansible.builtin.set_fact:
+        repo_local_path: "{{ data_store.scm.parent_directory | default(default_path) }}/{{ data_store['scm']['origin']['url'].split('/')[-1] | regex_replace('\\.git$', '') }}"
+      tags: always
+
+    - name: Check if repository directory already exists
+      ansible.builtin.stat:
+        path: "{{ repo_local_path }}"
+      register: repo_dir_stat
+      tags: always
+
+    - name: Pull latest changes if repository exists
+      ansible.builtin.command:
+        cmd: git -C {{ repo_local_path }} pull origin main
+      register: git_pull_result
+      changed_when: "'Already up to date' not in git_pull_result.stdout"
+      failed_when: false
+      when: repo_dir_stat.stat.exists | default(false)
+      tags: always
+
     - name: Retrieve host vars with default access or SSH key
       ansible.scm.git_retrieve:
         origin:
@@ -29,11 +54,29 @@
           ssh_key_content: "{{ data_store['scm']['origin'].ssh_key_content | default(omit) }}"
         parent_directory: "{{ data_store.scm.parent_directory | default(default_path) }}"
       register: resource_manager_result
+      failed_when: false
+      when: not (repo_dir_stat.stat.exists | default(false))
+      tags: always
 
-    - name: Update data store path
+    - name: Set repository path when directory already exists
+      ansible.builtin.set_fact:
+        network_backup_repository:
+          path: "{{ repo_local_path }}"
+      when: repo_dir_stat.stat.exists | default(false)
+      tags: always
+
+    - name: Update data store path from git_retrieve result
       ansible.builtin.set_fact:
         network_backup_repository: "{{ resource_manager_result }}"
+      when: 
+        - resource_manager_result is defined
+        - resource_manager_result.path is defined
+        - not (repo_dir_stat.stat.exists | default(false))
+      tags: always
 
 - name: Update Inventory Path
   ansible.builtin.set_fact:
+    # Use the actual repository path from git_retrieve or existing repo
+    # This path is used by backup.yaml to set network_backup_path_root
     network_backup_path: "{{ network_backup_repository['path'] }}"
+  tags: always

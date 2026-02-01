@@ -17,6 +17,7 @@ This role supports full and differential backups, storing them locally or in a r
 - Backs up the configuration **only if** there are changes compared to the last saved version.
 - Works with both local and Git-based data stores.
 - Helps reduce storage and SCM noise by saving only when diff exists.
+- **Ignores timestamps and metadata** - only detects actual configuration changes.
 
 ---
 
@@ -34,8 +35,8 @@ This role supports full and differential backups, storing them locally or in a r
 | `data_store.scm.origin.path` | Directory path inside the repo to save backup | `str` | No | N/A |
 | `data_store.scm.origin.ssh_key_file` | Path to the SSH private key file for Git authentication | `str` | Yes (if using SCM SSH) | N/A |
 | `data_store.scm.origin.ssh_key_content` | The content of the SSH private key | `str` | Yes (if using SCM SSH) | N/A |
+| `type` | Type of backup to perform. Options: `"full"`, `"incremental"`, or `"diff"` | `str` | No | `"full"` |
 
-> Note: Either `data_store.local` or `data_store.scm` must be provided.
 
 ---
 
@@ -135,6 +136,32 @@ This role supports full and differential backups, storing them locally or in a r
               filename: "{{ ansible_date_time.date }}_{{ inventory_hostname }}.txt"
               path: "backups/{{ ansible_date_time.date }}/{{ inventory_hostname }}"
 ```
+
+### Create Differential Backup (Only Publish if Config Changed)
+
+```yaml
+- name: Create Network Backup and Push to GitHub
+  hosts: network
+  gather_facts: false
+  tasks:
+    - name: Create Network Backup
+      ansible.builtin.include_role:
+        name: network.backup.backup
+      vars:
+        type: "diff"  # Enable differential backup
+        data_store:
+          scm:
+            origin:
+              user:
+                name: "your_name"
+                email: "your_email@example.com"
+              url: "git@github.com:youruser/your-backup-repo.git"
+              ssh_key_file: "/path/to/ssh/key"
+              filename: "{{ ansible_date_time.date }}_{{ inventory_hostname }}.txt"
+              path: "backups/{{ ansible_date_time.date }}/{{ inventory_hostname }}"
+```
+
+> **Note**: With `type: "diff"`, the backup will only be published to SCM if actual configuration changes are detected. Timestamps and metadata differences are ignored. See [Differential Backup Documentation](Differential_Backup_Documentation.md) for more details.
 
 ## License
 
