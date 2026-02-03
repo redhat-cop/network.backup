@@ -1,0 +1,309 @@
+---
+# Diff severity scoring for configuration changes
+# Analyzes configuration diffs and assigns severity scores
+# Uses rules-based approach with optional ML enhancement
+# 
+# To enable ML: Set enable_ml_scoring=true and provide ml_model_path
+# ML requires: scikit-learn, joblib (install via pip)
+
+- name: Set default backup type
+  ansible.builtin.set_fact:
+    backup_type: "{{ type | default('full') }}"
+  tags: always
+
+- name: Check if severity scoring is enabled
+  ansible.builtin.set_fact:
+    severity_scoring_enabled: "{{ enable_severity_scoring | default(false) }}"
+  tags: always
+
+- name: Skip severity scoring if not enabled or no previous backup
+  ansible.builtin.set_fact:
+    skip_severity_scoring: "{{ not severity_scoring_enabled or backup_type != 'diff' or normalized_previous_backup is not defined or normalized_previous_backup == '' }}"
+  tags: always
+
+- name: Debug severity scoring skip condition
+  ansible.builtin.debug:
+    msg: |
+      Severity Scoring Debug:
+      - severity_scoring_enabled: {{ severity_scoring_enabled | default('NOT SET') }}
+      - backup_type: {{ backup_type | default('NOT SET') }}
+      - normalized_previous_backup is defined: {{ normalized_previous_backup is defined }}
+      - normalized_previous_backup length: {{ normalized_previous_backup | default('') | length }}
+      - skip_severity_scoring: {{ skip_severity_scoring | default('NOT SET') }}
+  when:
+    - data_store['scm']['origin'] is defined
+    - debug_severity | default(false) | bool
+  tags: always
+
+- name: Write normalized previous backup to temp file
+  ansible.builtin.copy:
+    content: "{{ normalized_previous_backup }}"
+    dest: "/tmp/prev_backup_{{ inventory_hostname }}.txt"
+    mode: '0600'
+  delegate_to: localhost
+  when:
+    - not skip_severity_scoring | default(true)
+    - data_store['scm']['origin'] is defined
+  tags: always
+
+- name: Write normalized current backup to temp file
+  ansible.builtin.copy:
+    content: "{{ normalized_current }}"
+    dest: "/tmp/curr_backup_{{ inventory_hostname }}.txt"
+    mode: '0600'
+  delegate_to: localhost
+  when:
+    - not skip_severity_scoring | default(true)
+    - data_store['scm']['origin'] is defined
+  tags: always
+
+- name: Extract diff lines between previous and current backup
+  ansible.builtin.shell: |
+    diff -u /tmp/prev_backup_{{ inventory_hostname }}.txt /tmp/curr_backup_{{ inventory_hostname }}.txt || true
+  register: diff_output
+  changed_when: false
+  delegate_to: localhost
+  when:
+    - not skip_severity_scoring | default(true)
+    - data_store['scm']['origin'] is defined
+  tags: always
+
+- name: Save diff output to file for ML processing
+  ansible.builtin.copy:
+    content: "{{ diff_output.stdout | default('') }}"
+    dest: "/tmp/diff_output_{{ inventory_hostname }}.txt"
+    mode: '0600'
+  delegate_to: localhost
+  when:
+    - not skip_severity_scoring | default(true)
+    - data_store['scm']['origin'] is defined
+    - enable_ml_scoring | default(false) | bool
+  tags: always
+
+- name: Cleanup temp backup files (keep diff file for ML)
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: absent
+  delegate_to: localhost
+  loop:
+    - "/tmp/prev_backup_{{ inventory_hostname }}.txt"
+    - "/tmp/curr_backup_{{ inventory_hostname }}.txt"
+  when:
+    - not skip_severity_scoring | default(true)
+    - data_store['scm']['origin'] is defined
+  tags: always
+
+- name: Load and execute parsers for feature extraction
+  ansible.builtin.include_tasks: load_parsers.yaml
+  when:
+    - not skip_severity_scoring | default(true)
+    - data_store['scm']['origin'] is defined
+  tags: alwayss
+
+- name: Calculate severity score (Rules-based scoring)
+  ansible.builtin.set_fact:
+    severity_score: >-
+      {{
+        (diff_features.bgp_changes | default(0) | int) * 10 +
+        (diff_features.acl_changes | default(0) | int) * 10 +
+        (diff_features.security_changes | default(0) | int) * 10 +
+        (diff_features.routing_changes | default(0) | int) * 5 +
+        (diff_features.vlan_changes | default(0) | int) * 5 +
+        (diff_features.description_changes | default(0) | int) * 1 +
+        ([0, ((diff_features.interface_changes | default(0) | int) - (diff_features.description_changes | default(0) | int))] | max) * 2
+      }}
+  when:
+    - not skip_severity_scoring | default(true)
+    - data_store['scm']['origin'] is defined
+    - diff_features is defined
+  tags: always
+
+- name: Determine severity level based on score
+  ansible.builtin.set_fact:
+    severity_level: >-
+      {{
+        'CRITICAL' if (severity_score | default(0) | int) >= 20
+        else ('HIGH' if (severity_score | default(0) | int) >= 10
+        else ('MEDIUM' if (severity_score | default(0) | int) >= 5
+        else 'LOW'))
+      }}
+  when:
+    - not skip_severity_scoring | default(true)
+    - data_store['scm']['origin'] is defined
+    - severity_score is defined
+  tags: always
+
+- name: Check if ML scoring is enabled
+  ansible.builtin.set_fact:
+    ml_scoring_enabled: "{{ enable_ml_scoring | default(false) | bool }}"
+    ml_model_path_clean: "{{ ml_model_path | default('') | string }}"
+  when:
+    - not skip_severity_scoring | default(true)
+    - data_store['scm']['origin'] is defined
+  tags: always
+
+- name: Debug ML configuration
+  ansible.builtin.debug:
+    msg: |
+      ML Configuration Debug:
+      - enable_ml_scoring: {{ enable_ml_scoring | default('NOT SET') }}
+      - ml_scoring_enabled: {{ ml_scoring_enabled | default('NOT SET') }}
+      - ml_model_path: {{ ml_model_path | default('NOT SET') }}
+      - ml_model_path is defined: {{ ml_model_path is defined }}
+  when:
+    - not skip_severity_scoring | default(true)
+    - data_store['scm']['origin'] is defined
+    - debug_ml | default(false) | bool
+  tags: always
+
+- name: Copy ML scoring script to temp location
+  ansible.builtin.copy:
+    src: "{{ role_path }}/files/diff_severity_ml.py"
+    dest: "/tmp/diff_severity_ml.py"
+    mode: '0755'
+  delegate_to: localhost
+  when:
+    - not skip_severity_scoring | default(true)
+    - ml_scoring_enabled | default(false) | bool
+    - data_store['scm']['origin'] is defined
+  tags: always
+
+- name: Check if ML model file exists
+  ansible.builtin.stat:
+    path: "{{ ml_model_path_clean }}"
+  register: ml_model_file
+  delegate_to: localhost
+  when:
+    - not skip_severity_scoring | default(true)
+    - ml_scoring_enabled | default(false) | bool
+    - data_store['scm']['origin'] is defined
+    - ml_model_path_clean is defined
+    - ml_model_path_clean != ''
+  tags: always
+
+- name: Run ML-based severity scoring (if enabled)
+  ansible.builtin.shell: |
+    python3 /tmp/diff_severity_ml.py /tmp/diff_output_{{ inventory_hostname }}.txt {{ ml_model_path_clean }}
+  register: ml_scoring_result
+  changed_when: false
+  delegate_to: localhost
+  when:
+    - not skip_severity_scoring | default(true)
+    - ml_scoring_enabled | default(false) | bool
+    - data_store['scm']['origin'] is defined
+    - ml_model_path_clean is defined
+    - ml_model_path_clean != ''
+    - ml_model_file.stat.exists | default(false)
+  failed_when: false
+  tags: always
+
+- name: Debug ML scoring result
+  ansible.builtin.debug:
+    msg: |
+      ML Scoring Result Debug:
+      - ml_scoring_result.rc: {{ ml_scoring_result.rc | default('NOT SET') }}
+      - ml_scoring_result.stdout: {{ ml_scoring_result.stdout | default('NOT SET') | truncate(200) }}
+      - ml_scoring_result.stderr: {{ ml_scoring_result.stderr | default('NOT SET') | truncate(200) }}
+  when:
+    - not skip_severity_scoring | default(true)
+    - ml_scoring_enabled | default(false) | bool
+    - ml_scoring_result is defined
+    - debug_ml | default(false) | bool
+  tags: always
+
+- name: Cleanup ML temp files (after ML processing)
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: absent
+  delegate_to: localhost
+  loop:
+    - "/tmp/diff_output_{{ inventory_hostname }}.txt"
+    - "/tmp/diff_severity_ml.py"
+  when:
+    - not skip_severity_scoring | default(true)
+    - data_store['scm']['origin'] is defined
+  tags: always
+
+- name: Parse ML scoring results
+  ansible.builtin.set_fact:
+    ml_result_json: "{{ ml_scoring_result.stdout | from_json }}"
+  when:
+    - not skip_severity_scoring | default(true)
+    - ml_scoring_enabled | default(false) | bool
+    - ml_scoring_result.stdout is defined
+    - ml_scoring_result.rc == 0
+  tags: always
+
+- name: Extract ML scoring values
+  ansible.builtin.set_fact:
+    ml_severity_level: "{{ ml_result_json.final.level | default('N/A') }}"
+    ml_severity_confidence: "{{ ml_result_json.final.confidence | default(omit) }}"
+    ml_scoring_method: "{{ ml_result_json.final.method | default('ML') }}"
+  when:
+    - not skip_severity_scoring | default(true)
+    - ml_scoring_enabled | default(false) | bool
+    - ml_result_json is defined
+    - ml_result_json.final is defined
+  tags: always
+
+- name: Use ML results if available, otherwise use rules-based
+  ansible.builtin.set_fact:
+    final_severity_level: "{{ ml_severity_level | default(severity_level) }}"
+    final_severity_score: "{{ severity_score }}"
+    scoring_method: "{{ ml_scoring_method | default('Rules-based') }}"
+    ml_confidence: "{{ ml_severity_confidence | default(omit) }}"
+  when:
+    - not skip_severity_scoring | default(true)
+    - severity_level is defined
+  tags: always
+
+- name: Display severity scoring results
+  ansible.builtin.debug:
+    msg: |
+      ============================================
+      DIFF SEVERITY SCORING RESULTS
+      ============================================
+      Scoring Method: {{ scoring_method | default('Rules-based') }}
+      Severity Level: {{ final_severity_level | default('N/A') }}
+      Severity Score: {{ final_severity_score | default('N/A') }}
+      {% if ml_confidence is defined %}
+      ML Confidence: {{ ml_confidence | round(2) }}
+      {% endif %}
+      
+      Change Features Detected:
+        - BGP Changes: {{ diff_features.bgp_changes | default(0) }}
+        - ACL Changes: {{ diff_features.acl_changes | default(0) }}
+        - Security Changes: {{ diff_features.security_changes | default(0) }}
+        - Routing Changes: {{ diff_features.routing_changes | default(0) }}
+        - VLAN Changes: {{ diff_features.vlan_changes | default(0) }}
+        - Interface Changes: {{ diff_features.interface_changes | default(0) }}
+        - Description Changes: {{ diff_features.description_changes | default(0) }}
+        - Total Changes: {{ diff_features.total_changes | default(0) }}
+      
+      Recommended Action:
+        {% if final_severity_level | default('') == 'CRITICAL' %}
+        ⚠️  CRITICAL: Manual review required before merge
+        {% elif final_severity_level | default('') == 'HIGH' %}
+        ⚠️  HIGH: Review recommended
+        {% elif final_severity_level | default('') == 'MEDIUM' %}
+        ℹ️  MEDIUM: Team notification sent
+        {% else %}
+        ✓ LOW: Auto-approve safe
+        {% endif %}
+      ============================================
+  when:
+    - not skip_severity_scoring | default(true)
+    - final_severity_level is defined
+  tags: always
+
+- name: Fail on critical severity if auto-rollback enabled
+  ansible.builtin.fail:
+    msg: |
+      CRITICAL severity change detected (Score: {{ severity_score }}).
+      Auto-rollback is enabled. Backup will not be published.
+      Please review changes manually before proceeding.
+  when:
+    - not skip_severity_scoring | default(true)
+    - severity_level | default('') == 'CRITICAL'
+    - auto_rollback_on_critical | default(false)
+  tags: always

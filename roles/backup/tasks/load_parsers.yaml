@@ -1,0 +1,107 @@
+---
+# Load and execute parsers for feature extraction
+# This task loads all parser definitions and applies them to the diff output
+
+- name: Find all parser definition files
+  ansible.builtin.find:
+    paths: "{{ role_path }}/parsers"
+    patterns: "*_parser.yaml"
+    recurse: false
+  register: parser_files
+  delegate_to: localhost
+  changed_when: false
+  tags: always
+
+- name: Load parser definitions
+  ansible.builtin.set_fact:
+    loaded_parsers: "{{ loaded_parsers | default([]) + [lookup('file', item.path) | from_yaml] }}"
+  loop: "{{ parser_files.files | default([]) }}"
+  loop_control:
+    label: "{{ item.path | basename }}"
+  delegate_to: localhost
+  when: parser_files.files is defined
+  tags: always
+
+- name: Initialize diff_features dictionary
+  ansible.builtin.set_fact:
+    diff_features: {}
+  tags: always
+
+- name: Execute each parser to extract features
+  ansible.builtin.set_fact:
+    diff_features: "{{ diff_features | combine({item.feature_name: ((diff_output.stdout | default('') | regex_findall(item.patterns.add | join('|'), multiline=True) | length) + (diff_output.stdout | default('') | regex_findall(item.patterns.remove | join('|'), multiline=True) | length))}) }}"
+  loop: "{{ loaded_parsers | default([]) }}"
+  loop_control:
+    label: "{{ item.parser_name }}"
+  when:
+    - not skip_severity_scoring | default(true)
+    - data_store['scm']['origin'] is defined
+    - loaded_parsers is defined
+  tags: always
+
+- name: Fix description_changes counting (count modifications as 1, not 2)
+  ansible.builtin.set_fact:
+    # For description changes: count as max(add, remove) to avoid double-counting modifications
+    # When a description is changed: 1 remove + 1 add = 1 change (not 2)
+    description_add_count: "{{ diff_output.stdout | default('') | regex_findall('^\\+\\s*description', multiline=True) | length }}"
+    description_remove_count: "{{ diff_output.stdout | default('') | regex_findall('^-\\s*description', multiline=True) | length }}"
+  when:
+    - not skip_severity_scoring | default(true)
+    - data_store['scm']['origin'] is defined
+    - diff_features is defined
+    - diff_features.description_changes is defined
+  tags: always
+
+- name: Set description_changes to max of add/remove counts
+  ansible.builtin.set_fact:
+    diff_features: "{{ diff_features | combine({'description_changes': (
+      [description_add_count | default(0) | int, description_remove_count | default(0) | int] | max
+    )}) }}"
+  when:
+    - not skip_severity_scoring | default(true)
+    - data_store['scm']['origin'] is defined
+    - diff_features is defined
+    - description_add_count is defined
+    - description_remove_count is defined
+  tags: always
+
+- name: Calculate total changes count (sum of all detected features)
+  ansible.builtin.set_fact:
+    # Total changes = sum of all detected feature changes
+    # This ensures we only count actual config changes, not metadata
+    diff_features: "{{ diff_features | combine({'total_changes': (diff_features.bgp_changes | default(0) | int) + (diff_features.acl_changes | default(0) | int) + (diff_features.security_changes | default(0) | int) + (diff_features.routing_changes | default(0) | int) + (diff_features.vlan_changes | default(0) | int) + (diff_features.interface_changes | default(0) | int) + (diff_features.description_changes | default(0) | int)}) }}"
+  when:
+    - not skip_severity_scoring | default(true)
+    - data_store['scm']['origin'] is defined
+    - diff_features is defined
+  tags: always
+
+- name: Display parser execution summary
+  ansible.builtin.debug:
+    msg: |
+      Parser Execution Summary:
+      Parsers Loaded: {{ loaded_parsers | default([]) | length }}
+      Features Detected:
+      {% for feature, count in diff_features.items() %}
+        - {{ feature }}: {{ count }}
+      {% endfor %}
+  when:
+    - not skip_severity_scoring | default(true)
+    - data_store['scm']['origin'] is defined
+    - debug_parsers | default(false)
+  tags: always
+
+- name: Debug description parser pattern matching
+  ansible.builtin.debug:
+    msg: |
+      Description Parser Debug:
+      - Pattern (add): {{ loaded_parsers | selectattr('parser_name', 'equalto', 'description_parser') | map(attribute='patterns.add') | first | default('NOT FOUND') }}
+      - Pattern (remove): {{ loaded_parsers | selectattr('parser_name', 'equalto', 'description_parser') | map(attribute='patterns.remove') | first | default('NOT FOUND') }}
+      - Diff lines matching add pattern: {{ diff_output.stdout | default('') | regex_findall('^\\+\\s*description', multiline=True) | length }}
+      - Diff lines matching remove pattern: {{ diff_output.stdout | default('') | regex_findall('^-\\s*description', multiline=True) | length }}
+      - Sample diff lines with 'description': {{ diff_output.stdout | default('') | regex_findall('.*description.*', multiline=True) | list | first(5) | join('\n') }}
+  when:
+    - not skip_severity_scoring | default(true)
+    - data_store['scm']['origin'] is defined
+    - debug_parsers | default(false)
+  tags: always

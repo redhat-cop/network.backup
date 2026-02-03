@@ -26,6 +26,8 @@
       -e '/^!Time:/d' \
       -e '/^!NVRAM config last updated at:/d' \
       -e '/^!No configuration change since last restart/d' \
+      -e '/^Current configuration :/d' \
+      -e '/^Building configuration/d' \
       "{{ network_backup_path }}/{{ network_backup_filename }}" | grep -v '^[[:space:]]*$'
   register: normalized_previous_result
   changed_when: false

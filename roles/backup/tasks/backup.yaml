@@ -10,16 +10,97 @@
   run_once: true
   tags: always
 
-- name: Get scm url - Use actual repo path from retrieve.yaml
+- name: Propagate network_backup_path to all hosts (from first host that ran retrieve)
   ansible.builtin.set_fact:
-    network_backup_path_root: "{{ network_backup_path | default(role_path ~ '/' ~ (data_store.scm.origin.url.split('/')[-1] | regex_replace('\\.git$', ''))) }}"
+    network_backup_path: "{{ hostvars[groups['all'][0]]['network_backup_path'] | default(network_backup_path) }}"
+  when: 
+    - data_store['scm']['origin'] is defined
+    - network_backup_path is not defined or network_backup_path == ""
+  tags: always
+
+- name: Get scm url - Use actual repo path from retrieve.yaml or calculate from parent_directory
+  ansible.builtin.set_fact:
+    network_backup_path_root: >-
+      {{
+        network_backup_path | default(
+          (data_store.scm.parent_directory | default(role_path)) ~ '/' ~
+          (data_store.scm.origin.url.split('/')[-1] | regex_replace('\\.git$', ''))
+        )
+      }}
   when: data_store['scm']['origin'] is defined
   tags: always
 
-- name: Get file name
+- name: Ensure network_backup_path_root is valid (not root or empty)
   ansible.builtin.set_fact:
-    network_backup_path: "{{ network_backup_path_root }}/{{ data_store.scm.origin.path | default(role_path, true) }}"
-  when: data_store['scm']['origin'] is defined
+    network_backup_path_root: "{{ role_path ~ '/' ~ (data_store.scm.origin.url.split('/')[-1] | regex_replace('\\.git$', '')) }}"
+  when: 
+    - data_store['scm']['origin'] is defined
+    - network_backup_path_root is not defined or network_backup_path_root == "" or network_backup_path_root == "/"
+  tags: always
+
+- name: Debug path construction
+  ansible.builtin.debug:
+    msg: |
+      Path Debug Info:
+      - network_backup_path_root: {{ network_backup_path_root | default('NOT SET') }}
+      - data_store.scm.origin.path: {{ data_store.scm.origin.path | default('NOT SET') }}
+      - role_path: {{ role_path | default('NOT SET') }}
+  when: 
+    - data_store['scm']['origin'] is defined
+    - debug_paths | default(false)
+  tags: always
+
+- name: Get file name - construct full backup path
+  ansible.builtin.set_fact:
+    network_backup_path: "{{ network_backup_path_root }}/{{ data_store.scm.origin.path | default('', true) }}"
+  when: 
+    - data_store['scm']['origin'] is defined
+    - data_store.scm.origin.path is defined
+    - data_store.scm.origin.path != ""
+  tags: always
+
+- name: Set network_backup_path to root if path not provided
+  ansible.builtin.set_fact:
+    network_backup_path: "{{ network_backup_path_root }}"
+  when: 
+    - data_store['scm']['origin'] is defined
+    - data_store.scm.origin.path is not defined or data_store.scm.origin.path == ""
+  tags: always
+
+- name: Ensure network_backup_path is absolute and expand user home
+  ansible.builtin.set_fact:
+    network_backup_path: "{{ network_backup_path | expanduser }}"
+  when: 
+    - data_store['scm']['origin'] is defined
+    - network_backup_path is defined
+  tags: always
+
+- name: Validate network_backup_path is not root directory
+  ansible.builtin.assert:
+    that:
+      - network_backup_path != "/"
+      - network_backup_path != ""
+      - "'/backups' not in network_backup_path or network_backup_path != '/backups'"
+    fail_msg: |
+      Invalid backup path detected: {{ network_backup_path }}
+      Path cannot be root directory (/). 
+      Check network_backup_path_root and data_store.scm.origin.path configuration.
+    success_msg: "Backup path validated: {{ network_backup_path }}"
+  when: 
+    - data_store['scm']['origin'] is defined
+    - network_backup_path is defined
+  tags: always
+
+- name: Debug final backup path (enable with -e debug_paths=true)
+  ansible.builtin.debug:
+    msg: |
+      Final Backup Path Debug:
+      - network_backup_path_root: {{ network_backup_path_root | default('NOT SET') }}
+      - network_backup_path: {{ network_backup_path | default('NOT SET') }}
+      - data_store.scm.origin.path: {{ data_store.scm.origin.path | default('NOT SET') }}
+  when: 
+    - data_store['scm']['origin'] is defined
+    - debug_paths | default(false)
   tags: always
 
 - name: Get timestamp
@@ -45,9 +126,20 @@
   ansible.builtin.include_tasks: network.yaml
   tags: always
 
+- name: Calculate SHA-256 hash of backup file
+  ansible.builtin.include_tasks: hash_verification.yaml
+  tags: always
+
 - name: Check for differential backup (SCM only)
   ansible.builtin.include_tasks: differential_scm.yaml
   when: data_store['scm']['origin'] is defined
+  tags: always
+
+- name: Calculate diff severity score
+  ansible.builtin.include_tasks: diff_severity_scoring.yaml
+  when: 
+    - data_store['scm']['origin'] is defined
+    - backup_has_changes | default(true)
   tags: always
 
 - name: Include build tasks

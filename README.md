@@ -7,9 +7,9 @@
 ## About
 - The Ansible Network Backup Validated Content provides a comprehensive solution for managing network backups and restores across supported network platforms. This validated content offers two key functionalities: `backup` and `restore`, each designed to be platform-agnostic and user-friendly.
 
-- The `backup` role allows users to create, compare, and tag backups, supporting both local and remote data stores. This ensures that network configurations are regularly and securely backed up, providing a reliable method to safeguard network infrastructure.
+- The `backup` role allows users to create, compare, and tag backups, supporting both local and remote data stores. This ensures that network configurations are regularly and securely backed up, providing a reliable method to safeguard network infrastructure. The role includes SHA-256 hash verification to ensure backup file integrity and detect tampering or corruption.
 
-- The `restore` role enables users to fetch backups from local or remote data stores and perform configuration restores. This functionality ensures that network configurations can be swiftly and accurately restored when needed, minimizing downtime and maintaining network stability.
+- The `restore` role enables users to fetch backups from local or remote data stores and perform configuration restores. This functionality ensures that network configurations can be swiftly and accurately restored when needed, minimizing downtime and maintaining network stability. The role automatically verifies backup file integrity using SHA-256 hashes before restoring, preventing corrupted or tampered configurations from being applied.
 
 - The Network Backup Content is ideal for system administrators and IT professionals who need to manage and maintain network infrastructure, automate the backup and restore process, and ensure data is regularly and securely backed up and available for restoration as required.
 
@@ -71,6 +71,13 @@ ansible-galaxy collection install network.backup
 **Restore Configuration**:
 - Allows users to restore a previously backed-up configuration.
 - Users can compare the running configuration with the backup to identify differences and restore the configuration only if differences are found.
+- Automatically verifies backup file integrity using SHA-256 hashes before restoring, ensuring corrupted or tampered files are not applied.
+
+**Hash Verification**:
+- Calculates SHA-256 hashes for all backup files to ensure data integrity.
+- Stores hash files alongside backup files for easy verification.
+- Automatically verifies backup file integrity during restore operations.
+- Prevents restoring corrupted or tampered configurations.
 
 ## Testing
 

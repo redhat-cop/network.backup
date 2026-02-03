@@ -19,6 +19,13 @@ This role supports full and differential backups, storing them locally or in a r
 - Helps reduce storage and SCM noise by saving only when diff exists.
 - **Ignores timestamps and metadata** - only detects actual configuration changes.
 
+### SHA-256 Hash Verification
+- Calculates SHA-256 hash for every backup file to ensure data integrity.
+- Stores hash in a separate `.sha256` file alongside the backup file.
+- Provides cryptographic proof of backup file integrity.
+- Enables detection of file corruption or tampering.
+- Hash files are automatically created and stored with backups.
+
 ---
 
 ## Role Variables
@@ -36,7 +43,9 @@ This role supports full and differential backups, storing them locally or in a r
 | `data_store.scm.origin.ssh_key_file` | Path to the SSH private key file for Git authentication | `str` | Yes (if using SCM SSH) | N/A |
 | `data_store.scm.origin.ssh_key_content` | The content of the SSH private key | `str` | Yes (if using SCM SSH) | N/A |
 | `type` | Type of backup to perform. Options: `"full"`, `"incremental"`, or `"diff"` | `str` | No | `"full"` |
+| `enable_hash_file` | Enable SHA-256 hash file creation. When `true`, creates a `.sha256` file alongside the backup file | `bool` | No | `true` |
 
+> **Note**: When `enable_hash_file` is enabled (default), the role creates a hash file with the same name as the backup file but with a `.sha256` extension. For example, if the backup file is `ios_device_backup.txt`, the hash file will be `ios_device_backup.txt.sha256`. The hash file contains the SHA-256 hash of the backup file and can be used to verify backup integrity during restore operations.
 
 ---
 
@@ -162,6 +171,32 @@ This role supports full and differential backups, storing them locally or in a r
 ```
 
 > **Note**: With `type: "diff"`, the backup will only be published to SCM if actual configuration changes are detected. Timestamps and metadata differences are ignored. See [Differential Backup Documentation](Differential_Backup_Documentation.md) for more details.
+
+### Create Backup with Hash Verification
+
+```yaml
+- name: Create Network Backup with Hash Verification
+  hosts: network
+  gather_facts: false
+  tasks:
+    - name: Create Network Backup
+      ansible.builtin.include_role:
+        name: network.backup.backup
+      vars:
+        enable_hash_file: true  # Enable hash file creation (default)
+        data_store:
+          scm:
+            origin:
+              user:
+                name: "your_name"
+                email: "your_email@example.com"
+              url: "git@github.com:youruser/your-backup-repo.git"
+              ssh_key_file: "/path/to/ssh/key"
+              filename: "{{ ansible_date_time.date }}_{{ inventory_hostname }}.txt"
+              path: "backups/{{ ansible_date_time.date }}/{{ inventory_hostname }}"
+```
+
+> **Note**: When `enable_hash_file: true` (default), the role creates a `.sha256` file alongside the backup file. This hash file contains the SHA-256 hash of the backup file and is used by the restore role to verify backup integrity before restoring. The hash file is automatically stored in the same location as the backup file.
 
 ## License
 

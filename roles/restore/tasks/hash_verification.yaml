@@ -1,0 +1,66 @@
+---
+# Hash verification for restore operations
+# Verifies backup file integrity before restore
+
+- name: Check if hash verification is enabled
+  ansible.builtin.set_fact:
+    verify_hash: "{{ verify_backup_hash | default(true) }}"
+  tags: always
+
+- name: Read SHA-256 hash file if it exists
+  ansible.builtin.stat:
+    path: "{{ network_restore_backup_path }}/{{ network_backup_restore_filename | regex_replace('\\.txt$', '') }}.sha256"
+  register: hash_file_stat
+  delegate_to: localhost
+  when: verify_hash
+  tags: always
+
+- name: Extract expected hash from hash file
+  ansible.builtin.shell: |
+    grep "SHA-256 Hash:" "{{ network_restore_backup_path }}/{{ network_backup_restore_filename | regex_replace('\\.txt$', '') }}.sha256" | awk '{print $3}'
+  register: expected_hash_result
+  changed_when: false
+  delegate_to: localhost
+  when:
+    - verify_hash
+    - hash_file_stat.stat.exists | default(false)
+  tags: always
+
+- name: Calculate actual hash of backup file
+  ansible.builtin.shell: |
+    sha256sum "{{ network_restore_backup_path }}/{{ network_backup_restore_filename }}" | awk '{print $1}'
+  register: actual_hash_result
+  changed_when: false
+  delegate_to: localhost
+  when: verify_hash
+  tags: always
+
+- name: Verify backup file integrity
+  ansible.builtin.assert:
+    that:
+      - not verify_hash or hash_file_stat.stat.exists | default(false) == false or expected_hash_result.stdout == actual_hash_result.stdout
+    fail_msg: |
+      Backup file integrity check FAILED!
+      Expected Hash: {{ expected_hash_result.stdout | default('N/A') }}
+      Actual Hash: {{ actual_hash_result.stdout | default('N/A') }}
+      The backup file may be corrupted or tampered with.
+      Restore operation aborted for safety.
+    success_msg: |
+      Backup file integrity verified successfully.
+      SHA-256 Hash: {{ actual_hash_result.stdout }}
+  when: verify_hash
+  tags: always
+
+- name: Display hash verification result
+  ansible.builtin.debug:
+    msg: |
+      ============================================
+      BACKUP FILE INTEGRITY VERIFICATION
+      ============================================
+      Backup File: {{ network_backup_restore_filename }}
+      Expected Hash: {{ expected_hash_result.stdout | default('Hash file not found - skipping verification') }}
+      Actual Hash: {{ actual_hash_result.stdout | default('N/A') }}
+      Status: {{ '✓ VERIFIED' if (expected_hash_result.stdout | default('') == actual_hash_result.stdout | default('')) else '⚠️  HASH FILE NOT FOUND' }}
+      ============================================
+  when: verify_hash
+  tags: always

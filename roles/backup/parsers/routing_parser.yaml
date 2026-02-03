@@ -1,0 +1,19 @@
+---
+# Routing Configuration Parser
+# Detects routing-related configuration changes
+# Weight: 5 points per change
+
+parser_name: routing_parser
+feature_name: routing_changes
+weight: 5
+description: "Detects routing configuration changes (static routes, routing protocols)"
+
+patterns:
+  add:
+    - '^\\+ip\\s+route'
+    - '^\\+router\\s+'
+    - '^\\+ipv6\\s+route'
+  remove:
+    - '^-ip\\s+route'
+    - '^-router\\s+'
+    - '^-ipv6\\s+route'
