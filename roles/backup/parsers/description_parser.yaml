@@ -1,0 +1,19 @@
+---
+# Description Configuration Parser
+# Detects interface description changes (lowest risk)
+# Weight: 1 point per change
+
+parser_name: description_parser
+feature_name: description_changes
+weight: 1
+description: "Detects interface description changes (lowest risk changes)"
+
+patterns:
+  add:
+    # Match: + description <value> or +description <value>
+    # Pattern: + (optional space) description (space or end of line)
+    - "^\\+\\s*description(\\s|$)"
+  remove:
+    # Match: - description <value> or -description <value>
+    # Pattern: - (optional space) description (space or end of line)
+    - "^-\\s*description(\\s|$)"

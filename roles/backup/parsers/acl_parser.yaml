@@ -1,0 +1,19 @@
+---
+# ACL Configuration Parser
+# Detects Access Control List configuration changes
+# Weight: 10 points per change
+
+parser_name: acl_parser
+feature_name: acl_changes
+weight: 10
+description: "Detects ACL (Access Control List) configuration changes"
+
+patterns:
+  add:
+    - '^\\+(ip|ipv6)\\s+access-list'
+    - '^\\+ip\\s+access-group'
+    - '^\\+ipv6\\s+access-group'
+  remove:
+    - '^-(ip|ipv6)\\s+access-list'
+    - '^-ip\\s+access-group'
+    - '^-ipv6\\s+access-group'

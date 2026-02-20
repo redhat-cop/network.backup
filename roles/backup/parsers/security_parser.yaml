@@ -1,0 +1,25 @@
+---
+# Security Configuration Parser
+# Detects security-related configuration changes (AAA, TACACS, RADIUS, usernames)
+# Weight: 10 points per change
+
+parser_name: security_parser
+feature_name: security_changes
+weight: 10
+description: "Detects security-related configuration changes (AAA, TACACS, RADIUS, usernames)"
+
+patterns:
+  add:
+    - '^\\+aaa\\s+'
+    - '^\\+tacacs\\s+'
+    - '^\\+radius\\s+'
+    - '^\\+username\\s+'
+    - '^\\+crypto\\s+key'
+    - '^\\+enable\\s+secret'
+  remove:
+    - '^-aaa\\s+'
+    - '^-tacacs\\s+'
+    - '^-radius\\s+'
+    - '^-username\\s+'
+    - '^-crypto\\s+key'
+    - '^-enable\\s+secret'

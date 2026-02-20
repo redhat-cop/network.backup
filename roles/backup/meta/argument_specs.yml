@@ -45,6 +45,13 @@ argument_specs:
             type: dict
             required: false
             options:
+              parent_directory:
+                type: str
+                required: false
+                description:
+                  - Parent directory where the Git repository will be cloned (e.g., /tmp or role_path).
+                  - If not specified, defaults to role_path.
+                  - Best practice: Use temp directory (e.g., /tmp) for isolated operations.
               origin:
                 type: dict
                 required: true

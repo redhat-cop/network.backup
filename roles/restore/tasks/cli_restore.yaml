@@ -2,6 +2,7 @@
 - name: Get current timestamp
   ansible.builtin.set_fact:
     timestamp: "{{ lookup('pipe', 'date +%Y%m%d%H%M%S') }}"
+  tags: always
 
 - name: Set content specific facts
   ansible.builtin.set_fact:
@@ -11,16 +12,18 @@
     delete_path: "{{ role_path }}/tasks/delete"
     health_check_path: "{{ role_path }}/tasks/health_checks"
     delete_backup_from_dest: true
+  tags: always
 
 - name: Check if file copy is possible
   ansible.builtin.include_tasks: "{{ health_check_path }}/{{ network_os }}.yaml"
+  tags: always
 
 - name: Copy file from src to a network device
   ansible.netcommon.net_put:
     src: "{{ network_restore_backup_path }}/{{ network_backup_restore_filename }}"
     dest: "{{ file_name }}.txt"
   when: network_os in ['iosxr', 'nxos', 'eos', 'junos']
-
+  tags: always
 
 - name: Copy file using system SCP CLI as a workaround for ios quirk and libssh SCP
   ansible.builtin.command: >
@@ -32,21 +35,31 @@
   delegate_to: localhost
   when: network_os == "ios"
   changed_when: true
+  tags: always
 
 - name: Prepare appliance for a restore operation
   ansible.builtin.include_tasks: "{{ prepare_path }}/{{ network_os }}.yaml"
+  tags: always
+
+- name: Set default appliance_dir per network OS if not provided
+  ansible.builtin.set_fact:
+    appliance_dir: "{{ appliance_dir | default('flash://' if network_os == 'ios' else 'flash:' if network_os == 'iosxr' else '/var/tmp' if network_os == 'junos' else 'flash:' if network_os == 'nxos' else 'flash:' if network_os == 'eos' else 'flash:') }}"
+  tags: always
 
 - name: Restore operation for {{ network_os }}
   ansible.netcommon.cli_restore:
     filename: "{{ file_name }}.txt"
     path: "{{ appliance_dir }}"
+  tags: always
 
 - name: Delete backup from appliance
   ansible.builtin.include_tasks: "{{ delete_path }}/{{ network_os }}.yaml"
   when: delete_backup_from_dest
+  tags: always
 
 - name: Remove locally cloned repo
   ansible.builtin.file:
     path: "{{ network_restore_backup_repo }}"
     state: absent
   when: data_store.scm.origin.path is defined
+  tags: always

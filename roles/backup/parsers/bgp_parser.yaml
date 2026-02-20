@@ -1,0 +1,17 @@
+---
+# BGP Configuration Parser
+# Detects BGP-related configuration changes
+# Weight: 10 points per change
+
+parser_name: bgp_parser
+feature_name: bgp_changes
+weight: 10
+description: "Detects BGP router configuration changes"
+
+patterns:
+  add:
+    - '^\\+router\\s+bgp'
+    - '^\\+router\\s+bgp\\s+\\d+'
+  remove:
+    - '^-router\\s+bgp'
+    - '^-router\\s+bgp\\s+\\d+'

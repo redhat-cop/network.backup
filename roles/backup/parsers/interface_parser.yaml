@@ -1,0 +1,20 @@
+---
+# Interface Configuration Parser
+# Detects interface-related configuration changes
+# Weight: 2 points per change (excluding descriptions)
+# Note: Description changes are handled separately
+
+parser_name: interface_parser
+feature_name: interface_changes
+weight: 2
+description: "Detects interface configuration changes (excluding descriptions)"
+
+patterns:
+  add:
+    - '^\\+interface\\s+'
+  remove:
+    - '^-interface\\s+'
+
+# Exclude patterns (these should not count as interface changes)
+exclude_patterns:
+  - 'description'

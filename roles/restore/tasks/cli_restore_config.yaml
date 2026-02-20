@@ -2,6 +2,8 @@
 - name: Set content specific facts
   ansible.builtin.set_fact:
     cli_restore_path: "{{ role_path }}/cli_restore"
+  tags: always
 
 - name: Invoke restore operation
   ansible.builtin.include_tasks: "{{ cli_restore_path }}/{{ network_os }}.yaml"
+  tags: always

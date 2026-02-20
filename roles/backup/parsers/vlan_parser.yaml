@@ -1,0 +1,17 @@
+---
+# VLAN Configuration Parser
+# Detects VLAN-related configuration changes
+# Weight: 5 points per change
+
+parser_name: vlan_parser
+feature_name: vlan_changes
+weight: 5
+description: "Detects VLAN configuration changes"
+
+patterns:
+  add:
+    - '^\\+vlan\\s+\\d+'
+    - '^\\+vlan\\s+\\d+\\s+name'
+  remove:
+    - '^-vlan\\s+\\d+'
+    - '^-vlan\\s+\\d+\\s+name'
