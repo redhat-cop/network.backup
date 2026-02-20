@@ -19,6 +19,12 @@ This role supports full and differential backups, storing them locally or in a r
 - Helps reduce storage and SCM noise by saving only when diff exists.
 - **Ignores timestamps and metadata** - only detects actual configuration changes.
 
+### Parser-Based Diff Severity Scoring (SCM / differential only)
+- When using SCM and differential backup, the role can analyze configuration diffs and assign a **severity level** (LOW, MEDIUM, HIGH, CRITICAL) using a **rules-based (parser)** approach.
+- Parsers detect change types (BGP, ACL, security, routing, VLAN, interface, description) and a weighted formula computes a score and level.
+- Optional: fail and do not publish when severity is CRITICAL (`auto_rollback_on_critical`).
+- Severity scoring is **parser-based only** in this collection; no ML dependency.
+
 ### SHA-256 Hash Verification
 - Calculates SHA-256 hash for every backup file to ensure data integrity.
 - Stores hash in a separate `.sha256` file alongside the backup file.
@@ -44,8 +50,12 @@ This role supports full and differential backups, storing them locally or in a r
 | `data_store.scm.origin.ssh_key_content` | The content of the SSH private key | `str` | Yes (if using SCM SSH) | N/A |
 | `type` | Type of backup to perform. Options: `"full"`, `"incremental"`, or `"diff"` | `str` | No | `"full"` |
 | `enable_hash_file` | Enable SHA-256 hash file creation. When `true`, creates a `.sha256` file alongside the backup file | `bool` | No | `true` |
+| `enable_severity_scoring` | When `true` and type is `diff` with SCM, run parser-based diff severity scoring and set severity level/score | `bool` | No | `false` |
+| `auto_rollback_on_critical` | When `true`, fail and do not publish backup if severity level is CRITICAL | `bool` | No | `false` |
 
 > **Note**: When `enable_hash_file` is enabled (default), the role creates a hash file with the same name as the backup file but with a `.sha256` extension. For example, if the backup file is `ios_device_backup.txt`, the hash file will be `ios_device_backup.txt.sha256`. The hash file contains the SHA-256 hash of the backup file and can be used to verify backup integrity during restore operations.
+
+For collection-level architecture (backup/restore flow, severity scoring), see [../../docs/ARCHITECTURE.md](../../docs/ARCHITECTURE.md).
 
 ---
 
@@ -171,6 +181,32 @@ This role supports full and differential backups, storing them locally or in a r
 ```
 
 > **Note**: With `type: "diff"`, the backup will only be published to SCM if actual configuration changes are detected. Timestamps and metadata differences are ignored. See [Differential Backup Documentation](Differential_Backup_Documentation.md) for more details.
+
+### Differential Backup with Parser-Based Severity Scoring
+
+```yaml
+- name: Create Differential Backup with Severity Scoring
+  hosts: network
+  gather_facts: false
+  tasks:
+    - name: Create Network Backup
+      ansible.builtin.include_role:
+        name: network.backup.backup
+      vars:
+        type: "diff"
+        enable_severity_scoring: true   # Enable parser-based severity (LOW/MEDIUM/HIGH/CRITICAL)
+        auto_rollback_on_critical: false # Set true to fail and not publish on CRITICAL
+        data_store:
+          scm:
+            origin:
+              user:
+                name: "your_name"
+                email: "your_email@example.com"
+              url: "git@github.com:youruser/your-backup-repo.git"
+              ssh_key_file: "/path/to/ssh/key"
+              filename: "{{ inventory_hostname }}_config.txt"
+              path: "backups/{{ ansible_date_time.date }}"
+```
 
 ### Create Backup with Hash Verification
 

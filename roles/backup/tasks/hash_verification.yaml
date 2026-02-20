@@ -1,0 +1,45 @@
+---
+# Hash verification tasks for backup files
+# Calculates SHA-256 hash for integrity verification
+
+- name: Calculate SHA-256 hash of backup file
+  ansible.builtin.shell: |
+    sha256sum "{{ network_backup_path }}/{{ network_backup_filename }}" | awk '{print $1}'
+  register: backup_hash_result
+  changed_when: false
+  delegate_to: localhost
+  tags: always
+
+- name: Store backup hash for verification
+  ansible.builtin.set_fact:
+    backup_sha256: "{{ backup_hash_result.stdout }}"
+    backup_file_path: "{{ network_backup_path }}/{{ network_backup_filename }}"
+  tags: always
+
+- name: Display backup hash information
+  ansible.builtin.debug:
+    msg: |
+      Backup File: {{ backup_file_path }}
+      SHA-256 Hash: {{ backup_sha256 }}
+      Use this hash to verify backup integrity during restore operations.
+  tags: always
+
+- name: Get current timestamp for hash file
+  ansible.builtin.set_fact:
+    hash_file_timestamp: "{{ lookup('pipe', 'date +%Y-%m-%dT%H:%M:%S%z') }}"
+  when: enable_hash_file | default(true)
+  tags: always
+
+- name: Write hash to separate file for easy reference
+  ansible.builtin.copy:
+    content: |
+      Backup File: {{ network_backup_filename }}
+      SHA-256 Hash: {{ backup_sha256 }}
+      Created: {{ hash_file_timestamp | default(lookup('pipe', 'date +%Y-%m-%dT%H:%M:%S%z')) }}
+      Device: {{ inventory_hostname }}
+      Network OS: {{ ansible_network_os }}
+    dest: "{{ network_backup_path }}/{{ network_backup_filename | regex_replace('\\.txt$', '') }}.sha256"
+    mode: '0644'
+  delegate_to: localhost
+  when: enable_hash_file | default(true)
+  tags: always

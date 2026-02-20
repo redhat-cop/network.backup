@@ -5,13 +5,16 @@
 
 
 ## About
-- The Ansible Network Backup Validated Content provides a comprehensive solution for managing network backups and restores across supported network platforms. This validated content offers two key functionalities: `backup` and `restore`, each designed to be platform-agnostic and user-friendly.
+- The Ansible Network Backup Validated Content provides a **platform-agnostic** solution for managing network backups and restores across supported network platforms (Cisco IOS, IOS-XR, NX-OS, Arista EOS, Juniper Junos). This validated content offers two key functionalities: `backup` and `restore`, each designed to be platform-agnostic and user-friendly.
 
 - The `backup` role allows users to create, compare, and tag backups, supporting both local and remote data stores. This ensures that network configurations are regularly and securely backed up, providing a reliable method to safeguard network infrastructure. The role includes SHA-256 hash verification to ensure backup file integrity and detect tampering or corruption.
 
 - The `restore` role enables users to fetch backups from local or remote data stores and perform configuration restores. This functionality ensures that network configurations can be swiftly and accurately restored when needed, minimizing downtime and maintaining network stability. The role automatically verifies backup file integrity using SHA-256 hashes before restoring, preventing corrupted or tampered configurations from being applied.
 
 - The Network Backup Content is ideal for system administrators and IT professionals who need to manage and maintain network infrastructure, automate the backup and restore process, and ensure data is regularly and securely backed up and available for restoration as required.
+
+## Architecture
+- For a **platform-agnostic architecture overview**, backup/restore flows, parser-based severity scoring, and diagrams, see [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md).
 
 ## Included content
 
